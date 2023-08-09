@@ -1,0 +1,11 @@
+@keyframes encolhe_hr {
+    from {
+        width: 90%;
+        opacity: 0;
+    }
+
+    to {
+        width: 30%;
+        opacity: 1;
+    }
+}
