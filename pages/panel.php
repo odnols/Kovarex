@@ -36,9 +36,11 @@
                                     } ?>" onclick="<?php if (!isset($_SESSION["id_usuario"])) { ?> login()<?php } ?>">
 
         <div id="nav_links">
-            <h2><a href="itens.php">Itens</a></h2>
-            <h2><a href="pedidos.php">Pedidos</a></h2>
-            <h2><a href="licitacoes.php">Licitações</a></h2>
+            <h2><a href="panel"><img src="../files/img/icons/logo.png"></a></h2>
+
+            <h2><a href="itens">Itens</a></h2>
+            <h2><a href="pedidos">Pedidos</a></h2>
+            <h2><a href="licitacoes">Licitações</a></h2>
         </div>
     </div>
 

@@ -1,4 +1,5 @@
 html {
+    overflow-x: hidden;
     background-color: rgb(30, 105, 107);
 }
 
@@ -75,18 +76,21 @@ hr#hr_login {
     margin-left: 40%;
 }
 
-#nav_links>h2 {
+#nav_links>h2,
+#nav_links>h1 {
     float: left;
     margin-top: 0px;
     margin-left: 20px;
 }
 
-h2>a {
+h2>a,
+h1>a {
     color: white;
     transition: .2s;
 }
 
-h2>a:hover {
+h2>a:hover,
+h1>a:hover {
     color: gray;
     text-decoration: none;
 }
@@ -104,4 +108,120 @@ h2>a:hover {
 
 .sombra_quadro {
     box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.4);
+}
+
+#buttons_navegacao {
+    width: 90%;
+    float: left;
+    height: 100px;
+    margin-top: 2%;
+    margin-left: 5%;
+    margin-right: 5%;
+    border-radius: 15px;
+    background-color: rgb(192, 192, 192);
+}
+
+#quadro_fundo {
+    margin: 2%;
+    width: 100%;
+    padding: 2%;
+    float: left;
+    margin-left: 0px;
+    min-height: 500px;
+    background-color: white;
+}
+
+.categoria_item>h2 {
+    margin-bottom: 2%;
+}
+
+.categoria_item>.item,
+.cabecalho_infos {
+    height: auto;
+    display: grid;
+    overflow: hidden;
+    text-align: center;
+    border: 1px solid gainsboro;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    grid-template-columns: 20% 20% 20% 20% 20%;
+}
+
+.cabecalho_infos {
+    border-radius: 5px;
+    border: 2px solid gainsboro;
+}
+
+.item>p {
+    display: flex;
+    font-size: 20px;
+    align-items: center;
+    justify-content: center;
+}
+
+.titulo_item {
+    font-size: 20px;
+}
+
+.badge_tempo,
+.button_add_pedido {
+    max-width: 80%;
+    font-size: 18px;
+    margin-left: 10%;
+    max-height: 25px;
+    text-align: center;
+    align-items: center;
+    border-radius: 25px;
+    background-color: grey;
+    justify-content: center;
+    box-shadow: 0px 5px 5px rgba(0, 0, 0, .2);
+}
+
+.button_add_pedido {
+    display: flex;
+    color: black;
+    font-size: 20px;
+    max-height: 35px;
+    border-radius: 5px;
+    align-items: center;
+    transition: all .2s;
+    text-decoration: none;
+    justify-content: center;
+}
+
+a.button_add_pedido:hover {
+    color: black;
+    text-decoration: none;
+    background-color: rgb(126, 168, 62);
+}
+
+a.button_add_pedido:visited,
+a.button_add_pedido:active {
+    color: black;
+    text-decoration: none;
+}
+
+.verde {
+    background-color: rgb(187, 221, 137);
+}
+
+.laranja {
+    background-color: rgb(252, 192, 83);
+}
+
+.vermelho {
+    color: white;
+    background-color: rgb(202, 97, 97);
+}
+
+.preto {
+    color: white;
+}
+
+.cinza {
+    background-color: rgb(231, 231, 231);
+}
+
+.cinza:hover {
+    background-color: rgb(202, 202, 202) !important;
 }
