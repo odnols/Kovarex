@@ -24,7 +24,7 @@
 </head>
 
 <body>
-    <div class="banner_topo">
+    <div id="banner_topo">
         <h2 id="titulo"><?php if (isset($_SESSION["nome_user"])) {
                             echo "Olá " + $_SESSION["nome_user"];
                         } else {

@@ -20,11 +20,10 @@
     <script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
     <script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
     <script type="text/javascript" src="../js/slick/slick.min.js"></script>
-    <script type="text/javascript" src="../js/engine.js"></script>
 </head>
 
 <body>
-    <div class="banner_topo">
+    <div id="banner_topo">
         <h2 id="titulo"><?php if (isset($_SESSION["nome_user"])) {
                             echo "Olá " + $_SESSION["nome_user"];
                         } ?></h2>
@@ -36,11 +35,11 @@
                                     } ?>" onclick="<?php if (!isset($_SESSION["id_usuario"])) { ?> login()<?php } ?>">
 
         <div id="nav_links">
-            <h2><a href="panel"><img src="../files/img/icons/logo.png"></a></h2>
+            <h2><a href="panel.php"><img src="../files/img/icons/logo.png"></a></h2>
 
-            <h2><a href="itens">Itens</a></h2>
-            <h2><a href="pedidos">Pedidos</a></h2>
-            <h2><a href="licitacoes">Licitações</a></h2>
+            <h2><a href="itens.php">Itens</a></h2>
+            <h2><a href="pedidos.php">Pedidos</a></h2>
+            <h2><a href="licitacoes.php">Licitações</a></h2>
         </div>
     </div>
 
@@ -50,5 +49,7 @@
     <div id="quadro_pag" class="sombra_quadro"></div>
     <div id="quadro_pag" class="sombra_quadro"></div>
 </body>
+
+<script type="text/javascript" src="../js/engine.js"></script>
 
 </html>

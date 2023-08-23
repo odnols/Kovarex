@@ -44,14 +44,11 @@
     </div>
 
     <div id="buttons_navegacao" class="sombra_quadro">
-        <button class="badge button_filtro" onclick="filtra_itens('alimenticio_estocavel')">Alimentícios estocáveis</button>
-        <button class="badge button_filtro" onclick="filtra_itens('produto_limpeza')">Produtos de limpeza</button>
-        <button class="badge button_filtro" onclick="filtra_itens('item_informatica')">Informática</button>
-        <button class="badge button_filtro" onclick="filtra_itens('insumo_pintura')">Insumos de pintura</button>
-        <button class="badge button_filtro" onclick="filtra_itens()">Limpar filtro</button>
+
     </div>
 
     <div id="quadro_fundo">
+
 
         <div class="cabecalho_infos">
             <h3>Nome do item</h3>
@@ -60,10 +57,10 @@
             <h3>Expiração</h3>
         </div>
 
-        <div class="categoria_item alimenticio_estocavel">
+        <div class="categoria_item">
             <h2>Alimentícios estocáveis</h2>
 
-            <div class="item_card">
+            <div class="item">
                 <p>Leite integral</p>
                 <p>litro</p>
                 <p>fardo com 12 litros</p>
@@ -71,23 +68,23 @@
                 <a href="#" class="button_add_pedido cinza">Fazer pedido ></a>
             </div>
 
-            <div class="item_card">
+            <div class="item">
                 <p>Açúcar refinado</p>
                 <p>kg</p>
                 <p>pacote</p>
                 <span class="badge_tempo preto">Expirou em 02 de agosto de 2023</span>
-                <a href="#" class="button_add_pedido preto">Expirado</a>
+                <a href="#" class="button_add_pedido cinza">Fazer pedido ></a>
             </div>
 
-            <div class="item_card">
+            <div class="item">
                 <p>Açúcar</p>
                 <p>kg</p>
                 <p>fardo com 12 litros</p>
                 <span class="badge_tempo preto">Expirou em 02 de agosto de 2023</span>
-                <a href="#" class="button_add_pedido preto">Expirado</a>
+                <a href="#" class="button_add_pedido cinza">Fazer pedido ></a>
             </div>
 
-            <div class="item_card">
+            <div class="item">
                 <p>Café moido em pó</p>
                 <p>pacote</p>
                 <p>pacote com 500gr</p>
@@ -95,7 +92,7 @@
                 <a href="#" class="button_add_pedido cinza">Fazer pedido ></a>
             </div>
 
-            <div class="item_card">
+            <div class="item">
                 <p>Chá mate</p>
                 <p>pacote</p>
                 <p>pacote com 250gr</p>
@@ -104,10 +101,10 @@
             </div>
         </div>
 
-        <div class="categoria_item produto_limpeza">
+        <div class="categoria_item">
             <h2>Produtos de limpeza</h2>
 
-            <div class="item_card">
+            <div class="item">
                 <div>
                     <p class="titulo_item">Papel higiênico</p>
                     <p>Branco folha dupla, de 30m x 10 cm cada com folha dupla de alta qualidade, neutro, testado dermatologicamente</p>
@@ -118,7 +115,7 @@
                 <a href="#" class="button_add_pedido cinza">Fazer pedido ></a>
             </div>
 
-            <div class="item_card">
+            <div class="item">
                 <div>
                     <p class="titulo_item">Copo descartável</p>
                     <p>P/ água 180ml. Feito em polipropileno (pp), na cor branca, para consumo de água, sucos e refrigerantes, capacidade 180 ml, atóxico, fabricado de acordo com a nbr 14865, embalados em pacotes plásticos com 100 unidades e acondicionados em caixas de papelão com 25 centos. Deverá ter impresso nas caixas do produto o selo de aprovação abnt nbr</p>
@@ -130,10 +127,10 @@
             </div>
         </div>
 
-        <div class="categoria_item item_informatica">
+        <div class="categoria_item">
             <h2>Informática</h2>
 
-            <div class="item_card">
+            <div class="item">
                 <p>SSD 500GB</p>
                 <p>unidade</p>
                 <p>unidade</p>
@@ -142,10 +139,10 @@
             </div>
         </div>
 
-        <div class="categoria_item insumo_pintura">
+        <div class="categoria_item">
             <h2>Insumos para pintura</h2>
 
-            <div class="item_card">
+            <div class="item">
                 <p>Resina acrílica p/ pedras</p>
                 <p>galão</p>
                 <p>galão com 3,6 litros</p>
@@ -153,7 +150,7 @@
                 <a href="#" class="button_add_pedido cinza">Fazer pedido ></a>
             </div>
 
-            <div class="item_card">
+            <div class="item">
                 <p>Resina acrílica p/ pedras</p>
                 <p>lata</p>
                 <p>lata com 18 litros</p>
@@ -161,7 +158,7 @@
                 <a href="#" class="button_add_pedido cinza">Fazer pedido ></a>
             </div>
 
-            <div class="item_card">
+            <div class="item">
                 <p>Selador acrílico</p>
                 <p>lata</p>
                 <p>lata com 3,6 litros</p>
@@ -169,7 +166,7 @@
                 <a href="#" class="button_add_pedido cinza">Fazer pedido ></a>
             </div>
 
-            <div class="item_card">
+            <div class="item">
                 <p>Massa niveladora </p>
                 <p>galão</p>
                 <p>25kg</p>
@@ -177,7 +174,7 @@
                 <a href="#" class="button_add_pedido cinza">Fazer pedido ></a>
             </div>
 
-            <div class="item_card">
+            <div class="item">
                 <p>Massa acrílica</p>
                 <p>kg</p>
                 <p>25kg</p>
@@ -185,7 +182,7 @@
                 <a href="#" class="button_add_pedido cinza">Fazer pedido ></a>
             </div>
 
-            <div class="item_card">
+            <div class="item">
                 <p>Manta Líquida</p>
                 <p>litro</p>
                 <p>lata com 18 litros</p>
@@ -193,7 +190,7 @@
                 <a href="#" class="button_add_pedido cinza">Fazer pedido ></a>
             </div>
 
-            <div class="item_card">
+            <div class="item">
                 <p>Selador acrílico</p>
                 <p>lata</p>
                 <p>lata com 3,6L</p>
@@ -201,7 +198,7 @@
                 <a href="#" class="button_add_pedido cinza">Fazer pedido ></a>
             </div>
 
-            <div class="item_card">
+            <div class="item">
                 <div>
                     <p class="titulo_item">Massa niveladora</p>
                     <p>Ambientes internos e externos</p>
@@ -212,7 +209,7 @@
                 <a href="#" class="button_add_pedido cinza">Fazer pedido ></a>
             </div>
 
-            <div class="item_card">
+            <div class="item">
                 <div>
                     <p class="titulo_item">Tinta acrílica premium</p>
                     <p>Tinta para pisos e pavimentos; diversas cores</p>
@@ -223,7 +220,7 @@
                 <a href="#" class="button_add_pedido cinza">Fazer pedido ></a>
             </div>
 
-            <div class="item_card">
+            <div class="item">
                 <div>
                     <p class="titulo_item">Tinta esmalte sintético premium</p>
                     <p>Alto brilho, tinta para construção civil; diversas cores</p>
@@ -234,7 +231,7 @@
                 <a href="#" class="button_add_pedido cinza">Fazer pedido ></a>
             </div>
 
-            <div class="item_card">
+            <div class="item">
                 <div>
                     <p class="titulo_item">Tinta látex acrílica premium</p>
                     <p>Para uso em parede; diversas cores</p>
@@ -245,7 +242,7 @@
                 <a href="#" class="button_add_pedido cinza">Fazer pedido ></a>
             </div>
 
-            <div class="item_card">
+            <div class="item">
                 <div>
                     <p class="titulo_item">Tinta p/ demarcação viária</p>
                     <p>Com médio volume de tráfego</p>
@@ -256,7 +253,7 @@
                 <a href="#" class="button_add_pedido cinza">Fazer pedido ></a>
             </div>
 
-            <div class="item_card">
+            <div class="item">
                 <div>
                     <p class="titulo_item">Tinta acrílica premium</p>
                     <p>Tinta para pisos e pavimentos; diversas cores</p>
@@ -267,7 +264,7 @@
                 <a href="#" class="button_add_pedido cinza">Fazer pedido ></a>
             </div>
 
-            <div class="item_card">
+            <div class="item">
                 <div>
                     <p class="titulo_item">Tinta látex PVA premium</p>
                     <p>Para uso em parede; diversas cores</p>
@@ -278,7 +275,7 @@
                 <a href="#" class="button_add_pedido cinza">Fazer pedido ></a>
             </div>
 
-            <div class="item_card">
+            <div class="item">
                 <p>Tinta Epóxi</p>
                 <p>galão</p>
                 <p>galão com 3,6 litros</p>
@@ -286,7 +283,7 @@
                 <a href="#" class="button_add_pedido cinza">Fazer pedido ></a>
             </div>
 
-            <div class="item_card">
+            <div class="item">
                 <p>Impermeabilizante</p>
                 <p>lata</p>
                 <p>lata com 18 litros</p>
