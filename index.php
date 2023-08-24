@@ -43,7 +43,7 @@
 
         <!-- Formulários de Login -->
         <div id="formularios_lg">
-            <form name="loga" class="logah" action="php/session/usuario_confirmar_login.php" method="post">
+            <form name="loga" class="logah" action="./php/session/usuario_confirmar_login.php" method="post">
                 <h2>
                     <input type="text" name="email" required placeholder="E-mail" maxlength="100"><br><br>
 
@@ -60,7 +60,7 @@
 
         <!-- Formulário cadastro -->
         <div id="formularios_cad">
-            <form name="cadastra" class="logah" action="php/session/usuario_receber_cadastro.php" method="post">
+            <form name="cadastra" class="logah" action="./php/session/usuario_receber_cadastro.php" method="post">
                 <h2>
                     <input type="text" name="nome" required placeholder="Nome" maxlength="100"><br><br>
 
