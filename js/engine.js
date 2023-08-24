@@ -11,7 +11,7 @@ function fix_header() {
 }
 
 function login() {
-    $("#formulario_login").fadeToggle();
+    $("#formulario_login").fadeToggle()
 }
 
 function filtra_itens(alvo) {
@@ -33,3 +33,18 @@ function filtra_itens(alvo) {
 
     }
 }
+
+function btn_login(caso) {
+
+    document.getElementById("formularios_lg").style.display = "None"
+    document.getElementById("formularios_cad").style.display = "None"
+
+    if (caso)
+        document.getElementById("formularios_cad").style.display = "Block"
+    else
+        document.getElementById("formularios_lg").style.display = "Block"
+}
+
+$("#perfil_sm").click(() => {
+    $("#float_menu").fadeToggle()
+})
