@@ -22,6 +22,10 @@
     <script type="text/javascript" src="../js/slick/slick.min.js"></script>
 </head>
 
+<?php session_start();
+
+require_once "../php/session/verifica_sessao.php"; ?>
+
 <body>
     <div id="banner_topo">
         <h2 id="titulo"><?php if (isset($_SESSION["nome_user"])) {

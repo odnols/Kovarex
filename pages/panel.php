@@ -22,12 +22,12 @@
     <script type="text/javascript" src="../js/slick/slick.min.js"></script>
 </head>
 
+<?php session_start();
+
+require_once "../php/session/verifica_sessao.php"; ?>
+
 <body>
     <div id="banner_topo">
-        <h2 id="titulo"><?php if (isset($_SESSION["nome_user"])) {
-                            echo "Olá " + $_SESSION["nome_user"];
-                        } ?></h2>
-
         <img id="perfil_sm" src="<?php if (isset($_SESSION["nome_user"])) {
                                         echo $_SESSION["foto_perfil"];
                                     } else {
@@ -43,7 +43,14 @@
         </div>
     </div>
 
-    <div id="quadro_pag" class="sombra_quadro"></div>
+    <div id="float_menu">
+        <a href="#">Perfil</a> <br>
+        <a href="pedidos.php">Pedidos</a> <br>
+        <a href="#">Configurações</a> <br>
+        <a href="../php/session/redireciona_logoff.php">Deslogar</a>
+    </div>
+
+    <div id="quadro_pag" class="sombra_quadro"><?php echo $_SESSION["nome"]; ?> </div>
     <div id="quadro_pag" class="sombra_quadro"></div>
     <div id="quadro_pag" class="sombra_quadro"></div>
     <div id="quadro_pag" class="sombra_quadro"></div>

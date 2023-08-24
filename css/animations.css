@@ -9,3 +9,13 @@
         opacity: 1;
     }
 }
+
+@keyframes puxa_float_menu {
+    from {
+        top: 2%;
+    }
+
+    to {
+        top: 6%;
+    }
+}

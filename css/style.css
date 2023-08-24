@@ -67,6 +67,10 @@ hr#hr_login {
     background-color: rgba(0, 0, 0, .5);
 }
 
+#formularios_cad {
+    display: none;
+}
+
 .logah {
     margin-top: 4%;
 }
@@ -252,4 +256,22 @@ a.button_add_pedido:active {
 
 .sticky+.content {
     padding-top: 102px;
+}
+
+#float_menu {
+    top: 6%;
+    right: 1%;
+    z-index: -1;
+    padding: 2%;
+    display: none;
+    font-size: 20px;
+    position: fixed;
+    text-align: center;
+    background-color: black;
+    animation: puxa_float_menu .4s;
+}
+
+#float_menu>a {
+    text-decoration: none;
+    color: white !important;
 }
