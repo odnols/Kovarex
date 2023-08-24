@@ -24,13 +24,9 @@
 
 <body>
     <div id="banner_topo">
-        <h2 id="titulo"><?php if (isset($_SESSION["nome"])) {
-                            echo "Olá " + $_SESSION["nome"];
-                        } else {
-                            echo "Kovarex";
-                        } ?></h2>
+        <h2 id="titulo">Kovarex</h2>
 
-        <img id="perfil_sm" src="<?php if (isset($_SESSION["nome"])) {
+        <img id="perfil_sm" src="<?php if (isset($_SESSION["foto"])) {
                                         echo $_SESSION["foto"];
                                     } else {
                                         echo "files/img/icons/avatar.png";
@@ -43,7 +39,7 @@
 
         <!-- Formulários de Login -->
         <div id="formularios_lg">
-            <form name="loga" class="logah" action="./php/session/usuario_confirmar_login.php" method="post">
+            <form name="loga" class="logah" action="php/session/usuario_confirmar_login.php" method="post">
                 <h2>
                     <input type="text" name="email" required placeholder="E-mail" maxlength="100"><br><br>
 
@@ -60,7 +56,7 @@
 
         <!-- Formulário cadastro -->
         <div id="formularios_cad">
-            <form name="cadastra" class="logah" action="./php/session/usuario_receber_cadastro.php" method="post">
+            <form name="cadastra" class="logah" action="php/session/usuario_receber_cadastro.php" method="post">
                 <h2>
                     <input type="text" name="nome" required placeholder="Nome" maxlength="100"><br><br>
 

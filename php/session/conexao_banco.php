@@ -1,4 +1,5 @@
 <?php
+
 $servidor = "localhost";
 $user = "root";
 $password = "";
@@ -15,3 +16,8 @@ if (!$conexao)
 
 // Corretor ortográfico
 mysqli_set_charset($conexao, "utf8");
+
+// $conexao = mysqli_init();
+// $mysqli->ssl_set(NULL, NULL, "/etc/ssl/certs/ca-certificates.crt", NULL, NULL);
+// $mysqli->real_connect(getenv("DB_HOST"), getenv("DB_USERNAME"), getenv("DB_PASSWORD"), getenv("DB_NAME"));
+// $conexao->close();

@@ -1,4 +1,4 @@
-<?php require_once "conexao_obsoleta.php";
+<?php require_once "conexao_banco.php";
 
 $nome_usuario = $_POST["nome"];
 $email = $_POST["email"];
