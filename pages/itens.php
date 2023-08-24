@@ -28,15 +28,11 @@ require_once "../php/session/verifica_sessao.php"; ?>
 
 <body>
     <div id="banner_topo">
-        <h2 id="titulo"><?php if (isset($_SESSION["nome_user"])) {
-                            echo "Olá " + $_SESSION["nome_user"];
-                        } ?></h2>
-
-        <img id="perfil_sm" src="<?php if (isset($_SESSION["nome_user"])) {
-                                        echo $_SESSION["foto_perfil"];
+        <img id="perfil_sm" src="<?php if (isset($_SESSION["foto"])) {
+                                        echo $_SESSION["foto"];
                                     } else {
                                         echo "../files/img/icons/avatar.png";
-                                    } ?>" onclick="<?php if (!isset($_SESSION["id_usuario"])) { ?> login()<?php } ?>">
+                                    } ?>">
 
         <div id="nav_links">
             <h2><a href="panel.php"><img src="../files/img/icons/logo.png"></a></h2>

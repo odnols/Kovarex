@@ -1,4 +1,4 @@
-<?php require_once "conexao_obsoleta.php";
+<?php require_once "conexao_banco.php";
 
 session_start();
 
