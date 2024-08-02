@@ -1,6 +1,13 @@
 <?php require_once "conexao_banco.php";
 
+$options = [
+    'cost' => 12,
+];
+
 $nome_usuario = $_POST["nome"];
+// $email = password_hash($_POST["email"], PASSWORD_DEFAULT, $options);
+// $senha = password_hash($_POST["senha"], PASSWORD_DEFAULT, $options);
+
 $email = $_POST["email"];
 $senha = $_POST["senha"];
 
@@ -8,15 +15,10 @@ $hierarquia = 0;
 $controle = 0;
 
 // Verificando se não existe usuário com o mesmo e-mail
-$verifica = "SELECT * FROM usuario";
+$verifica = "SELECT * FROM usuario where email = '$email'";
 $executa = $conexao->query($verifica);
 
-if ($executa->num_rows > 0) {
-    while ($existe = $executa->fetch_assoc()) {
-        if ($email == $existe["email"])
-            $controle += 1;
-    }
-}
+if ($executa->num_rows > 0) $controle += 1;
 
 if ($controle == 0) {
     $cadast = "INSERT INTO usuario (id, email, nome, psw, hierarquia) values (null, '$email', '$nome_usuario', '$senha', $hierarquia)";

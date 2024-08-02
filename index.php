@@ -16,7 +16,7 @@
     <link rel="stylesheet" type="text/css" href="js/slick/slick-theme.css" />
 
     <script src="https://kit.fontawesome.com/6c1b2d82eb.js" crossorigin="anonymous"></script>
-    
+
     <script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
     <script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
     <script type="text/javascript" src="js/slick/slick.min.js"></script>
