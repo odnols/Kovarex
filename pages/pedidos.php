@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Kovarex - Licitações</title>
+    <title>Kovarex - Pedidos</title>
     <link rel="shortcut icon" href="../files/img/icons/logo.png">
 
     <!-- CSS -->
@@ -38,15 +38,19 @@ require_once "../php/session/verifica_sessao.php"; ?>
         </div>
     </div>
 
-    <div id="buttons_navegacao" class="sombra_quadro"></div>
+    <div id="buttons_navegacao_pedidos" class="sombra_quadro">
+        <button class="badge button_filtro" onclick="filtra_itens('em_aberto')">Em Aberto</button>
+        <button class="badge button_filtro" onclick="filtra_itens('em_andamento')">Em andamento</button>
+        <button class="badge button_filtro" onclick="filtra_itens('finalizados')">Finalizados</button>
+        <button class="badge button_filtro" onclick="filtra_itens()">Limpar filtro</button>
+    </div>
 
     <div id="quadro_fundo">
 
         <div class="cabecalho_infos">
-            <h3>Nome do item</h3>
-            <h3>Unidade de medida</h3>
-            <h3>Forma de envio</h3>
-            <h3>Expiração</h3>
+            <h3>Tipo do pedido</h3>
+            <h3>Última atualização</h3>
+            <h3>Status</h3>
         </div>
 
     </div>

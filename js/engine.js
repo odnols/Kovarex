@@ -1,15 +1,3 @@
-window.onscroll = function () { fix_header() }
-
-var header = document.getElementById("banner_topo")
-var sticky = header.offsetTop
-
-function fix_header() {
-    if (window.pageYOffset > sticky)
-        header.classList.add("sticky")
-    else
-        header.classList.remove("sticky")
-}
-
 function login() {
     $("#formulario_login").fadeToggle()
 }
@@ -19,8 +7,7 @@ function filtra_itens(alvo) {
     const itens = document.getElementsByClassName("categoria_item")
     let caso = "Block"
 
-    if (alvo)
-        caso = "None"
+    if (alvo) caso = "None"
 
     for (let i = 0; i < itens.length; i++)
         itens[i].style.display = caso
@@ -30,7 +17,6 @@ function filtra_itens(alvo) {
 
         for (let i = 0; i < alvos.length; i++)
             alvos[i].style.display = "Block"
-
     }
 }
 
