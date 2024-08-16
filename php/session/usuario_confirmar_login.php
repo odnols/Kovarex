@@ -4,24 +4,35 @@ $options = [
     'cost' => 12,
 ];
 
-// $email = password_verify($_POST["email"], '$2y$12$f2ZpbdKW3iosnEt9M3Jpk.ILMziU5B8NX/ANWn5lEWGnavxg/thsK');
-// $senha = password_verify($_POST["senha"], '$2y$12$dyoPe0O4l32PTY7CFRppguTaRyMjkSYAAGpGmWskGj7icMtSOI2AC');
-
 $email = $_POST["email"];
-$senha = $_POST["senha"];
 
-$query = "SELECT * FROM usuario where email = '$email' and psw = '$senha'";
-$resultado = $conexao->query($query);
+$dados = "SELECT * FROM usuario where email like '$email'";
+$resultado = $conexao->query($dados);
 
 if ($resultado->num_rows > 0) {
     $linha = $resultado->fetch_assoc();
 
-    session_start();
-    $_SESSION["logado"] = 1;
-    $_SESSION["id"] = $linha["id"];
-    $_SESSION["nome"] = $linha["nome"];
-    $_SESSION["hierarquia"] = $linha["hierarquia"];
+    if (password_verify($_POST["senha"], $linha['hash'])) {
 
-    header("Location: ../../pages/panel.php");
-} else // Banco de Dados de usuários vazio
+        // Verificando se a senha precisa ser atualizada com um novo hash
+        if (password_needs_rehash($linha['hash'], PASSWORD_BCRYPT, $options)) {
+
+            // Atualizando o hash do usuário para o formato mais recente de dados
+            $newHash = password_hash($_POST["senha"], PASSWORD_BCRYPT, $options);
+
+            $atualiza_dados = "UPDATE usuario where email = '$email' set hash = '$newHash'";
+            $conexao->query($atualiza_dados);
+        }
+
+        // Efetuando o login no sistema
+        session_start();
+        $_SESSION["logado"] = 1;
+        $_SESSION["id"] = $linha["id"];
+        $_SESSION["nome"] = $linha["nome"];
+        $_SESSION["hierarquia"] = $linha["hierarquia"];
+
+        header("Location: ../../pages/panel.php");
+    } else
+        header("Location: ../../index.php?ERROR=001");
+} else
     header("Location: ../../index.php?ERROR=001");
