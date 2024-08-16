@@ -7,7 +7,7 @@ create table usuario(
     hierarquia int not null,
     nome varchar(255),
     email varchar(5000),
-    psw varchar(5000)
+    hash varchar(5000)
 ) engine = InnoDB;
 
 create table empresa(
