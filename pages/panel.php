@@ -51,7 +51,7 @@ $atribuicoes = $conexao->query($status_usuario);
                 <h2><a href="itens.php">Itens</a></h2>
                 <h2><a href="pedidos.php">Pedidos</a></h2>
                 <h2><a href="entregas.php">Entregas</a></h2>
-                <?php if ($_SESSION["hierarquia"]) { ?> <h2><a href="licitacoes.php">Licitações</a></h2> <?php } ?>
+                <?php if ($_SESSION["hierarquia"]) { ?> <h2><a href="moderacao.php">Moderação</a></h2> <?php } ?>
             <?php } ?>
         </div>
     </div>

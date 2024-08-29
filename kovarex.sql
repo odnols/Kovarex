@@ -2,8 +2,8 @@ create database kovarex;
 
 use kovarex;
 
--- update usuario set hierarquia = 1 where id = 1;
-select * from usuario;
+select * from empresa;
+delete from empresa where id = 1;
 
 create table usuario(
     id int not null auto_increment primary key,
@@ -111,3 +111,9 @@ create table atribuicao(
     foreign key (id_usuario) references usuario(id),
     foreign key (id_departamento) references departamento(id)
 )engine = InnoDB;
+
+update usuario set hierarquia = 1 where id = 1;
+insert into departamento (nome) values ('Licitação e Compras');
+insert into atribuicao (id_usuario, id_departamento) values (1, 1);
+
+select * from usuario;

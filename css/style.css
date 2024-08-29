@@ -167,7 +167,8 @@ h1>a:hover {
     color: yellow;
 }
 
-#quadro_fundo {
+#quadro_fundo,
+#quadro_fundo_total {
     margin: 2%;
     width: 100%;
     padding: 2%;
@@ -176,6 +177,11 @@ h1>a:hover {
     min-height: 500px;
     transition: all .2s;
     background-color: white;
+}
+
+#quadro_fundo_total {
+    position: fixed;
+    height: 100%;
 }
 
 .categoria_item>h2 {
@@ -322,4 +328,123 @@ a.button_add_pedido:active {
 
 .large_button {
     height: 100px;
+}
+
+.input {
+    font-weight: 500;
+    font-size: 14px;
+    height: 40px;
+    border-radius: 10px;
+    padding-left: 10px;
+    border: 1px solid ghostwhite;
+    border-bottom: 1px solid #e5e5e5;
+    outline: none;
+    width: 100%;
+}
+
+.input:focus {
+    border-bottom: 1px solid #227b7e;
+    -webkit-transition: 0.1s;
+    transition: 0.5s;
+}
+
+.detalhes_fornecedor {
+    padding: 3%;
+}
+
+#cadastro_fornecedor {
+    width: 100%;
+    padding: 15px;
+    margin-top: 35px;
+    border-radius: 15px;
+    border: 1px solid gainsboro;
+}
+
+button {
+    color: black !important;
+    font-size: 18px;
+    border-radius: 5px;
+    border: solid 2px gainsboro;
+}
+
+.button_form_cadastro {
+    width: 100%;
+    color: black;
+    font-size: 18px;
+    border-radius: 5px;
+    border: solid 2px gainsboro;
+    text-decoration: none !important;
+}
+
+.button_form_cadastro:hover,
+.button_form_cadastro:active,
+.button_form_cadastro:visited {
+    color: black;
+}
+
+.form_primeira_interacao {
+    display: grid;
+    column-gap: 1%;
+    grid-template-columns: 50% 50%;
+}
+
+.lista_fornecedores {
+    margin-top: 35px;
+    width: 100%;
+}
+
+.item_fornecedor {
+    width: 100%;
+    margin-bottom: 5px;
+    border-bottom: 1px solid gainsboro;
+}
+
+.item_fornecedor>button {
+    float: right;
+    margin-top: -15px;
+    margin-right: 15px;
+}
+
+.sem_resultados {
+    text-align: center;
+    display: none;
+}
+
+.id_label {
+    color: white;
+    border-radius: 5px;
+    padding: 2px 15px 2px 15px;
+    background-color: rgb(66, 66, 66);
+}
+
+.invisible {
+    display: none;
+}
+
+.cadastrar_novo {
+    width: 14%;
+    float: right;
+    height: 40px;
+}
+
+#input_filtro_fornecedor {
+    width: 85%;
+}
+
+.cadastro_popup {
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    z-index: 20;
+    color: white;
+    height: 100%;
+    display: none;
+    padding: 5% 30%;
+    position: fixed;
+    backdrop-filter: blur(5px);
+    background-color: rgba(0, 0, 0, .7);
+}
+
+.cadastro_popup>#cadastro_fornecedor>input {
+    color: black !important;
 }
