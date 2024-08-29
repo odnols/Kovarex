@@ -114,7 +114,7 @@ require_once "../../php/session/conexao_banco.php"; ?>
                         <h3>Ou importe de outro sistema...</h3>
 
                         <br>
-                        <p><i class="fa fa-regular fa-lightbulb"></i> A importação utilizará o código ID do fornecedor no outro sistema caso não haja registros no Kovarex com o mesmo ID, em caso de CNPJ ou CPF repetido, iremos ignorar a importação do CNPJ ou CPF que estiver repetido.</p>
+                        <p><i class="fa fa-regular fa-lightbulb"></i> A importação utilizará o CNPJ ou ID do fornecedor, caso haja um CNPJ ou CPF repetido, iremos ignorar a importação do CNPJ ou CPF que estiver repetido de modo a evitar erros em dados.</p>
 
                         <br><br>
                         <div class="file">
