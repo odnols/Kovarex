@@ -52,7 +52,7 @@ require_once "../php/session/conexao_banco.php"; ?>
         <div class="quadro_pag sombra_quadro">
             <h3><i class="fa fa-solid fa-user"></i> Usuários</h3>
             <hr>
-            <p>Gerencie os usuários no Kovarex.</p>
+            <p>Gerencie os usuários.</p>
 
             <br>
             <a href="moderacao/usuarios.php" class="button_add_pedido cinza large_button">Ver todos os usuários ></a>
@@ -61,7 +61,7 @@ require_once "../php/session/conexao_banco.php"; ?>
         <div class="quadro_pag sombra_quadro">
             <h3><i class="fa fa-solid fa-industry"></i> Fornecedores</h3>
             <hr>
-            <p>Gerencie os fornecedores no Kovarex.</p>
+            <p>Gerencie os fornecedores.</p>
 
             <br>
             <a href="moderacao/fornecedores.php" class="button_add_pedido cinza large_button">Ver todos os fornecedores ></a>
@@ -70,7 +70,7 @@ require_once "../php/session/conexao_banco.php"; ?>
         <div class="quadro_pag sombra_quadro">
             <h3><i class="fa fa-solid fa-file-contract"></i> Licitações</h3>
             <hr>
-            <p>Gerencie licitações, itens inclusos, quantidades e departamentos solicitantes.</p>
+            <p>Gerencie licitações, relação de itens, quantidades e departamentos solicitantes.</p>
 
             <br>
             <a href="itens.php" class="button_add_pedido cinza large_button">Gerenciar licitações ></a>
@@ -79,7 +79,7 @@ require_once "../php/session/conexao_banco.php"; ?>
         <div class="quadro_pag sombra_quadro">
             <h3><i class="fa fa-solid fa-cube"></i> Itens</h3>
             <hr>
-            <p>Gerencie os itens cadastrados no Kovarex.</p>
+            <p>Gerencie os itens.</p>
 
             <br>
             <a href="itens.php" class="button_add_pedido cinza large_button">Gerenciar itens ></a>
@@ -88,7 +88,7 @@ require_once "../php/session/conexao_banco.php"; ?>
         <div class="quadro_pag sombra_quadro">
             <h3><i class="fa fa-solid fa-warehouse"></i></i> Departamentos</h3>
             <hr>
-            <p>Gerencie os departamentos cadastrados no Kovarex.</p>
+            <p>Gerencie os departamentos.</p>
 
             <br>
             <a href="itens.php" class="button_add_pedido cinza large_button">Gerenciar departamentos ></a>
@@ -97,7 +97,7 @@ require_once "../php/session/conexao_banco.php"; ?>
         <div class="quadro_pag sombra_quadro">
             <h3><i class="fa fa-solid fa-ruler"></i> Unidades</h3>
             <hr>
-            <p>Gerencie as unidades de medida no Kovarex.</p>
+            <p>Gerencie as unidades de medida.</p>
 
             <br>
             <a href="itens.php" class="button_add_pedido cinza large_button">Gerenciar unidades ></a>
