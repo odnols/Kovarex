@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Kovarex - Fornecedores</title>
+    <title>Kovarex - Departamentos</title>
     <link rel="shortcut icon" href="../../files/img/icons/logo.png">
 
     <!-- CSS -->
@@ -51,36 +51,36 @@ require_once "../session/conexao_banco.php"; ?>
 
             <?php
 
-            $id_fornecedor = $_POST["id_fornecedor"];
-            $fornecedor = "SELECT * FROM empresa WHERE id = $id_fornecedor";
-            $dados = $conexao->query($fornecedor);
+            $id_departamento = $_POST["id_departamento"];
+            $departamento = "SELECT * FROM departamento WHERE id = $id_departamento";
+            $dados = $conexao->query($departamento);
 
-            // Coletando os dados do fornecedor para edição
-            $dados_fornecedor = $dados->fetch_assoc();
+            // Coletando os dados do departamento para edição
+            $dados_departamento = $dados->fetch_assoc();
 
-            $cnpj = $dados_fornecedor["cnpj"];
-            $razao = $dados_fornecedor["razao_social"]; ?>
+            $nome = $dados_departamento["nome"];
+            $cor_destaque = $dados_departamento["cor_destaque"]; ?>
 
-            <a href="../../pages/moderacao/fornecedores.php"><button><i class="fa fa-solid fa-caret-left"></i> Retornar</button></a>
+            <a href="../../pages/moderacao/departamentos.php"><button><i class="fa fa-solid fa-caret-left"></i> Retornar</button></a>
 
             <br>
-            <h2>Editando o Fornecedor</h2>
+            <h2>Editando o Departamento</h2>
 
             <div class="lista_fornecedores">
 
-                <form id="cadastro_fornecedor" action="./atualizar_fornecedor.php" method="post">
+                <form id="cadastro_fornecedor" action="./atualizar_departamento.php" method="post">
 
-                    <h3>Atualize os dados do fornecedor abaixo</h3>
+                    <h3>Atualize os dados do departamento abaixo</h3>
                     <br>
 
-                    <input type="text" class="input invisible" name="input_id" value="<?php echo $id_fornecedor ?>">
+                    <input type="text" class="input invisible" name="input_id" value="<?php echo $id_departamento ?>">
 
-                    <span>CNPJ</span><br>
-                    <input type="text" class="input" name="input_cnpj" required maxlength="18" pattern="([0-9]{2}[\.]?[0-9]{3}[\.]?[0-9]{3}[\/]?[0-9]{4}[-]?[0-9]{2})|([0-9]{3}[\.]?[0-9]{3}[\.]?[0-9]{3}[-]?[0-9]{2})" value="<?php echo $cnpj ?>">
+                    <span>Nome</span><br>
+                    <input type="text" class="input" name="input_nome" required maxlength="250" value="<?php echo $nome ?>">
 
                     <br><br>
-                    <span>Razão social</span><br>
-                    <input type="text" class="input" name="input_razao_social" required maxlength="255" value="<?php echo $razao ?>">
+                    <span>Cor de destaque</span><br>
+                    <input type="color" class="input" name="input_cor_destaque" required value="<?php echo $cor_destaque ?>">
 
                     <br><br>
                     <button class="button_form_cadastro">Atualizar</button>

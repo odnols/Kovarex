@@ -2,7 +2,7 @@ create database kovarex;
 
 use kovarex;
 
-select * from empresa;
+select * from atribuicao;
 delete from empresa where id = 1;
 
 create table usuario(
@@ -82,7 +82,8 @@ create table item_pedido(
 
 create table departamento(
 	id int not null auto_increment primary key,
-    nome varchar(250)
+    nome varchar(250),
+    cor_destaque varchar(20)
 ) engine = InnoDB;
 
 create table empenho(

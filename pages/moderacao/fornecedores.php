@@ -37,7 +37,7 @@ require_once "../../php/session/conexao_banco.php"; ?>
                                     } ?>">
 
         <div id="nav_links">
-            <h2><a href="panel.php"><img src="../../files/img/icons/logo.png"></a></h2>
+            <h2><a href="../panel.php"><img src="../../files/img/icons/logo.png"></a></h2>
 
             <h2><a href="../itens.php">Itens</a></h2>
             <h2><a href="../pedidos.php">Pedidos</a></h2>
@@ -73,8 +73,11 @@ require_once "../../php/session/conexao_banco.php"; ?>
                         $id = $dados_fornecedor["id"];
                         $cnpj = $dados_fornecedor["cnpj"];
                         $razao = $dados_fornecedor["razao_social"];
+                        $cnpj_formatado = str_replace(".", "", $cnpj);
+                        $cnpj_formatado = str_replace("/", "", $cnpj_formatado);
+                        $cnpj_formatado = str_replace("-", "", $cnpj_formatado);
 
-                        echo "<form class='item_fornecedor $cnpj $razao $id' action='../../php/functions/editar_fornecedor.php' method='POST'>
+                        echo "<form class='item_fornecedor $cnpj $razao $id $cnpj_formatado' action='../../php/functions/editar_fornecedor.php' method='POST'>
                                 <span class='id_label'>$id</span> $razao <br>
                                 $cnpj
 

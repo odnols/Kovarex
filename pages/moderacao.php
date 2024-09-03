@@ -91,7 +91,7 @@ require_once "../php/session/conexao_banco.php"; ?>
             <p>Gerencie os departamentos.</p>
 
             <br>
-            <a href="itens.php" class="button_add_pedido cinza large_button">Gerenciar departamentos ></a>
+            <a href="./moderacao/departamentos.php" class="button_add_pedido cinza large_button">Gerenciar departamentos ></a>
         </div>
 
         <div class="quadro_pag sombra_quadro">
