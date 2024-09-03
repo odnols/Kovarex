@@ -49,12 +49,15 @@ require_once "../../php/session/conexao_banco.php"; ?>
     <div id="quadro_fundo_total">
         <div class="detalhes_fornecedor">
 
+            <a href="../moderacao.php"><button><i class="fa fa-solid fa-caret-left"></i> Retornar</button></a>
+            <br><br>
+
             <?php
             $dados = $conexao->query("SELECT * FROM usuario");
 
             if ($dados->num_rows > 0) { ?>
 
-                <input id="input_filtro_fornecedor" type="text" name="text" class="input" placeholder="Pesquise por um nome, departamento ou atribuições" onkeyup="filtra_fornecedor()">
+                <input id="input_filtro_fornecedor" style="width: 100%;" type="text" name="text" class="input" placeholder="Pesquise por nome ou departamento" onkeyup="filtra_fornecedor()">
 
                 <br><br>
                 <h4>Usuários</h4>
@@ -87,11 +90,12 @@ require_once "../../php/session/conexao_banco.php"; ?>
                                 $nome_departamentos = $nome_departamentos . "$nome_departamento ";
                             }
                         } else
-                            $departamentos = "<div class='label cinza'>Sem departamento vinculado</div>";
+                            $departamentos = "<div class='label'>Sem departamento vinculado</div> <div class='label vermelho'>Sem acesso ao sistema</div>";
 
                         $nome_departamentos = strtolower($nome_departamentos);
+                        $nome_min = strtolower($nome);
 
-                        echo "<form class='item_fornecedor $nome $id $nome_departamentos' action='../../php/functions/editar_usuario.php' method='POST'>
+                        echo "<form class='item_fornecedor $nome_min $id $nome_departamentos' action='../../php/functions/editar_usuario.php' method='POST'>
                                 <span class='label'>$id</span> $nome <br>
 
                                 $departamentos
