@@ -52,8 +52,7 @@ require_once "../session/conexao_banco.php"; ?>
             <?php
 
             $id_usuario = $_POST["id_usuario"];
-            $usuario = "SELECT * FROM usuario WHERE id = $id_usuario";
-            $dados = $conexao->query($usuario);
+            $dados = $conexao->query("SELECT * FROM usuario WHERE id = $id_usuario");
 
             // Coletando os dados do usuario para edição
             $dados_usuario = $dados->fetch_assoc();
@@ -82,42 +81,50 @@ require_once "../session/conexao_banco.php"; ?>
                     <input type="text" class="input" name="input_email" required value="<?php echo $email ?>">
 
                     <br><br>
-                    <span>Departamentos</span><br>
-                    <div>
 
-                        <?php
-                        $departamentos = "SELECT * FROM departamento";
-                        $dados_departamentos = $conexao->query($departamentos);
+                    <div class="select_destaque">
+                        <h4>Departamentos</h4>
 
-                        $dados_atribuicao = $conexao->query("SELECT * FROM atribuicao WHERE id_usuario = $id_usuario");
-                        $atribuicoes = [];
+                        <input id="input_filtro_fornecedor" style="width: 100%;" type="text" name="text" class="input" placeholder="Pesquise por um departamento" onkeyup="filtra_fornecedor()">
 
-                        // Listando todos os departamentos do usuário
-                        if ($dados_atribuicao->num_rows > 0)
-                            while ($dados_atr_interno = $dados_atribuicao->fetch_assoc())
-                                array_push($atribuicoes, $dados_atr_interno["id_departamento"]);
+                        <br><br>
 
-                        // Listando todos os departamentos e ativando os que o usuário possui atribuição
-                        if ($dados_departamentos->num_rows > 0) {
-                            while ($dados_dpt_interno = $dados_departamentos->fetch_assoc()) {
+                        <div class="lista_grid">
 
-                                $id_departamento = $dados_dpt_interno["id"];
-                                $nome_departamento = $dados_dpt_interno["nome"];
-                                $cor_destaque = $dados_dpt_interno["cor_destaque"];
+                            <?php
+                            $dados_departamentos = $conexao->query("SELECT * FROM departamento");
+                            $dados_atribuicao = $conexao->query("SELECT * FROM atribuicao WHERE id_usuario = $id_usuario");
+                            $atribuicoes = [];
 
-                                $atribuido = in_array($id_departamento, $atribuicoes) ? "checked" : "";
+                            // Listando todos os departamentos do usuário
+                            if ($dados_atribuicao->num_rows > 0)
+                                while ($dados_atr_interno = $dados_atribuicao->fetch_assoc())
+                                    array_push($atribuicoes, $dados_atr_interno["id_departamento"]);
 
-                                echo "<input name='input_atribuicoes[]' value='$id_departamento' type='checkbox' $atribuido> <div class='label espacador_label' style='background-color: $cor_destaque'>$nome_departamento</div>";
+                            // Listando todos os departamentos e ativando os que o usuário possui atribuição
+                            if ($dados_departamentos->num_rows > 0) {
+                                while ($dados_dpt_interno = $dados_departamentos->fetch_assoc()) {
+
+                                    $id_departamento = $dados_dpt_interno["id"];
+                                    $nome_departamento = $dados_dpt_interno["nome"];
+                                    $cor_destaque = $dados_dpt_interno["cor_destaque"];
+
+                                    $atribuido = in_array($id_departamento, $atribuicoes) ? "checked" : "";
+                                    $nome_min = strtolower($nome_departamento);
+
+                                    echo "<span class='item_fornecedor item_min $nome_min'><input name='input_atribuicoes[]' value='$id_departamento' type='checkbox' $atribuido> <div class='label espacador_label' style='background-color: $cor_destaque'>$nome_departamento</div></span>";
+                                }
                             }
-                        }
-                        ?>
+                            ?>
+                        </div>
                     </div>
-
-                    <br><br>
-                    <button class="button_form_cadastro">Atualizar</button>
-                </form>
             </div>
+
+            <br><br>
+            <button class="button_form_cadastro">Atualizar</button>
+            </form>
         </div>
+    </div>
     </div>
 </body>
 

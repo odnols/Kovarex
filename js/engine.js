@@ -37,7 +37,7 @@ $("#perfil_sm").click(() => {
 
 function filtra_fornecedor() {
 
-    const alvo = (document.getElementById("input_filtro_fornecedor").value).toUpperCase()
+    const alvo = (document.getElementById("input_filtro_fornecedor").value).toLowerCase()
     let item_fornecedor = document.getElementsByClassName("item_fornecedor")
     let filtros = 0
 

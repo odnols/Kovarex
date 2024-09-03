@@ -49,6 +49,11 @@ require_once "../../php/session/conexao_banco.php"; ?>
     <div id="quadro_fundo_total">
         <div class="detalhes_fornecedor">
 
+            <a href="../moderacao.php"><button><i class="fa fa-solid fa-caret-left"></i> Retornar</button></a>
+            <br><br>
+
+            <input id="input_filtro_fornecedor" type="text" name="text" class="input" placeholder="Pesquise por um departamento" onkeyup="filtra_fornecedor()">
+
             <?php
             $dados = $conexao->query("SELECT * FROM departamento");
 
@@ -70,7 +75,9 @@ require_once "../../php/session/conexao_banco.php"; ?>
                         $nome = $dados_departamento["nome"];
                         $cor = $dados_departamento["cor_destaque"];
 
-                        echo "<form class='item_departamento' action='../../php/functions/editar_departamento.php' method='POST'>
+                        $nome_min = strtolower($nome);
+
+                        echo "<form class='item_fornecedor item_departamento $nome_min' action='../../php/functions/editar_departamento.php' method='POST'>
                                 <span class='barra_lateral_cor_destaque' style='background-color: $cor'></span>
 
                                 <h4 class='id_label'>$nome</h4><br>
@@ -80,9 +87,9 @@ require_once "../../php/session/conexao_banco.php"; ?>
                                 <button class='btn_editar_dpt'><i class='fa fa-solid fa-pen'></i> Editar departamento</button>
                         </form>";
                     } ?>
-
-                    <h2 class="sem_resultados"><i class="fa fa-solid fa-ban"></i> Sem fornecedores para essa pesquisa...</h2>
                 </div>
+
+                <h2 class="sem_resultados"><i class="fa fa-solid fa-ban"></i> Sem departamentos para essa pesquisa...</h2>
 
             <?php } else { ?>
 

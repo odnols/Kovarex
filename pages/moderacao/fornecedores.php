@@ -49,6 +49,9 @@ require_once "../../php/session/conexao_banco.php"; ?>
     <div id="quadro_fundo_total">
         <div class="detalhes_fornecedor">
 
+            <a href="../moderacao.php"><button><i class="fa fa-solid fa-caret-left"></i> Retornar</button></a>
+            <br><br>
+
             <?php
             $dados = $conexao->query("SELECT * FROM empresa");
 
@@ -74,8 +77,10 @@ require_once "../../php/session/conexao_banco.php"; ?>
                         $cnpj_formatado = str_replace("/", "", $cnpj_formatado);
                         $cnpj_formatado = str_replace("-", "", $cnpj_formatado);
 
-                        echo "<form class='item_fornecedor $cnpj $razao $id $cnpj_formatado' action='../../php/functions/editar_fornecedor.php' method='POST'>
-                                <span class='id_label'>$id</span> $razao <br>
+                        $razaio_min = strtolower($razao);
+
+                        echo "<form class='item_fornecedor $cnpj $razaio_min $id $cnpj_formatado' action='../../php/functions/editar_fornecedor.php' method='POST'>
+                                <span class='label'>$id</span> $razao <br>
                                 $cnpj
 
                                 <input name='id_fornecedor' value='$id' class='invisible'>
