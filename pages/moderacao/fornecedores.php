@@ -50,9 +50,7 @@ require_once "../../php/session/conexao_banco.php"; ?>
         <div class="detalhes_fornecedor">
 
             <?php
-
-            $fornecedores = "SELECT * FROM empresa";
-            $dados = $conexao->query($fornecedores);
+            $dados = $conexao->query("SELECT * FROM empresa");
 
             if ($dados->num_rows > 0) { ?>
 
@@ -66,7 +64,6 @@ require_once "../../php/session/conexao_banco.php"; ?>
                 <div class="lista_fornecedores">
 
                     <?php
-
                     // Listando todos os fornecedores
                     while ($dados_fornecedor = $dados->fetch_assoc()) {
 

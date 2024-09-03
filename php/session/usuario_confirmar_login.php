@@ -6,8 +6,7 @@ $options = [
 
 $email = $_POST["email"];
 
-$dados = "SELECT * FROM usuario where email like '$email'";
-$resultado = $conexao->query($dados);
+$resultado = $conexao->query("SELECT * FROM usuario where email like '$email'");
 
 if ($resultado->num_rows > 0) {
     $linha = $resultado->fetch_assoc();
@@ -20,8 +19,7 @@ if ($resultado->num_rows > 0) {
             // Atualizando o hash do usuário para o formato mais recente de dados
             $newHash = password_hash($_POST["senha"], PASSWORD_BCRYPT, $options);
 
-            $atualiza_dados = "UPDATE usuario where email = '$email' set hash = '$newHash'";
-            $conexao->query($atualiza_dados);
+            $conexao->query("UPDATE usuario where email = '$email' set hash = '$newHash'");
         }
 
         // Efetuando o login no sistema

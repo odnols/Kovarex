@@ -50,9 +50,7 @@ require_once "../../php/session/conexao_banco.php"; ?>
         <div class="detalhes_fornecedor">
 
             <?php
-
-            $usuarios = "SELECT * FROM usuario";
-            $dados = $conexao->query($usuarios);
+            $dados = $conexao->query("SELECT * FROM usuario");
 
             if ($dados->num_rows > 0) { ?>
 
@@ -63,16 +61,13 @@ require_once "../../php/session/conexao_banco.php"; ?>
 
                 <div class="lista_fornecedores">
 
-                    <?php
-
-                    // Listando todos os usuarios
+                    <?php // Listando todos os usuarios
                     while ($dados_usuario = $dados->fetch_assoc()) {
 
                         $id = $dados_usuario["id"];
                         $nome = $dados_usuario["nome"];
 
-                        $departamentos = "SELECT * FROM atribuicao WHERE id_usuario = $id";
-                        $dados_atribuicao = $conexao->query($departamentos);
+                        $dados_atribuicao = $conexao->query("SELECT * FROM atribuicao WHERE id_usuario = $id");
 
                         $departamentos = "";
                         $nome_departamentos = "";
@@ -81,9 +76,7 @@ require_once "../../php/session/conexao_banco.php"; ?>
                             while ($dados_dpt_interno = $dados_atribuicao->fetch_assoc()) {
 
                                 $id_departamento = $dados_dpt_interno["id_departamento"];
-
-                                $departamento = "SELECT * from departamento WHERE id = $id_departamento";
-                                $dados_departamento = $conexao->query($departamento);
+                                $dados_departamento = $conexao->query("SELECT * from departamento WHERE id = $id_departamento");
 
                                 $dados_dpt_interno = $dados_departamento->fetch_assoc();
 
@@ -114,47 +107,9 @@ require_once "../../php/session/conexao_banco.php"; ?>
 
             <?php } else { ?>
 
-                <h1>Não há nenhum fornecedor cadastrado ainda...</h1>
+                <h1>Não há nenhum usuário cadastrado ainda...</h1>
                 <hr>
 
-                <div class="form_primeira_interacao">
-                    <form id="cadastro_fornecedor" action="../../php/functions/cadastrar_usuario.php" method="post">
-
-                        <h3>Cadastre um agora mesmo para começar!</h3>
-                        <br>
-
-                        <br><br>
-                        <span>Nome</span><br>
-                        <input type="text" class="input" name="input_nome" required maxlength="255">
-
-                        <br><br>
-                        <button class="button_form_cadastro">Cadastrar</button>
-                    </form>
-
-                    <form id="cadastro_fornecedor" action="../../php/functions/importar_dados.php" method="post">
-
-                        <h3>Ou importe de outro sistema...</h3>
-
-                        <br>
-                        <p><i class="fa fa-regular fa-lightbulb"></i> A importação utilizará o CNPJ ou ID do fornecedor, caso haja um CNPJ ou CPF repetido, iremos ignorar a importação do CNPJ ou CPF que estiver repetido de modo a evitar erros em dados.</p>
-
-                        <br><br>
-                        <div class="file">
-                            <label class="file-label">
-                                <input class="file-input" type="file" name="resume" accept=".pdf" disabled />
-                                <span class="file-cta">
-                                    <span class="file-icon">
-                                        <i class="fas fa-upload"></i>
-                                    </span>
-                                    <span class="file-label"> Escolha uma base de dados...</span>
-                                </span>
-                            </label>
-                        </div>
-
-                        <br>
-                        <button class="button_form_cadastro" disabled>Importar</button>
-                    </form>
-                </div>
             <?php } ?>
         </div>
     </div>

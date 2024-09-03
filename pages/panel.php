@@ -25,8 +25,7 @@ require_once "../php/session/verifica_sessao.php";
 require_once "../php/session/conexao_banco.php";
 
 // Verificando as atribuições de departamentos que o usuário possui
-$status_usuario = "SELECT * FROM atribuicao WHERE id_usuario = $id_user";
-$atribuicoes = $conexao->query($status_usuario);
+$atribuicoes = $conexao->query("SELECT * FROM atribuicao WHERE id_usuario = $id_user");
 
 ?>
 
@@ -84,9 +83,7 @@ $atribuicoes = $conexao->query($status_usuario);
                 <div class="quadro_pag sombra_quadro">
 
                     <?php
-
-                    $pedidos = "SELECT * FROM pedido WHERE id_autor = $id_user order by id desc limit 5";
-                    $resultado = $conexao->query($pedidos);
+                    $resultado = $conexao->query("SELECT * FROM pedido WHERE id_autor = $id_user order by id desc limit 5");
 
                     if ($resultado->num_rows > 0) {
                     } else

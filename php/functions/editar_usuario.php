@@ -89,9 +89,7 @@ require_once "../session/conexao_banco.php"; ?>
                         $departamentos = "SELECT * FROM departamento";
                         $dados_departamentos = $conexao->query($departamentos);
 
-                        $departamentos_atribuidos = "SELECT * FROM atribuicao WHERE id_usuario = $id_usuario";
-                        $dados_atribuicao = $conexao->query($departamentos_atribuidos);
-
+                        $dados_atribuicao = $conexao->query("SELECT * FROM atribuicao WHERE id_usuario = $id_usuario");
                         $atribuicoes = [];
 
                         // Listando todos os departamentos do usuário

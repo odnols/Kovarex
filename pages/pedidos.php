@@ -23,11 +23,8 @@ require_once "../php/session/verifica_sessao.php"; ?>
 
 <body>
     <div id="banner_topo">
-        <img id="perfil_sm" src="<?php if (isset($_SESSION["foto"])) {
-                                        echo $_SESSION["foto"];
-                                    } else {
-                                        echo "../files/img/icons/avatar.png";
-                                    } ?>">
+        <img id="perfil_sm" src="<?php if (isset($_SESSION["foto"])) echo $_SESSION["foto"];
+                                    else  echo "../files/img/icons/avatar.png"; ?>">
 
         <div id="nav_links">
             <h2><a href="panel.php"><img src="../files/img/icons/logo.png"></a></h2>

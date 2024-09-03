@@ -10,7 +10,6 @@ $razao = $_POST["input_razao_social"];
 // Deixando a razão social em maiusculo
 $razao = strtoupper($razao);
 
-$atualiza_fornecedor = "UPDATE empresa SET cnpj = '$cnpj', razao_social = '$razao' WHERE id = $id";
-$conexao->query($atualiza_fornecedor);
+$conexao->query("UPDATE empresa SET cnpj = '$cnpj', razao_social = '$razao' WHERE id = $id");
 
 header("Location: ../../pages/moderacao/fornecedores.php");

@@ -52,8 +52,7 @@ require_once "../session/conexao_banco.php"; ?>
             <?php
 
             $id_fornecedor = $_POST["id_fornecedor"];
-            $fornecedor = "SELECT * FROM empresa WHERE id = $id_fornecedor";
-            $dados = $conexao->query($fornecedor);
+            $dados = $conexao->query("SELECT * FROM empresa WHERE id = $id_fornecedor");
 
             // Coletando os dados do fornecedor para edição
             $dados_fornecedor = $dados->fetch_assoc();
