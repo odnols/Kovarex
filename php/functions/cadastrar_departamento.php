@@ -6,14 +6,12 @@ require_once "../session/conexao_banco.php";
 $nome = $_POST["input_nome"];
 $cor_destaque = $_POST["input_cor_destaque"];
 
-$verifica_fornecedor = "SELECT * FROM departamento where nome = '$nome'";
-$verifica = $conexao->query($verifica_fornecedor);
+$verifica = $conexao->query("SELECT * FROM departamento where nome = '$nome'");
 
 if ($verifica->num_rows > 0) // Fornecedor com o CNPJ ou CPF informado já existe
     header("Location: ../../pages/moderacao/departamentos.php");
 
 // Inserindo o novo fornecedor no banco
-$insere_departamento = "INSERT INTO departamento (nome, cor_destaque) VALUES ('$nome', '$cor_destaque')";
-$conexao->query($insere_departamento);
+$conexao->query("INSERT INTO departamento (nome, cor_destaque) VALUES ('$nome', '$cor_destaque')");
 
 header("Location: ../../pages/moderacao/departamentos.php");

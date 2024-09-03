@@ -50,9 +50,7 @@ require_once "../../php/session/conexao_banco.php"; ?>
         <div class="detalhes_fornecedor">
 
             <?php
-
-            $departamentos = "SELECT * FROM departamento";
-            $dados = $conexao->query($departamentos);
+            $dados = $conexao->query("SELECT * FROM departamento");
 
             if ($dados->num_rows > 0) { ?>
 

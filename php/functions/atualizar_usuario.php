@@ -7,8 +7,7 @@ $id = $_POST["input_id"];
 $nome = $_POST["input_nome"];
 $email = $_POST["input_email"];
 
-$departamentos = "SELECT * FROM departamento";
-$dados_departamento = $conexao->query($departamentos);
+$dados_departamento = $conexao->query("SELECT * FROM departamento");
 
 $departamentos = [];
 $atribuicoes = [];
@@ -19,8 +18,7 @@ if ($dados_departamento->num_rows > 0)
     while ($dados_atr_interno = $dados_departamento->fetch_assoc())
         array_push($departamentos, $dados_atr_interno["id"]);
 
-$departamentos_atribuidos = "SELECT * FROM atribuicao WHERE id_usuario = $id";
-$dados_atribuicao = $conexao->query($departamentos_atribuidos);
+$dados_atribuicao = $conexao->query("SELECT * FROM atribuicao WHERE id_usuario = $id");
 
 // Listando todos os departamentos do usuário
 if ($dados_atribuicao->num_rows > 0)
@@ -39,7 +37,6 @@ foreach ($departamentos as $id) {
     if (!in_array($id, $atribuidos)) $conexao->query("DELETE FROM atribuicao WHERE id_usuario = $id AND id_departamento = $atribuicao");
 }
 
-$atualiza_usuario = "UPDATE usuario SET nome = '$nome', email = '$email' WHERE id = $id";
-$conexao->query($atualiza_usuario);
+$conexao->query("UPDATE usuario SET nome = '$nome', email = '$email' WHERE id = $id");
 
 header("Location: ../../pages/moderacao/usuarios.php");

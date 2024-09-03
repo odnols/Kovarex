@@ -52,8 +52,7 @@ require_once "../session/conexao_banco.php"; ?>
             <?php
 
             $id_departamento = $_POST["id_departamento"];
-            $departamento = "SELECT * FROM departamento WHERE id = $id_departamento";
-            $dados = $conexao->query($departamento);
+            $dados = $conexao->query("SELECT * FROM departamento WHERE id = $id_departamento");
 
             // Coletando os dados do departamento para edição
             $dados_departamento = $dados->fetch_assoc();
