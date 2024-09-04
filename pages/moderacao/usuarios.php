@@ -95,10 +95,15 @@ require_once "../../php/session/conexao_banco.php"; ?>
                         $nome_departamentos = strtolower($nome_departamentos);
                         $nome_min = strtolower($nome);
 
-                        echo "<form class='item_fornecedor $nome_min $id $nome_departamentos' action='../../php/functions/editar_usuario.php' method='POST'>
+                        $alterar_psw = "";
+
+                        if ($dados_usuario["alterar_psw"] == 1) // Tag com informações sobre alteração de senha em andamento
+                            $alterar_psw = "<div class='label vermelho'><i class='fa fa-solid fa-key'></i> Senha a ser alterada</div>";
+
+                        echo "<form class='item_fornecedor $nome_min $id $nome_departamentos' action='../../php/cache/editar_usuario.php' method='POST'>
                                 <span class='label'>$id</span> $nome <br>
 
-                                $departamentos
+                                $departamentos$alterar_psw
 
                                 <input name='id_usuario' value='$id' class='invisible'>
 

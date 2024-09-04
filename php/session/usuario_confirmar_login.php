@@ -29,7 +29,9 @@ if ($resultado->num_rows > 0) {
         $_SESSION["nome"] = $linha["nome"];
         $_SESSION["hierarquia"] = $linha["hierarquia"];
 
-        header("Location: ../../pages/panel.php");
+        // Redirecionando para o usuário trocar a senha de acesso
+        if ($linha["alterar_psw"] == 1) header("Location: ../cache/alterar_senha.php");
+        else header("Location: ../../pages/panel.php");
     } else
         header("Location: ../../index.php?ERROR=001");
 } else

@@ -2,7 +2,7 @@ create database kovarex;
 
 use kovarex;
 
-select * from atribuicao;
+select * from usuario;
 delete from empresa where id = 1;
 
 create table usuario(
@@ -10,7 +10,8 @@ create table usuario(
     hierarquia int not null,
     nome varchar(255),
     email varchar(100),
-    hash varchar(5000)
+    hash varchar(5000),
+    alterar_psw boolean
 ) engine = InnoDB;
 
 create table empresa(

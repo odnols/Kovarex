@@ -67,7 +67,7 @@ require_once "../session/conexao_banco.php"; ?>
 
             <div class="lista_fornecedores">
 
-                <form id="cadastro_fornecedor" action="./atualizar_fornecedor.php" method="post">
+                <form id="cadastro_fornecedor" action="../functions/atualizar_fornecedor.php" method="post">
 
                     <h3>Atualize os dados do fornecedor abaixo</h3>
                     <br>
