@@ -79,7 +79,7 @@ require_once "../../php/session/conexao_banco.php"; ?>
 
                         $razaio_min = strtolower($razao);
 
-                        echo "<form class='item_fornecedor $cnpj $razaio_min $id $cnpj_formatado' action='../../php/functions/editar_fornecedor.php' method='POST'>
+                        echo "<form class='item_fornecedor $cnpj $razaio_min $id $cnpj_formatado' action='../../php/cache/editar_fornecedor.php' method='POST'>
                                 <span class='label'>$id</span> $razao <br>
                                 $cnpj
 
@@ -156,7 +156,7 @@ require_once "../../php/session/conexao_banco.php"; ?>
 
                 <br><br>
                 <button class="button_form_cadastro">Cadastrar</button> <br><br>
-                <button class="button_form_cadastro" onclick="fechar_popup()">Fechar janela</button>
+                <button class="button_form_cadastro" onclick="fechar_popup()" type="button">Fechar janela</button>
             </form>
         </div>
     </div>

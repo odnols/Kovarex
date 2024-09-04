@@ -66,7 +66,9 @@ require_once "../session/conexao_banco.php"; ?>
             <h2>Editando o Usuário</h2>
 
             <div class="lista_fornecedores">
-                <form id="cadastro_fornecedor" action="./atualizar_usuario.php" method="post">
+                <form id="cadastro_fornecedor" action="../functions/atualizar_usuario.php" method="post">
+
+                    <button class="cadastrar_novo" onclick="abrir_popup()" type="button"><i class="fa fa-solid fa-key"></i> Redefinir senha</button>
 
                     <h3>Atualize os dados do usuário abaixo</h3>
                     <br>
@@ -125,6 +127,26 @@ require_once "../session/conexao_banco.php"; ?>
             </form>
         </div>
     </div>
+
+    <!-- Tela popup para alteração de senha do usuário -->
+    <div class="cadastro_popup">
+        <form id="cadastro_fornecedor" action="../functions/usuario_redefinir_senha.php" method="post">
+
+            <h3>Redefinir senha do usuário</h3>
+            <br>
+
+            <p>O usuário será direcionado até a tela para realizar a troca de senha assim que fizer login novamente.</p>
+            <hr>
+
+            <input type="text" class="input invisible" name="id_user" value="<?php echo $id_usuario ?>">
+
+            <span>Nova senha</span><br>
+            <input type="password" class="input" name="senha" required maxlength="50">
+
+            <br><br>
+            <button class="button_form_cadastro">Redefinir</button> <br><br>
+            <button class="button_form_cadastro" onclick="fechar_popup()" type="button">Fechar janela</button>
+        </form>
     </div>
 </body>
 

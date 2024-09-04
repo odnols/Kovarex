@@ -77,7 +77,7 @@ require_once "../../php/session/conexao_banco.php"; ?>
 
                         $nome_min = strtolower($nome);
 
-                        echo "<form class='item_fornecedor item_departamento $nome_min' action='../../php/functions/editar_departamento.php' method='POST'>
+                        echo "<form class='item_fornecedor item_departamento $nome_min' action='../../php/cache/editar_departamento.php' method='POST'>
                                 <span class='barra_lateral_cor_destaque' style='background-color: $cor'></span>
 
                                 <h4 class='id_label'>$nome</h4><br>
@@ -131,7 +131,7 @@ require_once "../../php/session/conexao_banco.php"; ?>
 
                 <br><br>
                 <button class="button_form_cadastro">Cadastrar</button> <br><br>
-                <button class="button_form_cadastro" onclick="fechar_popup()">Fechar janela</button>
+                <button class="button_form_cadastro" onclick="fechar_popup()" type="button">Fechar janela</button>
             </form>
         </div>
     </div>
