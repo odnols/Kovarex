@@ -39,9 +39,9 @@ require_once "../../php/session/conexao_banco.php"; ?>
         <div id="nav_links">
             <h2><a href="../panel.php"><img src="../../files/img/icons/logo.png"></a></h2>
 
-            <h2><a href="../itens.php">Itens</a></h2>
+            <h2><a href="../licitacoes.php">Licitações</a></h2>
             <h2><a href="../pedidos.php">Pedidos</a></h2>
-            <h2><a href="../entregas.php">Entregas</a></h2>
+            <h2><a href="../autorizacoes.php">Autorizações</a></h2>
             <?php if ($_SESSION["hierarquia"]) { ?> <h2><a href="../moderacao.php">Moderação</a></h2> <?php } ?>
         </div>
     </div>

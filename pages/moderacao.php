@@ -41,9 +41,9 @@ require_once "../php/session/conexao_banco.php"; ?>
         <div id="nav_links">
             <h2><a href="panel.php"><img src="../files/img/icons/logo.png"></a></h2>
 
-            <h2><a href="itens.php">Itens</a></h2>
+            <h2><a href="licitacoes.php">Licitações</a></h2>
             <h2><a href="pedidos.php">Pedidos</a></h2>
-            <h2><a href="entregas.php">Entregas</a></h2>
+            <h2><a href="autorizacoes.php">Autorizações</a></h2>
             <?php if ($_SESSION["hierarquia"]) { ?> <h2><a href="moderacao.php">Moderação</a></h2> <?php } ?>
         </div>
     </div>
@@ -73,7 +73,7 @@ require_once "../php/session/conexao_banco.php"; ?>
             <p>Gerencie licitações, relação de itens, quantidades e departamentos solicitantes.</p>
 
             <br>
-            <a href="itens.php" class="button_add_pedido cinza large_button">Gerenciar licitações ></a>
+            <a href="licitacoes.php" class="button_add_pedido cinza large_button">Gerenciar licitações ></a>
         </div>
 
         <div class="quadro_pag sombra_quadro">
@@ -82,7 +82,7 @@ require_once "../php/session/conexao_banco.php"; ?>
             <p>Gerencie os itens.</p>
 
             <br>
-            <a href="itens.php" class="button_add_pedido cinza large_button">Gerenciar itens ></a>
+            <a href="licitacoes.php" class="button_add_pedido cinza large_button">Gerenciar itens ></a>
         </div>
 
         <div class="quadro_pag sombra_quadro">
@@ -97,10 +97,10 @@ require_once "../php/session/conexao_banco.php"; ?>
         <div class="quadro_pag sombra_quadro">
             <h3><i class="fa fa-solid fa-ruler"></i> Unidades</h3>
             <hr>
-            <p>Gerencie as unidades de medida.</p>
+            <p>Gerencie as unidades de medida e categorias de itens.</p>
 
             <br>
-            <a href="itens.php" class="button_add_pedido cinza large_button">Gerenciar unidades ></a>
+            <a href="licitacoes.php" class="button_add_pedido cinza large_button">Gerenciar unidades ></a>
         </div>
     </div>
 </body>
