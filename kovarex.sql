@@ -3,7 +3,6 @@ create database kovarex;
 use kovarex;
 
 select * from usuario;
-delete from empresa where id = 1;
 
 create table usuario(
     id int not null auto_increment primary key,
@@ -66,8 +65,10 @@ create table pedido(
     id int not null auto_increment primary key,
     data_criacao varchar(50),
     id_autor int not null,
+    id_departamento int not null,
     status int,
-    foreign key (id_autor) references usuario(id)
+    foreign key (id_autor) references usuario(id),
+    foreign key (id_departamento) references departamento(id)
 ) engine = InnoDB;
 
 create table item_pedido(
@@ -87,6 +88,11 @@ create table departamento(
     cor_destaque varchar(20)
 ) engine = InnoDB;
 
+insert into empenho (num_empenho, num_af, status, data_empenho, data_entrega, id_departamento) values (500, 250, 1, '20/09/2024', '20/09/2024', 1);
+select * from empenho;
+
+update empenho set ultima_atualizacao = '20/09/2024' where id = 1;
+
 create table empenho(
 	id int not null auto_increment primary key,
     num_empenho int not null,
@@ -94,6 +100,7 @@ create table empenho(
     status int not null,
     data_empenho varchar(50),
     data_entrega varchar(50),
+    ultima_atualizacao varchar(50),
 	id_departamento int not null,
     foreign key (id_departamento) references departamento(id)
 ) engine = InnoDB;

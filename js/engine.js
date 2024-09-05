@@ -35,19 +35,31 @@ $("#perfil_sm").click(() => {
     $("#float_menu").fadeToggle()
 })
 
-function filtra_fornecedor() {
+function filtra_fornecedor(caso) {
 
-    const alvo = (document.getElementById("input_filtro_fornecedor").value).toLowerCase()
+    let alvo = "input_filtro_fornecedor"
+
+    // Filtro utilizado para itens de pedidos
+    if (caso) alvo = "filtro_tipo_item_pedido"
+
+    alvo = (document.getElementById(alvo).value).toLowerCase()
     let item_fornecedor = document.getElementsByClassName("item_fornecedor")
     let filtros = 0
 
+
     // Filtrando os fornecedores com a pesquisa ativa
-    for (let i = 0; i < item_fornecedor.length; i++)
-        if ((item_fornecedor[i].classList.value).includes(alvo)) item_fornecedor[i].style.display = "Block"
-        else {
+    for (let i = 0; i < item_fornecedor.length; i++) {
+        if ((item_fornecedor[i].classList.value).includes(alvo)) {
+
+            // Verificando o tipo de display do card que está sendo filtrado
+            let caso = (item_fornecedor[i].classList.value).includes("selecionar_lista_pedido") ? "Grid" : "Block"
+
+            item_fornecedor[i].style.display = caso
+        } else {
             filtros++
             item_fornecedor[i].style.display = "None"
         }
+    }
 
     // Card com retorno para sem resultados no filtro
     if (filtros === item_fornecedor.length) document.getElementsByClassName("sem_resultados")[0].style.display = "Block"
