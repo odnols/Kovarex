@@ -74,6 +74,8 @@ $id_user = $_SESSION["id"]; ?>
                         $data_empenho = $empenho["data_empenho"];
                         $ultima_atualizacao = $empenho["ultima_atualizacao"];
 
+                        $codigo_compartilhamento = $empenho["codigo_compartilhamento"];
+
                         $dados_departamento = $conexao->query("SELECT * FROM departamento WHERE id = $id_departamento");
                         $dados_departamento = $dados_departamento->fetch_assoc();
 
@@ -81,6 +83,8 @@ $id_user = $_SESSION["id"]; ?>
                         $cor_destaque = $dados_departamento["cor_destaque"];
 
                         echo "<form class='card_empenho' action='./pedidos/consultar_empenho.php'>
+                            
+                            <span class='label'><i class='fa fa-solid fa-share'></i> $codigo_compartilhamento</span>
                             <button style='float: right;'><i class='fa fa-regular fa-compass'></i> Ver mais</button>
 
                             <span class='barra_lateral_cor_destaque' style='background-color: $cor_destaque'></span>
@@ -90,6 +94,7 @@ $id_user = $_SESSION["id"]; ?>
 
                             <span class='label' style='background-color: gray;'><i class='fa fa-solid fa-pencil'></i> Materiais de escritório</span>
                             <input type='text' class='invisible' value='$id_empenho'>
+                            <input type='text' class='invisible' name='empenho' value='$codigo_compartilhamento'>
 
                             <p><span class='label' style='background-color: $cor_destaque;'>$nome_departamento</span></p>
                         </form>";

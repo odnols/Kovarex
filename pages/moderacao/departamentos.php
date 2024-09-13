@@ -46,7 +46,7 @@ require_once "../../php/session/conexao_banco.php"; ?>
         </div>
     </div>
 
-    <div id="quadro_fundo_total">
+    <div id="quadro_fundo_total" class="cinza_escuro">
         <div class="detalhes_fornecedor">
 
             <a href="../moderacao.php"><button><i class="fa fa-solid fa-caret-left"></i> Retornar</button></a>

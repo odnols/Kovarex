@@ -106,7 +106,7 @@ $atribuicoes = $conexao->query("SELECT * FROM atribuicao WHERE id_usuario = $id_
 
                 <div class="quadro_pag pilula_fechamento_mensal sombra_quadro">
 
-                    <p><i class="fa fa-solid fa-flag-checkered"></i> Um novo fechamento está programado para o dia 02/10, envie pedidos de materiais licitados antes desta data.</p>
+                    <p><i class="fa fa-solid fa-flag-checkered"></i> Um novo fechamento está programado para o dia 02/10, envie pedidos de materiais que são licitados antes desta data.</p>
                 </div>
 
                 <div class="quadro_pag pilula_completa sombra_quadro">
@@ -134,6 +134,8 @@ $atribuicoes = $conexao->query("SELECT * FROM atribuicao WHERE id_usuario = $id_
                                 $num_af = $empenho["num_af"];
                                 $id_departamento = $empenho["id_departamento"];
 
+                                $codigo_compartilhamento = $empenho["codigo_compartilhamento"];
+
                                 $data_empenho = $empenho["data_empenho"];
                                 $ultima_atualizacao = $empenho["ultima_atualizacao"];
 
@@ -143,16 +145,17 @@ $atribuicoes = $conexao->query("SELECT * FROM atribuicao WHERE id_usuario = $id_
                                 $nome_departamento = $dados_departamento["nome"];
                                 $cor_destaque = $dados_departamento["cor_destaque"];
 
-                                $empenhos_ativos = $empenhos_ativos . "<form class='card_empenho' action='./pedidos/consultar_empenho.php'>
+                                $empenhos_ativos = $empenhos_ativos . "<form class='card_empenho' action='./pedidos/consultar_empenho.php' method='POST'>
+                                    <span class='label'><i class='fa fa-solid fa-share'></i> $codigo_compartilhamento</span>
                                     <button style='float: right;'><i class='fa fa-regular fa-compass'></i> Ver mais</button>
-
+                                
                                     <span class='barra_lateral_cor_destaque' style='background-color: $cor_destaque'></span>
                                     <h4>Empenho <b>$num_empenho</b><br>Autorização <b>$num_af</b></h4>
                                     <hr>
                                     <p>Empenhado em $data_empenho<br>Última atualização em $ultima_atualizacao</p>
 
                                     <span class='label' style='background-color: gray;'><i class='fa fa-solid fa-pencil'></i> Materiais de escritório</span>
-                                    <input type='text' class='invisible' value='$id_empenho'>
+                                    <input type='text' class='invisible' name='empenho' value='$codigo_compartilhamento'>
 
                                     <p><span class='label' style='background-color: $cor_destaque;'>$nome_departamento</span></p>
                                 </form>";
@@ -195,6 +198,10 @@ $atribuicoes = $conexao->query("SELECT * FROM atribuicao WHERE id_usuario = $id_
 
         <?php } ?>
     </div>
+
+    <footer id="footer">
+        <h2 style="float: right;">Kovarex</h2>
+    </footer>
 </body>
 
 <script type="text/javascript" src="../js/engine.js"></script>
