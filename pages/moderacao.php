@@ -103,6 +103,10 @@ require_once "../php/session/conexao_banco.php"; ?>
             <a href="licitacoes.php" class="button_add_pedido cinza large_button">Gerenciar unidades ></a>
         </div>
     </div>
+
+    <footer id="footer">
+        <h2 style="float: right;">Kovarex</h2>
+    </footer>
 </body>
 
 <script type="text/javascript" src="../js/engine.js"></script>

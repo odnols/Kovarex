@@ -7,6 +7,7 @@ select * from usuario;
 create table usuario(
     id int not null auto_increment primary key,
     hierarquia int not null,
+    cnpj varchar(18),
     nome varchar(255),
     email varchar(100),
     hash varchar(5000),
@@ -88,11 +89,6 @@ create table departamento(
     cor_destaque varchar(20)
 ) engine = InnoDB;
 
-insert into empenho (num_empenho, num_af, status, data_empenho, data_entrega, id_departamento) values (500, 250, 1, '20/09/2024', '20/09/2024', 1);
-select * from empenho;
-
-update empenho set ultima_atualizacao = '20/09/2024' where id = 1;
-
 create table empenho(
 	id int not null auto_increment primary key,
     num_empenho int not null,
@@ -102,15 +98,21 @@ create table empenho(
     data_entrega varchar(50),
     ultima_atualizacao varchar(50),
 	id_departamento int not null,
-    foreign key (id_departamento) references departamento(id)
+    id_pedido int not null,
+    codigo_compartilhamento varchar(30) not null,
+    constraint cod_unique unique (codigo_compartilhamento),
+    foreign key (id_departamento) references departamento(id),
+    foreign key(id_pedido) references pedido(id)
 ) engine = InnoDB;
 
 create table evento_empenho(
 	id int not null auto_increment primary key,
     id_autor int not null,
+    id_empenho int not null,
     descricao varchar(500),
     data_evento varchar(50),
-    foreign key (id_autor) references usuario(id)
+    foreign key (id_autor) references usuario(id),
+    foreign key (id_empenho) references empenho(id)
 );
 
 create table atribuicao(
@@ -120,9 +122,3 @@ create table atribuicao(
     foreign key (id_usuario) references usuario(id),
     foreign key (id_departamento) references departamento(id)
 )engine = InnoDB;
-
-update usuario set hierarquia = 1 where id = 1;
-insert into departamento (nome) values ('Licitação e Compras');
-insert into atribuicao (id_usuario, id_departamento) values (1, 1);
-
-select * from usuario;

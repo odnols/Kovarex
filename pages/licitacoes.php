@@ -290,8 +290,11 @@ require_once "../php/session/verifica_sessao.php"; ?>
                 <a href="#" class="button_add_pedido cinza">Fazer pedido ></a>
             </div>
         </div>
-
     </div>
+
+    <footer id="footer">
+        <h2 style="float: right;">Kovarex</h2>
+    </footer>
 </body>
 
 <script type="text/javascript" src="../js/engine.js"></script>

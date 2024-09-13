@@ -26,6 +26,12 @@
     <div id="banner_topo">
         <h2 id="titulo">Kovarex</h2>
 
+        <!-- Redirecionando para o empenho com o código informado -->
+        <?php if (isset($_GET["empenho"])) {
+            $codigo = $_GET["empenho"];
+            header("Location: ./pages/pedidos/consultar_empenho.php?empenho=$codigo");
+        } ?>
+
         <img id="perfil_sm" src="<?php if (isset($_SESSION["foto"])) {
                                         echo $_SESSION["foto"];
                                     } else {

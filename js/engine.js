@@ -52,7 +52,7 @@ function filtra_fornecedor(caso) {
         if ((item_fornecedor[i].classList.value).includes(alvo)) {
 
             // Verificando o tipo de display do card que está sendo filtrado
-            let caso = (item_fornecedor[i].classList.value).includes("selecionar_lista_pedido") ? "Grid" : "Block"
+            let caso = (item_fornecedor[i].classList.value).includes("selecionar_lista_pedido") || ((item_fornecedor[i].classList.value).includes("item_lista_conferir_empenho")) ? "Grid" : "Block"
 
             item_fornecedor[i].style.display = caso
         } else {
@@ -72,4 +72,8 @@ function abrir_popup() {
 
 function fechar_popup() {
     $(".cadastro_popup").fadeToggle()
+}
+
+function pop_up_login() {
+    $("#formulario_login_empenho").fadeToggle()
 }

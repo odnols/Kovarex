@@ -46,7 +46,7 @@ require_once "../../php/session/conexao_banco.php"; ?>
         </div>
     </div>
 
-    <div id="quadro_fundo_total">
+    <div id="quadro_fundo_total" class="cinza_escuro">
         <div class="detalhes_fornecedor">
 
             <a href="../moderacao.php"><button><i class="fa fa-solid fa-caret-left"></i> Retornar</button></a>
@@ -78,6 +78,7 @@ require_once "../../php/session/conexao_banco.php"; ?>
                         $cnpj_formatado = str_replace("-", "", $cnpj_formatado);
 
                         $razaio_min = strtolower($razao);
+                        $cadastro = strlen($dados_fornecedor["id_vinculado"]) > 0 ? "<span class='label amarelo' style='float: right; margin-right: 5px; margin-top: -11px'><i class='fa fa-solid fa-id-badge'></i> Representante cadastrado</span>" : "<span class='label vermelho' style='float: right; margin-right: 5px; margin-top: -11px'><i class='fa fa-solid fa-id-badge'></i> Sem representante</span>";
 
                         echo "<form class='item_fornecedor $cnpj $razaio_min $id $cnpj_formatado' action='../../php/cache/editar_fornecedor.php' method='POST'>
                                 <span class='label'>$id</span> $razao <br>
@@ -85,7 +86,9 @@ require_once "../../php/session/conexao_banco.php"; ?>
 
                                 <input name='id_fornecedor' value='$id' class='invisible'>
 
+                                
                                 <button><i class='fa fa-solid fa-pen'></i> Editar fornecedor</button>
+                                $cadastro
                         </form>";
                     } ?>
 
