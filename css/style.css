@@ -161,7 +161,7 @@ h1>a:hover {
     height: auto;
     column-gap: 5%;
     grid-template-columns: 46.5% 46.5%;
-    grid-template-areas: 'pilula_fechamento_mensal pilula_fechamento_mensal'
+    grid-template-areas: 'pilula_avisos_geral pilula_avisos_geral'
         'pilula_l pilula_r'
         'pilula_l_2 pilula_r'
         'pilula_completa pilula_completa';
@@ -180,17 +180,17 @@ h1>a:hover {
 }
 
 .pilula_completa,
-.pilula_fechamento_mensal {
+.pilula_avisos_geral {
     margin-left: 1%;
     grid-area: pilula_completa;
 }
 
-.pilula_fechamento_mensal {
+.pilula_avisos_geral {
     padding: 1%;
     height: 60px;
     margin-bottom: 10px;
     border: 2px solid yellow;
-    grid-area: pilula_fechamento_mensal;
+    grid-area: pilula_avisos_geral;
     animation: borda_dourada 2s infinite;
 }
 
@@ -236,6 +236,12 @@ h1>a:hover {
     border-top-right-radius: 5px;
     grid-template-columns: 20% 20% 20% 20% 20%;
 }
+
+.grid_unidades {
+    display: grid;
+    grid-template-columns: 48% 48%;
+}
+
 
 .cabecalho_infos {
     border-radius: 5px;
@@ -471,6 +477,7 @@ button {
 
 #input_filtro_fornecedor {
     width: 85%;
+    color: black;
 }
 
 .cadastro_popup {
@@ -495,7 +502,7 @@ button {
 .lista_grid_selecionar_item {
     display: grid;
     column-gap: 1%;
-    grid-template-columns: auto auto auto auto auto auto;
+    grid-template-columns: 15% 15% 15% 15% 15% 15%;
 }
 
 .lista_grid_selecionar_item {

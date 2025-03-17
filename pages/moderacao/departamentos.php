@@ -84,7 +84,7 @@ require_once "../../php/session/conexao_banco.php"; ?>
 
                                 <input name='id_departamento' value='$id' class='invisible'>
 
-                                <button class='btn_editar_dpt'><i class='fa fa-solid fa-pen'></i> Editar departamento</button>
+                                <button class='btn_editar_dpt'><i class='fa fa-solid fa-pen'></i> Editar</button>
                         </form>";
                     } ?>
                 </div>
