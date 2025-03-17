@@ -87,7 +87,7 @@ require_once "../../php/session/conexao_banco.php"; ?>
                                 <input name='id_fornecedor' value='$id' class='invisible'>
 
                                 
-                                <button><i class='fa fa-solid fa-pen'></i> Editar fornecedor</button>
+                                <button><i class='fa fa-solid fa-pen'></i> Editar</button>
                                 $cadastro
                         </form>";
                     } ?>

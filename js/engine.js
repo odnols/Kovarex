@@ -66,14 +66,23 @@ function filtra_fornecedor(caso) {
     else document.getElementsByClassName("sem_resultados")[0].style.display = "None"
 }
 
-function abrir_popup() {
-    $(".cadastro_popup").fadeIn()
+function abrir_popup(alvo) {
+
+    if (alvo) $(`.${alvo}`).fadeIn()
+    else $(".cadastro_popup").fadeIn()
 }
 
-function fechar_popup() {
-    $(".cadastro_popup").fadeToggle()
+function fechar_popup(alvo) {
+    if (alvo) $(`.${alvo}`).fadeToggle()
+    else $(".cadastro_popup").fadeToggle()
 }
 
 function pop_up_login() {
     $("#formulario_login_empenho").fadeToggle()
+}
+
+function confirmar_exclusao(alvo, id) {
+
+    if (confirm("Confirma a exclusão?"))
+        window.location.href = `../../php/functions/excluir_${alvo}.php?input_id=${id}`
 }

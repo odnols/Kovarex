@@ -104,10 +104,9 @@ $atribuicoes = $conexao->query("SELECT * FROM atribuicao WHERE id_usuario = $id_
                         echo "<p>Você ainda não tem pedidos para acompanhar... <br><br>Crie um agora mesmo!</p>"; ?>
                 </div>
 
-                <div class="quadro_pag pilula_fechamento_mensal sombra_quadro">
-
+                <!-- <div class="quadro_pag pilula_avisos_geral sombra_quadro">
                     <p><i class="fa fa-solid fa-flag-checkered"></i> Um novo fechamento está programado para o dia 02/10, envie pedidos de materiais que são licitados antes desta data.</p>
-                </div>
+                </div> -->
 
                 <div class="quadro_pag pilula_completa sombra_quadro">
                     <a href="autorizacoes.php" class="button_add_pedido cinza" style="float: right; width: 20%">Ver todas as autorizações ></a>

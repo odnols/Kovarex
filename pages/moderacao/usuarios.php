@@ -107,7 +107,7 @@ require_once "../../php/session/conexao_banco.php"; ?>
 
                                 <input name='id_usuario' value='$id' class='invisible'>
 
-                                <button><i class='fa fa-solid fa-pen'></i> Editar usuário</button>
+                                <button><i class='fa fa-solid fa-pen'></i> Editar</button>
                         </form>";
                     } ?>
 

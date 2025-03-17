@@ -100,7 +100,7 @@ require_once "../php/session/conexao_banco.php"; ?>
             <p>Gerencie as unidades de medida e categorias de itens.</p>
 
             <br>
-            <a href="licitacoes.php" class="button_add_pedido cinza large_button">Gerenciar unidades ></a>
+            <a href="./moderacao/unidades.php" class="button_add_pedido cinza large_button">Gerenciar unidades ></a>
         </div>
     </div>
 
