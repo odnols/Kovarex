@@ -2,10 +2,7 @@ create database kovarex;
 
 use kovarex;
 
-select
-    *
-from
-    usuario;
+select * from usuario;
 
 create table usuario(
     id int not null auto_increment primary key,
