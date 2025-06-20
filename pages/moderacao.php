@@ -82,7 +82,7 @@ require_once "../php/session/conexao_banco.php"; ?>
             <p>Gerencie os itens.</p>
 
             <br>
-            <a href="licitacoes.php" class="button_add_pedido cinza large_button">Gerenciar itens ></a>
+            <a href="./moderacao/itens.php" class="button_add_pedido cinza large_button">Gerenciar itens ></a>
         </div>
 
         <div class="quadro_pag sombra_quadro">

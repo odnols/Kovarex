@@ -1,10 +1,22 @@
+var foco = "";
+
 function login() {
     $("#formulario_login").fadeToggle()
 }
 
+function get(alvo) {
+
+    let item = document.getElementsByClassName(alvo)
+
+    if (item.length < 1)
+        item = document.getElementById(alvo)
+
+    return item
+}
+
 function filtra_itens(alvo) {
 
-    const itens = document.getElementsByClassName("categoria_item")
+    const itens = get("categoria_item")
     let caso = "Block"
 
     if (alvo) caso = "None"
@@ -13,7 +25,7 @@ function filtra_itens(alvo) {
         itens[i].style.display = caso
 
     if (alvo) {
-        const alvos = document.getElementsByClassName(alvo)
+        const alvos = get(alvo)
 
         for (let i = 0; i < alvos.length; i++)
             alvos[i].style.display = "Block"
@@ -22,13 +34,13 @@ function filtra_itens(alvo) {
 
 function btn_login(caso) {
 
-    document.getElementById("formularios_lg").style.display = "None"
-    document.getElementById("formularios_cad").style.display = "None"
+    get("formularios_lg").style.display = "None"
+    get("formularios_cad").style.display = "None"
 
     if (caso)
-        document.getElementById("formularios_cad").style.display = "Block"
+        get("formularios_cad").style.display = "Block"
     else
-        document.getElementById("formularios_lg").style.display = "Block"
+        get("formularios_lg").style.display = "Block"
 }
 
 $("#perfil_sm").click(() => {
@@ -42,8 +54,8 @@ function filtra_fornecedor(caso) {
     // Filtro utilizado para itens de pedidos
     if (caso) alvo = "filtro_tipo_item_pedido"
 
-    alvo = (document.getElementById(alvo).value).toLowerCase()
-    let item_fornecedor = document.getElementsByClassName("item_fornecedor")
+    alvo = (get(alvo).value).toLowerCase()
+    let item_fornecedor = get("item_fornecedor")
     let filtros = 0
 
 
@@ -62,8 +74,8 @@ function filtra_fornecedor(caso) {
     }
 
     // Card com retorno para sem resultados no filtro
-    if (filtros === item_fornecedor.length) document.getElementsByClassName("sem_resultados")[0].style.display = "Block"
-    else document.getElementsByClassName("sem_resultados")[0].style.display = "None"
+    if (filtros === item_fornecedor.length) get("sem_resultados")[0].style.display = "Block"
+    else get("sem_resultados")[0].style.display = "None"
 }
 
 function abrir_popup(alvo) {
@@ -85,4 +97,41 @@ function confirmar_exclusao(alvo, id) {
 
     if (confirm("Confirma a exclusão?"))
         window.location.href = `../../php/functions/excluir_${alvo}.php?input_id=${id}`
+}
+
+function disable_input() {
+
+    get("input_id_disable").disabled = true;
+}
+
+addEventListener("keydown", (e) => {
+    if (!e.repeat) {
+        console.log(`Key "${e.key}" pressed [event: keydown]`);
+    } else {
+        console.log(`Key "${e.key}" repeating [event: keydown]`);
+    }
+})
+
+function onMouseUp(e) {
+    const activeTextarea = document.activeElement;
+    const selection = activeTextarea.value.substring(
+        activeTextarea.selectionStart,
+        activeTextarea.selectionEnd,
+    );
+
+    foco = activeTextarea.id
+}
+
+const input = get("input");
+
+console.log(input.length, input)
+
+for (let i = 0; i < input.length; i++) {
+    input[i].addEventListener("mouseup", onMouseUp, false);
+}
+
+function focaliza(alvo) {
+    foco = alvo
+
+    console.log(foco)
 }
