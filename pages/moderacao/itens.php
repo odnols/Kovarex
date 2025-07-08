@@ -74,11 +74,37 @@ require_once "../../php/session/conexao_banco.php"; ?>
 
                 <br><br>
                 <span>Unidade de medida</span><br>
-                <input id="input_unidade_medida" type="text" class="input" name="input_unidade_medida" onfocus="focaliza('input_unidade_medida')" required maxlength="10">
+                <select id="input_unidade_medida" type="select" class="input" name="input_unidade_medida" required style="color: black;">
+                    <?php
+
+                    $unidades_medida = $conexao->query("SELECT * FROM unidade order by nome");
+                    if ($unidades_medida->num_rows > 0) {
+                        while ($unidade = $unidades_medida->fetch_assoc()) {
+
+                            $id_unidade = $unidade["id"];
+                            $nome_unidade = $unidade["nome"];
+
+                            echo "<option value='$id_unidade'>$nome_unidade</option>";
+                        }
+                    } ?>
+                </select>
 
                 <br><br>
                 <span>Tipo de item</span><br>
-                <input id="input_tipo_item" type="text" class="input" name="input_tipo_item" onfocus="focaliza('input_tipo_item')" required maxlength="10">
+                <select id="input_tipo_item" type="select" class="input" name="input_tipo_item" required style="color: black;">
+                    <?php
+
+                    $unidades_medida = $conexao->query("SELECT * FROM tipo_item order by nome");
+                    if ($unidades_medida->num_rows > 0) {
+                        while ($unidade = $unidades_medida->fetch_assoc()) {
+
+                            $id_unidade = $unidade["id"];
+                            $nome_unidade = $unidade["nome"];
+
+                            echo "<option value='$id_unidade'>$nome_unidade</option>";
+                        }
+                    } ?>
+                </select>
 
                 <br><br><br>
                 <button class="button_form_cadastro">Salvar</button> <br><br>

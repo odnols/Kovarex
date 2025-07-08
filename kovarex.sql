@@ -23,9 +23,9 @@ create table empresa(
 
 create table unidade(
     id int not null auto_increment primary key,
-    nome varchar(50),
+    nome_uni varchar(50),
     sigla varchar(10),
-    constraint nome_uni unique(nome)
+    constraint nome_uni unique(nome_uni)
 ) engine = InnoDB;
 
 create table tipo_item(
