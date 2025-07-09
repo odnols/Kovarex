@@ -115,8 +115,7 @@ require_once "../session/conexao_banco.php"; ?>
 
                                     echo "<span class='item_fornecedor item_min $nome_min'><input name='input_atribuicoes[]' value='$id_departamento' type='checkbox' $atribuido> <div class='label espacador_label' style='background-color: $cor_destaque'>$nome_departamento</div></span>";
                                 }
-                            }
-                            ?>
+                            } ?>
                         </div>
                     </div>
             </div>

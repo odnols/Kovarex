@@ -86,11 +86,11 @@ require_once "../../php/session/conexao_banco.php"; ?>
                                 $nome_departamento = $dados_dpt_interno["nome"];
                                 $cor_destaque = $dados_dpt_interno["cor_destaque"];
 
-                                $departamentos = $departamentos . "<div class='label espacador_label' style='background-color: $cor_destaque'>$nome_departamento</div>";
+                                $departamentos = $departamentos . "<a class='label espacador_label' style='background-color: $cor_destaque' href='./departamentos.php'>$nome_departamento</a>";
                                 $nome_departamentos = $nome_departamentos . "$nome_departamento ";
                             }
                         } else
-                            $departamentos = "<div class='label'>Sem departamento vinculado</div> <div class='label vermelho'>Sem acesso ao sistema</div>";
+                            $departamentos = "<a class='label' href='./departamentos.php'>Sem departamento vinculado</a> <div class='label vermelho'>Sem acesso ao sistema</div>";
 
                         $nome_departamentos = strtolower($nome_departamentos);
                         $nome_min = strtolower($nome);

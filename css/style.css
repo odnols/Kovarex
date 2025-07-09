@@ -534,7 +534,8 @@ button {
 
 .btn_editar_dpt {
     margin-top: -20px !important;
-    float: left;
+    margin-right: 0px !important;
+    float: right;
 }
 
 .item_min {

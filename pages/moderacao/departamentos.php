@@ -77,14 +77,21 @@ require_once "../../php/session/conexao_banco.php"; ?>
 
                         $nome_min = strtolower($nome);
 
+                        $vinculos = $conexao->query("SELECT * FROM atribuicao WHERE id_departamento = $id");
+                        $users_vinculados = "";
+
+                        if ($vinculos->num_rows > 0) $users_vinculados = "<a class='label azul' href='./usuarios.php'>$vinculos->num_rows usuários vinculados</a>";
+                        else $users_vinculados = "<a class='label' href='./usuarios.php'>Sem usuários vinculos</a>";
+
                         echo "<form class='item_fornecedor item_departamento $nome_min' action='../../php/cache/editar_departamento.php' method='POST'>
                                 <span class='barra_lateral_cor_destaque' style='background-color: $cor'></span>
-
-                                <h4 class='id_label'>$nome</h4><br>
-
                                 <input name='id_departamento' value='$id' class='invisible'>
 
-                                <button class='btn_editar_dpt'><i class='fa fa-solid fa-pen'></i> Editar</button>
+                                $users_vinculados
+
+                                <br><button class='btn_editar_dpt'><i class='fa fa-solid fa-pen'></i> Editar</button>
+                        
+                                <h4 class='id_label'>$nome</h4>
                         </form>";
                     } ?>
                 </div>
