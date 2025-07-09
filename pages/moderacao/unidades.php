@@ -76,7 +76,7 @@ require_once "../../php/session/conexao_banco.php"; ?>
                         $destaque = "";
                         $exclusao = "";
 
-                        if ($dados_atribuicao->num_rows > 0) $destaque = "<div class='label azul'>Há itens vinculados</div>";
+                        if ($dados_atribuicao->num_rows > 0) $destaque = "<a class='label azul' href='./itens.php'>Há $dados_atribuicao->num_rows itens vinculados</a>";
                         else {
 
                             $exclusao = "<button type='button' onclick=\"confirmar_exclusao('unidade', $id)\"><i class='fa fa-solid fa-trash'></i> Excluir</button>";
@@ -131,7 +131,7 @@ require_once "../../php/session/conexao_banco.php"; ?>
                         $destaque = "";
                         $exclusao = "";
 
-                        if ($dados_atribuicao->num_rows > 0) $destaque = "<div class='label azul'>Há itens vinculados</div>";
+                        if ($dados_atribuicao->num_rows > 0) $destaque = "<a class='label azul' href='./itens.php'>Há $dados_atribuicao->num_rows itens vinculados</a>";
                         else {
                             $exclusao = "<button type='button' onclick=\"confirmar_exclusao('tipo_item', $id)\"><i class='fa fa-solid fa-trash'></i> Excluir</button>";
                             $destaque = "<div class='label'>Nenhum item vinculado</div>";

@@ -2,7 +2,10 @@ create database kovarex;
 
 use kovarex;
 
-select * from usuario;
+select
+    *
+from
+    usuario;
 
 create table usuario(
     id int not null auto_increment primary key,
@@ -36,10 +39,12 @@ create table tipo_item(
 
 create table item(
     id int not null auto_increment primary key,
-    nome varchar(255),
+    nome varchar(50),
+    descricao varchar(150),
     id_unidade int not null,
     id_tipo_item int not null,
-    foreign key (id_unidade) references unidade(id) foreign key (id_tipo_item) references tipo_item(id)
+    foreign key (id_unidade) references unidade(id),
+    foreign key (id_tipo_item) references tipo_item(id)
 ) engine = InnoDB;
 
 create table pregao(

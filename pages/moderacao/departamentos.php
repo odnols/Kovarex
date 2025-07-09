@@ -54,12 +54,12 @@ require_once "../../php/session/conexao_banco.php"; ?>
 
             <input id="input_filtro_fornecedor" type="text" name="text" class="input" placeholder="Pesquise por um departamento" onkeyup="filtra_fornecedor()">
 
+            <button class="cadastrar_novo" onclick="abrir_popup()"><i class="fa fa-solid fa-plus"></i> Cadastrar um novo</button>
+
             <?php
             $dados = $conexao->query("SELECT * FROM departamento");
 
             if ($dados->num_rows > 0) { ?>
-
-                <button class="cadastrar_novo" onclick="abrir_popup()"><i class="fa fa-solid fa-plus"></i> Cadastrar um novo</button>
 
                 <br><br>
                 <h4>Departamentos</h4>

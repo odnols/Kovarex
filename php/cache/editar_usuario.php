@@ -85,12 +85,11 @@ require_once "../session/conexao_banco.php"; ?>
                     <br><br>
 
                     <div class="select_destaque">
-                        <h4>Departamentos</h4>
+                        <h4>Departamentos vinculados</h4>
 
                         <input id="input_filtro_fornecedor" style="width: 100%;" type="text" name="text" class="input" placeholder="Pesquise por um departamento" onkeyup="filtra_fornecedor()">
 
                         <br><br>
-
                         <div class="lista_grid">
 
                             <?php

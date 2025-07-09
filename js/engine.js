@@ -58,7 +58,6 @@ function filtra_fornecedor(caso) {
     let item_fornecedor = get("item_fornecedor")
     let filtros = 0
 
-
     // Filtrando os fornecedores com a pesquisa ativa
     for (let i = 0; i < item_fornecedor.length; i++) {
         if ((item_fornecedor[i].classList.value).includes(alvo)) {

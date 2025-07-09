@@ -52,14 +52,14 @@ require_once "../../php/session/conexao_banco.php"; ?>
             <a href="../moderacao.php"><button><i class="fa fa-solid fa-caret-left"></i> Retornar</button></a>
             <br><br>
 
+            <input id="input_filtro_fornecedor" type="text" name="text" class="input" placeholder="Pesquise por um CNPJ, ID ou Razão Social" onkeyup="filtra_fornecedor()">
+
+            <button class="cadastrar_novo" onclick="abrir_popup()"><i class="fa fa-solid fa-plus"></i> Cadastrar um novo</button>
+
             <?php
             $dados = $conexao->query("SELECT * FROM empresa");
 
             if ($dados->num_rows > 0) { ?>
-
-                <input id="input_filtro_fornecedor" type="text" name="text" class="input" placeholder="Pesquise por um CNPJ, ID ou Razão Social" onkeyup="filtra_fornecedor()">
-
-                <button class="cadastrar_novo" onclick="abrir_popup()"><i class="fa fa-solid fa-plus"></i> Cadastrar um novo</button>
 
                 <br><br>
                 <h4>Fornecedores</h4>

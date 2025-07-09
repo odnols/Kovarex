@@ -665,3 +665,19 @@ fieldset {
 .azul {
     background-color: rgb(53, 157, 218);
 }
+
+.item_fornecedor>textarea {
+    resize: none;
+    color: black;
+    border-radius: 5px;
+    margin-top: 10px;
+    overflow: hidden;
+    min-height: 0px;
+    height: 0px;
+    transition: min-height .25s ease-in;
+    width: 88%;
+}
+
+.item_fornecedor:hover>textarea {
+    min-height: 25px;
+}

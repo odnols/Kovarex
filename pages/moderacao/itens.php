@@ -46,31 +46,90 @@ require_once "../../php/session/conexao_banco.php"; ?>
         </div>
     </div>
 
-    <div id="quadro_fundo_total" class="cinza_escuro grid_unidades">
+    <div id="quadro_fundo_total" class="cinza_escuro">
         <div class="detalhes_fornecedor">
 
             <a href="../moderacao.php"><button><i class="fa fa-solid fa-caret-left"></i> Retornar</button></a>
             <br><br>
 
-            <input id="input_filtro_fornecedor" type="text" name="text" class="input" placeholder="Pesquise por um CNPJ, ID ou Razão Social" onkeyup="filtra_fornecedor()">
+            <input id="input_filtro_fornecedor" type="text" name="text" class="input" placeholder="Pesquise por um nome, tipo de item ou unidade" onkeyup="filtra_fornecedor()">
 
-            <button class="cadastrar_novo" onclick="abrir_popup()"><i class="fa fa-solid fa-plus"></i> Cadastrar um novo</button>
-            <br><br>
+            <button class="cadastrar_novo" onclick="abrir_popup('cadastrar_item')"><i class="fa fa-solid fa-plus"></i> Cadastrar um novo</button>
 
             <?php
-            $dados = $conexao->query("SELECT * FROM item order by id"); ?>
+            $dados = $conexao->query("SELECT * FROM item order by nome"); ?>
 
-            <form id="cadastro_fornecedor" action="../../php/functions/cadastrar_item.php" method="post">
+            <br><br>
+            <h4>Itens</h4>
 
-                <h3>Gerenciar Item</h3>
+            <?php if ($dados->num_rows > 0) { ?>
+
+                <div class="lista_fornecedores">
+                    <?php // Listando todos os itens
+                    while ($dados_item = $dados->fetch_assoc()) {
+
+                        $id = $dados_item["id"];
+                        $nome = $dados_item["nome"];
+                        $descricao = $dados_item["descricao"];
+                        $id_unidade = $dados_item["id_unidade"];
+                        $id_tipo_item = $dados_item["id_tipo_item"];
+
+                        $unidade_item = $conexao->query("SELECT * FROM unidade WHERE id = $id_unidade");
+                        $unidade_item = $unidade_item->fetch_assoc();
+                        $unidade_item = $unidade_item["nome"];
+
+                        $tipo_item = $conexao->query("SELECT * FROM tipo_item WHERE id = $id_tipo_item");
+                        $tipo_item = $tipo_item->fetch_assoc();
+                        $tipo_item = $tipo_item["nome"];
+
+                        $dados_atribuicao = $conexao->query("SELECT * FROM item_pedido WHERE id_item = $id");
+                        $destaque = "";
+                        $exclusao = "";
+
+                        if ($dados_atribuicao->num_rows > 0) $destaque = "<div class='label azul'>Há $dados_atribuicao->num_rows processos vinculados a este item</div>";
+                        else {
+
+                            $exclusao = "<button type='button' onclick=\"confirmar_exclusao('item', $id)\"><i class='fa fa-solid fa-trash'></i> Excluir</button>";
+                            $destaque = "<div class='label'>Não utilizado em nenhum processo</div>";
+                        }
+
+                        $nome_min = strtolower($nome);
+
+                        echo "<form class='item_fornecedor $nome_min $tipo_item $unidade_item $id' action='../../php/cache/editar_item.php' method='POST'>
+                                <span class='label'>$id</span> $nome <br>
+
+                                <textarea>Descrição: $descricao</textarea> <br>
+
+                                <a class='label verde' href='./unidades.php'>$unidade_item</a> <a class='label' href='./unidades.php'>$tipo_item</a> $destaque
+
+                                <input name='id_item' value='$id' class='invisible'>
+
+                                <button><i class='fa fa-solid fa-pen'></i> Editar</button>
+                                $exclusao
+                        </form>";
+                    } ?>
+                </div>
+
+            <?php } else { ?>
+                <h3>Não há nenhum item cadastrado ainda...</h3>
+                <hr>
+            <?php } ?>
+        </div>
+
+        <br><br>
+        <div class="cadastro_popup cadastrar_item">
+            <form id="cadastrar_item" action="../../php/functions/cadastrar_item.php" method="post">
+
+                <h3>Cadastrar Item</h3>
                 <br>
-
-                <span>ID</span><br>
-                <input id="input_id_disable" type="text" class="input" name="input_id_item" onfocus="focaliza('input_id_disable')" onfocusout="disable_input()">
 
                 <br><br>
                 <span>Nome</span><br>
-                <input type="text" class="input" name="input_nome_item" required maxlength="50">
+                <input type="text" class="input" name="input_nome_item" required maxlength="50" style="color: black;">
+
+                <br><br>
+                <span>Descrição</span><br>
+                <input type="text" class="input" name="input_descricao_item" maxlength="150" style="color: black;">
 
                 <br><br>
                 <span>Unidade de medida</span><br>
@@ -108,42 +167,10 @@ require_once "../../php/session/conexao_banco.php"; ?>
 
                 <br><br><br>
                 <button class="button_form_cadastro">Salvar</button> <br><br>
-                <button class="button_form_cadastro" onclick="fechar_popup('unidade_item')" type="button">Desfazer alterações</button>
+                <button class="button_form_cadastro" onclick="fechar_popup('cadastrar_item')" type="button">Cancelar</button>
             </form>
         </div>
-
-        <div class="detalhes_fornecedor" style="margin-top: 46px;">
-
-            <?php
-            $dados = $conexao->query("SELECT * FROM tipo_item order by id"); ?>
-
-            <br>
-            <h4>Prancheta</h4>
-            <br>
-
-            <div class="unidade_item">
-
-                <select>
-                    <option>A</option>
-                </select>
-            </div>
-
-            <div class="cadastro_popup tipo_item">
-                <form id="cadastro_fornecedor" action="../../php/functions/cadastrar_tipo_item.php" method="post">
-
-                    <h3>Cadastrar Tipo de Item</h3>
-                    <br>
-
-                    <br><br>
-                    <span>Nome</span><br>
-                    <input type="text" class="input" name="input_nome_tipo_item" required maxlength="50">
-
-                    <br><br>
-                    <button class="button_form_cadastro">Cadastrar</button> <br><br>
-                    <button class="button_form_cadastro" onclick="fechar_popup('tipo_item')" type="button">Fechar janela</button>
-                </form>
-            </div>
-        </div>
+    </div>
     </div>
 </body>
 
