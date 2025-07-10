@@ -73,7 +73,7 @@
 
                         echo "<option value='$id_unidade_item'>$nome_unidade_item</option>";
 
-                        $unidades_medida = $conexao->query("SELECT * FROM unidade order by nome");
+                        $unidades_medida = $conexao->query("SELECT * FROM unidade ORDER BY nome");
                         if ($unidades_medida->num_rows > 0) {
                             while ($unidade = $unidades_medida->fetch_assoc()) {
 
@@ -93,7 +93,7 @@
 
                         echo "<option value='$id_tipo_item'>$nome_tipo_item</option>";
 
-                        $tipos_item = $conexao->query("SELECT * FROM tipo_item order by nome");
+                        $tipos_item = $conexao->query("SELECT * FROM tipo_item ORDER BY nome");
                         if ($tipos_item->num_rows > 0) {
                             while ($tipo_item = $tipos_item->fetch_assoc()) {
 

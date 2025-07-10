@@ -8,7 +8,7 @@ $sigla = $_POST["input_sigla_unidade"];
 
 $sigla = strtoupper($sigla);
 
-$verifica = $conexao->query("SELECT * FROM unidade where nome = '$nome'");
+$verifica = $conexao->query("SELECT * FROM unidade WHERE nome = '$nome'");
 
 if ($verifica->num_rows > 0) // Unidade informado já existe
     header("Location: ../../pages/moderacao/unidades.php");

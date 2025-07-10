@@ -6,7 +6,7 @@ require_once "../session/conexao_banco.php";
 $nome = $_POST["input_nome"];
 $cor_destaque = $_POST["input_cor_destaque"];
 
-$verifica = $conexao->query("SELECT * FROM departamento where nome = '$nome'");
+$verifica = $conexao->query("SELECT * FROM departamento WHERE nome = '$nome'");
 
 if ($verifica->num_rows > 0) // Fornecedor com o CNPJ ou CPF informado já existe
     header("Location: ../../pages/moderacao/departamentos.php");

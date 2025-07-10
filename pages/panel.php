@@ -53,7 +53,7 @@
                     <hr>
 
                     <?php
-                    $resultado = $conexao->query("SELECT * FROM pedido WHERE id_autor = $id_user order by id desc limit 5");
+                    $resultado = $conexao->query("SELECT * FROM pedido WHERE id_autor = $id_user ORDER BY id DESC LIMIT 5");
 
                     if ($resultado->num_rows > 0) {
                     } else

@@ -4,7 +4,7 @@ $email = $_POST["email"];
 $controle = 0;
 
 // Verificando se não existe usuário com o mesmo e-mail cadastrado
-$executa = $conexao->query("SELECT * FROM usuario where email like '$email'");
+$executa = $conexao->query("SELECT * FROM usuario WHERE email like '$email'");
 
 if (!$executa->num_rows) {
 
@@ -17,10 +17,10 @@ if (!$executa->num_rows) {
 
     // Gerando a hash da senha para o novo usuário
     $senha = password_hash($_POST["senha"], PASSWORD_BCRYPT, $options);
-    $conexao->query("INSERT INTO usuario (id, email, nome, hash, hierarquia) values (null, '$email', '$nome_usuario', '$senha', $hierarquia)");
+    $conexao->query("INSERT INTO usuario (id, email, nome, hash, hierarquia) VALUES (null, '$email', '$nome_usuario', '$senha', $hierarquia)");
 
     // Realizando o login automaticamente após completar o cadastro
-    $resultado = $conexao->query("SELECT * FROM usuario where email like '$email'");
+    $resultado = $conexao->query("SELECT * FROM usuario WHERE email like '$email'");
 
     if ($resultado->num_rows > 0 && $controle == 0) {
         while ($linha = $resultado->fetch_assoc()) {

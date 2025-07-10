@@ -29,7 +29,7 @@
             <br><br>
 
             <?php
-            $dados = $conexao->query("SELECT * FROM unidade order by id"); ?>
+            $dados = $conexao->query("SELECT * FROM unidade ORDER BY id"); ?>
 
             <br>
             <h4><i class='fa fa-solid fa-weight-hanging'></i> Unidades de medida</h4>
@@ -85,7 +85,7 @@
         <div class="detalhes_fornecedor" style="margin-top: 46px;">
 
             <?php
-            $dados = $conexao->query("SELECT * FROM tipo_item order by id"); ?>
+            $dados = $conexao->query("SELECT * FROM tipo_item ORDER BY id"); ?>
 
             <br>
             <h4><i class='fa fa-solid fa-pencil'></i> Tipo de item</h4>

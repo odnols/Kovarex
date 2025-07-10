@@ -32,7 +32,7 @@
 
             <button class="cadastrar_novo bttn_editar" onclick="abrir_popup('cadastrar_item')"><i class="fa fa-solid fa-plus"></i> Cadastrar novo</button>
 
-            <?php $dados = $conexao->query("SELECT * FROM item order by nome"); ?>
+            <?php $dados = $conexao->query("SELECT * FROM item ORDER BY nome"); ?>
 
             <br><br>
             <h4>Gerenciando itens</h4>
@@ -113,7 +113,7 @@
                 <select id="input_unidade_medida" type="select" class="input" name="input_unidade_medida" required style="color: black;">
                     <?php
 
-                    $unidades_medida = $conexao->query("SELECT * FROM unidade order by nome");
+                    $unidades_medida = $conexao->query("SELECT * FROM unidade ORDER BY nome");
                     if ($unidades_medida->num_rows > 0) {
                         while ($unidade = $unidades_medida->fetch_assoc()) {
 
@@ -130,7 +130,7 @@
                 <select id="input_tipo_item" type="select" class="input" name="input_tipo_item" required style="color: black;">
                     <?php
 
-                    $unidades_medida = $conexao->query("SELECT * FROM tipo_item order by nome");
+                    $unidades_medida = $conexao->query("SELECT * FROM tipo_item ORDER BY nome");
                     if ($unidades_medida->num_rows > 0) {
                         while ($unidade = $unidades_medida->fetch_assoc()) {
 

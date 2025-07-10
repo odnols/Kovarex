@@ -8,7 +8,7 @@ $descricao = $_POST["input_descricao_item"];
 $unidade_medida = $_POST["input_unidade_medida"];
 $tipo_item = $_POST["input_tipo_item"];
 
-$verifica = $conexao->query("SELECT * FROM item where nome = '$nome'");
+$verifica = $conexao->query("SELECT * FROM item WHERE nome = '$nome'");
 
 if ($verifica->num_rows > 0) // Item informado já existe
     header("Location: ../../pages/moderacao/itens.php");

@@ -2,11 +2,6 @@ create database kovarex;
 
 use kovarex;
 
-select
-    *
-from
-    usuario;
-
 create table usuario(
     id int not null auto_increment primary key,
     hierarquia int not null,

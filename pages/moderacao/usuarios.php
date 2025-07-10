@@ -55,7 +55,7 @@
                             while ($dados_dpt_interno = $dados_atribuicao->fetch_assoc()) {
 
                                 $id_departamento = $dados_dpt_interno["id_departamento"];
-                                $dados_departamento = $conexao->query("SELECT * from departamento WHERE id = $id_departamento");
+                                $dados_departamento = $conexao->query("SELECT * FROM departamento WHERE id = $id_departamento");
 
                                 $dados_dpt_interno = $dados_departamento->fetch_assoc();
 
