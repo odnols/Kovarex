@@ -17,36 +17,12 @@
     <script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
 </head>
 
-<?php session_start();
-
-require_once "../session/verifica_sessao.php";
-require_once "../session/conexao_banco.php"; ?>
-
 <body>
-    <div id="banner_topo">
 
-        <div id="caixa_entrada">
-            <i class="fa fa-solid fa-envelope fa-lg icon_cinza"></i>
-            <!-- <i class="fa fa-solid fa-envelope-open-text fa-lg icon_amarelo"></i> -->
-        </div>
+    <?php // Importando a barra lateral de funções
+    include_once "../../modules/barra_funcoes.php" ?>
 
-        <img id="perfil_sm" src="<?php if (isset($_SESSION["foto"])) {
-                                        echo $_SESSION["foto"];
-                                    } else {
-                                        echo "../../files/img/icons/avatar.png";
-                                    } ?>">
-
-        <div id="nav_links">
-            <h2><a href="../../pages/panel.php"><img src="../../files/img/icons/logo.png"></a></h2>
-
-            <h2><a href="../../pages/licitacoes.php">Licitações</a></h2>
-            <h2><a href="../../pages/pedidos.php">Pedidos</a></h2>
-            <h2><a href="../../pages/autorizacoes.php">Autorizações</a></h2>
-            <?php if ($_SESSION["hierarquia"]) { ?> <h2><a href="../../pages/moderacao.php">Moderação</a></h2> <?php } ?>
-        </div>
-    </div>
-
-    <div id="quadro_fundo_total" class="cinza_escuro">
+    <div id="quadro_fundo_total" class="cinza_escuro_fundo">
         <div class="detalhes_fornecedor">
 
             <?php
@@ -68,7 +44,7 @@ require_once "../session/conexao_banco.php"; ?>
             <div class="lista_fornecedores">
                 <form id="cadastro_fornecedor" action="../functions/atualizar_usuario.php" method="post">
 
-                    <button class="cadastrar_novo" onclick="abrir_popup()" type="button"><i class="fa fa-solid fa-key"></i> Redefinir senha</button>
+                    <button class="cadastrar_novo bttn_editar" onclick="abrir_popup()" type="button"><i class="fa fa-solid fa-key"></i> Redefinir senha</button>
 
                     <h3>Atualize os dados do usuário abaixo</h3>
                     <br>
@@ -121,7 +97,7 @@ require_once "../session/conexao_banco.php"; ?>
             </div>
 
             <br><br>
-            <button class="button_form_cadastro">Atualizar</button>
+            <button class="button_form_cadastro bttn_salvar">Atualizar</button>
             </form>
         </div>
     </div>
@@ -142,8 +118,8 @@ require_once "../session/conexao_banco.php"; ?>
             <input type="password" class="input" name="senha" required maxlength="50">
 
             <br><br>
-            <button class="button_form_cadastro">Redefinir</button> <br><br>
-            <button class="button_form_cadastro" onclick="fechar_popup()" type="button">Fechar janela</button>
+            <button class="button_form_cadastro bttn_salvar">Redefinir</button> <br><br>
+            <button class="button_form_cadastro bttn_cancelar" onclick="fechar_popup()" type="button">Fechar janela</button>
         </form>
     </div>
 </body>

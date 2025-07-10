@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Kovarex - Página inicial</title>
+    <title>Kovarex - Painel</title>
     <link rel="shortcut icon" href="../files/img/icons/logo.png">
 
     <!-- CSS -->
@@ -17,54 +17,10 @@
     <script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
 </head>
 
-<?php session_start();
-
-$id_user = $_SESSION["id"];
-
-require_once "../php/session/verifica_sessao.php";
-require_once "../php/session/conexao_banco.php";
-
-// Verificando as atribuições de departamentos que o usuário possui
-$atribuicoes = $conexao->query("SELECT * FROM atribuicao WHERE id_usuario = $id_user");
-
-?>
-
 <body>
-    <div id="banner_topo">
 
-        <div id="caixa_entrada">
-            <i class="fa fa-solid fa-envelope fa-lg icon_cinza"></i>
-            <!-- <i class="fa fa-solid fa-envelope-open-text fa-lg icon_amarelo"></i> -->
-        </div>
-
-        <img id="perfil_sm" src="<?php if (isset($_SESSION["foto"])) {
-                                        echo $_SESSION["foto"];
-                                    } else {
-                                        echo "../files/img/icons/avatar.png";
-                                    } ?>">
-
-        <div id="nav_links">
-            <h2><a href="panel.php"><img src="../files/img/icons/logo.png"></a></h2>
-
-            <?php if ($atribuicoes->num_rows > 0) { ?>
-                <h2><a href="licitacoes.php">Licitações</a></h2>
-                <h2><a href="pedidos.php">Pedidos</a></h2>
-                <h2><a href="autorizacoes.php">Autorizações</a></h2>
-                <?php if ($_SESSION["hierarquia"]) { ?> <h2><a href="moderacao.php">Moderação</a></h2> <?php } ?>
-            <?php } ?>
-        </div>
-    </div>
-
-    <div id="float_menu">
-
-        <?php if ($atribuicoes->num_rows > 0) { ?>
-            <a href="#">Perfil</a> <br>
-            <a href="pedidos.php">Pedidos</a> <br>
-            <a href="#">Configurações</a> <br>
-        <?php } ?>
-
-        <a href="../php/session/redireciona_logoff.php">Deslogar</a>
-    </div>
+    <?php // Importando a barra lateral de funções
+    include_once "../modules/barra_funcoes.php" ?>
 
     <div id="conteudo_pag">
 
@@ -77,7 +33,7 @@ $atribuicoes = $conexao->query("SELECT * FROM atribuicao WHERE id_usuario = $id_
                     <p>Crie pedidos e acompanhe o status de entregas de forma rápida.</p>
 
                     <br>
-                    <a href="./pedidos/criar_pedido.php" class="button_add_pedido cinza large_button">Criar um novo pedido ></a>
+                    <a href="./pedidos/criar_pedido.php" class="button_add_pedido bttn_atalhos_panel cinza large_button">Criar um novo pedido ></a>
                 </div>
 
                 <div class="quadro_pag pilula_l_2 sombra_quadro">
@@ -88,7 +44,7 @@ $atribuicoes = $conexao->query("SELECT * FROM atribuicao WHERE id_usuario = $id_
                     <p>Acesse todos os itens licitados.</p>
 
                     <br>
-                    <a href="licitacoes.php" class="button_add_pedido cinza large_button">Ver itens licitados ></a>
+                    <a href="licitacoes.php" class="button_add_pedido bttn_atalhos_panel cinza large_button">Ver itens licitados ></a>
                 </div>
 
                 <div class="quadro_pag pilula_r sombra_quadro">
@@ -109,7 +65,7 @@ $atribuicoes = $conexao->query("SELECT * FROM atribuicao WHERE id_usuario = $id_
                 </div> -->
 
                 <div class="quadro_pag pilula_completa sombra_quadro">
-                    <a href="autorizacoes.php" class="button_add_pedido cinza" style="float: right; width: 20%">Ver todas as autorizações ></a>
+                    <a href="autorizacoes.php" class="button_add_pedido bttn_ver_autorizacoes_index cinza" style="float: right; width: 20%">Ver todas as autorizações ></a>
 
                     <h3><i class="fa fa-solid fa-clipboard-check"></i> Autorizações</h3>
                     <hr>
@@ -146,7 +102,7 @@ $atribuicoes = $conexao->query("SELECT * FROM atribuicao WHERE id_usuario = $id_
 
                                 $empenhos_ativos = $empenhos_ativos . "<form class='card_empenho' action='./pedidos/consultar_empenho.php' method='POST'>
                                     <span class='label'><i class='fa fa-solid fa-share'></i> $codigo_compartilhamento</span>
-                                    <button style='float: right;'><i class='fa fa-regular fa-compass'></i> Ver mais</button>
+                                    <button style='float: right;' class='bttn_ver_empenho'><i class='fa fa-regular fa-compass'></i> Ver mais</button>
                                 
                                     <span class='barra_lateral_cor_destaque' style='background-color: $cor_destaque'></span>
                                     <h4>Empenho <b>$num_empenho</b><br>Autorização <b>$num_af</b></h4>

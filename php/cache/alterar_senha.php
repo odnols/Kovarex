@@ -17,31 +17,10 @@
     <script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
 </head>
 
-<?php session_start();
-
-$id_user = $_SESSION["id"];
-
-require_once "../session/verifica_sessao.php";
-require_once "../session/conexao_banco.php";
-
-?>
-
 <body>
-    <div id="banner_topo">
 
-        <h2 id="titulo">Kovarex</h2>
-
-        <div id="caixa_entrada">
-            <i class="fa fa-solid fa-envelope fa-lg icon_cinza"></i>
-            <!-- <i class="fa fa-solid fa-envelope-open-text fa-lg icon_amarelo"></i> -->
-        </div>
-
-        <img id="perfil_sm" src="<?php if (isset($_SESSION["foto"])) {
-                                        echo $_SESSION["foto"];
-                                    } else {
-                                        echo "../../files/img/icons/avatar.png";
-                                    } ?>">
-    </div>
+    <?php // Importando a barra lateral de funções
+    include_once "../../modules/barra_funcoes.php" ?>
 
     <div id="formulario_login">
         <div id="formularios_lg">
@@ -53,7 +32,7 @@ require_once "../session/conexao_banco.php";
                 <br><br>
 
                 <div class="buttons_login">
-                    <button class="btn btn-custom btn-lg page-scroll configura_perfil">Alterar senha</button>
+                    <button class="btn btn-custom btn-lg page-scroll configura_perfil bttn_salvar">Alterar senha</button>
                 </div>
             </form>
         </div>

@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Kovarex - Licitações</title>
+    <title>Kovarex - Moderação</title>
     <link rel="shortcut icon" href="../files/img/icons/logo.png">
 
     <!-- CSS -->
@@ -17,90 +17,66 @@
     <script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
 </head>
 
-<?php session_start();
-
-$id_user = $_SESSION["id"];
-
-require_once "../php/session/verifica_sessao.php";
-require_once "../php/session/conexao_banco.php"; ?>
-
 <body>
-    <div id="banner_topo">
 
-        <div id="caixa_entrada">
-            <i class="fa fa-solid fa-envelope fa-lg icon_cinza"></i>
-            <!-- <i class="fa fa-solid fa-envelope-open-text fa-lg icon_amarelo"></i> -->
-        </div>
+    <?php // Importando a barra lateral de funções
+    include_once "../modules/barra_funcoes.php" ?>
 
-        <img id="perfil_sm" src="<?php if (isset($_SESSION["foto"])) {
-                                        echo $_SESSION["foto"];
-                                    } else {
-                                        echo "../files/img/icons/avatar.png";
-                                    } ?>">
+    <div id="conteudo_pag">
+        <div id="buttons_navegacao_index">
+            <div class="quadro_pag sombra_quadro">
+                <h3><i class="fa fa-solid fa-user"></i> Usuários</h3>
+                <hr>
+                <p>Gerencie os usuários.</p>
 
-        <div id="nav_links">
-            <h2><a href="panel.php"><img src="../files/img/icons/logo.png"></a></h2>
+                <br>
+                <a href="moderacao/usuarios.php" class="button_add_pedido bttn_atalhos_panel cinza large_button">Ver todos os usuários ></a>
+            </div>
 
-            <h2><a href="licitacoes.php">Licitações</a></h2>
-            <h2><a href="pedidos.php">Pedidos</a></h2>
-            <h2><a href="autorizacoes.php">Autorizações</a></h2>
-            <?php if ($_SESSION["hierarquia"]) { ?> <h2><a href="moderacao.php">Moderação</a></h2> <?php } ?>
-        </div>
-    </div>
+            <div class="quadro_pag sombra_quadro">
+                <h3><i class="fa fa-solid fa-industry"></i> Fornecedores</h3>
+                <hr>
+                <p>Gerencie os fornecedores.</p>
 
-    <div id="buttons_navegacao_index">
-        <div class="quadro_pag sombra_quadro">
-            <h3><i class="fa fa-solid fa-user"></i> Usuários</h3>
-            <hr>
-            <p>Gerencie os usuários.</p>
+                <br>
+                <a href="moderacao/fornecedores.php" class="button_add_pedido bttn_atalhos_panel cinza large_button">Ver todos os fornecedores ></a>
+            </div>
 
-            <br>
-            <a href="moderacao/usuarios.php" class="button_add_pedido cinza large_button">Ver todos os usuários ></a>
-        </div>
+            <div class="quadro_pag sombra_quadro">
+                <h3><i class="fa fa-solid fa-file-contract"></i> Licitações</h3>
+                <hr>
+                <p>Gerencie licitações, relação de itens, quantidades e departamentos solicitantes.</p>
 
-        <div class="quadro_pag sombra_quadro">
-            <h3><i class="fa fa-solid fa-industry"></i> Fornecedores</h3>
-            <hr>
-            <p>Gerencie os fornecedores.</p>
+                <br>
+                <a href="licitacoes.php" class="button_add_pedido bttn_atalhos_panel cinza large_button">Gerenciar licitações ></a>
+            </div>
 
-            <br>
-            <a href="moderacao/fornecedores.php" class="button_add_pedido cinza large_button">Ver todos os fornecedores ></a>
-        </div>
+            <div class="quadro_pag sombra_quadro">
+                <h3><i class="fa fa-solid fa-cube"></i> Itens</h3>
+                <hr>
+                <p>Gerencie os itens.</p>
 
-        <div class="quadro_pag sombra_quadro">
-            <h3><i class="fa fa-solid fa-file-contract"></i> Licitações</h3>
-            <hr>
-            <p>Gerencie licitações, relação de itens, quantidades e departamentos solicitantes.</p>
+                <br>
+                <a href="./moderacao/itens.php" class="button_add_pedido bttn_atalhos_panel cinza large_button">Gerenciar itens ></a>
+            </div>
 
-            <br>
-            <a href="licitacoes.php" class="button_add_pedido cinza large_button">Gerenciar licitações ></a>
-        </div>
+            <div class="quadro_pag sombra_quadro">
+                <h3><i class="fa fa-solid fa-warehouse"></i></i> Departamentos</h3>
+                <hr>
+                <p>Gerencie os departamentos.</p>
 
-        <div class="quadro_pag sombra_quadro">
-            <h3><i class="fa fa-solid fa-cube"></i> Itens</h3>
-            <hr>
-            <p>Gerencie os itens.</p>
+                <br>
+                <a href="./moderacao/departamentos.php" class="button_add_pedido bttn_atalhos_panel cinza large_button">Gerenciar departamentos ></a>
+            </div>
 
-            <br>
-            <a href="./moderacao/itens.php" class="button_add_pedido cinza large_button">Gerenciar itens ></a>
-        </div>
+            <div class="quadro_pag sombra_quadro">
+                <h3><i class="fa fa-solid fa-ruler"></i> Unidades</h3>
+                <hr>
+                <p>Gerencie as unidades de medida e categorias de itens.</p>
 
-        <div class="quadro_pag sombra_quadro">
-            <h3><i class="fa fa-solid fa-warehouse"></i></i> Departamentos</h3>
-            <hr>
-            <p>Gerencie os departamentos.</p>
-
-            <br>
-            <a href="./moderacao/departamentos.php" class="button_add_pedido cinza large_button">Gerenciar departamentos ></a>
-        </div>
-
-        <div class="quadro_pag sombra_quadro">
-            <h3><i class="fa fa-solid fa-ruler"></i> Unidades</h3>
-            <hr>
-            <p>Gerencie as unidades de medida e categorias de itens.</p>
-
-            <br>
-            <a href="./moderacao/unidades.php" class="button_add_pedido cinza large_button">Gerenciar unidades ></a>
+                <br>
+                <a href="./moderacao/unidades.php" class="button_add_pedido bttn_atalhos_panel cinza large_button">Gerenciar unidades ></a>
+            </div>
         </div>
     </div>
 

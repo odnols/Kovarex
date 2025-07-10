@@ -6,7 +6,7 @@ $options = [
 
 $email = $_POST["email"];
 
-$resultado = $conexao->query("SELECT * FROM usuario where email like '$email'");
+$resultado = $conexao->query("SELECT * FROM usuario WHERE email LIKE '$email'");
 
 if ($resultado->num_rows > 0) {
     $linha = $resultado->fetch_assoc();
@@ -19,20 +19,23 @@ if ($resultado->num_rows > 0) {
             // Atualizando o hash do usuário para o formato mais recente de dados
             $newHash = password_hash($_POST["senha"], PASSWORD_BCRYPT, $options);
 
-            $conexao->query("UPDATE usuario where email = '$email' set hash = '$newHash'");
+            $conexao->query("UPDATE usuario WHERE email = '$email' SET HASH = '$newHash'");
         }
 
         // Efetuando o login no sistema
         session_start();
         $_SESSION["logado"] = 1;
-        $_SESSION["id"] = $linha["id"];
+        $_SESSION["id_user"] = $linha["id"];
         $_SESSION["nome"] = $linha["nome"];
         $_SESSION["hierarquia"] = $linha["hierarquia"];
 
+        if (isset($_POST["codigo_empenho"])) // Login solicitado a partir da tela de empenho
+            $_SESSION["codigo_empenho"] = $_POST["codigo_empenho"];
+
         // Redirecionando para o usuário trocar a senha de acesso
-        if ($linha["alterar_psw"] == 1) header("Location: ../cache/alterar_senha.php");
-        else header("Location: ../../pages/panel.php");
+        if ($linha["alterar_psw"] == 1) header("Location: /kovarex/php/cache/alterar_senha.php");
+        else header("Location: /kovarex/pages/panel.php");
     } else
-        header("Location: ../../index.php?ERROR=001");
+        header("Location: /kovarex/index.php?ERROR=001");
 } else
-    header("Location: ../../index.php?ERROR=001");
+    header("Location: /kovarex/index.php?ERROR=001");

@@ -17,36 +17,12 @@
     <script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
 </head>
 
-<?php session_start();
-
-require_once "../../php/session/verifica_sessao.php";
-require_once "../../php/session/conexao_banco.php"; ?>
-
 <body>
-    <div id="banner_topo">
 
-        <div id="caixa_entrada">
-            <i class="fa fa-solid fa-envelope fa-lg icon_cinza"></i>
-            <!-- <i class="fa fa-solid fa-envelope-open-text fa-lg icon_amarelo"></i> -->
-        </div>
+    <?php // Importando a barra lateral de funções
+    include_once "../../modules/barra_funcoes.php" ?>
 
-        <img id="perfil_sm" src="<?php if (isset($_SESSION["foto"])) {
-                                        echo $_SESSION["foto"];
-                                    } else {
-                                        echo "../../files/img/icons/avatar.png";
-                                    } ?>">
-
-        <div id="nav_links">
-            <h2><a href="../panel.php"><img src="../../files/img/icons/logo.png"></a></h2>
-
-            <h2><a href="../licitacoes.php">Licitações</a></h2>
-            <h2><a href="../pedidos.php">Pedidos</a></h2>
-            <h2><a href="../autorizacoes.php">Autorizações</a></h2>
-            <?php if ($_SESSION["hierarquia"]) { ?> <h2><a href="../moderacao.php">Moderação</a></h2> <?php } ?>
-        </div>
-    </div>
-
-    <div id="quadro_fundo_total" class="cinza_escuro grid_unidades">
+    <div id="quadro_fundo_total" class="cinza_escuro_fundo grid_unidades">
         <div class="detalhes_fornecedor">
 
             <a href="../moderacao.php"><button><i class="fa fa-solid fa-caret-left"></i> Retornar</button></a>
@@ -56,9 +32,9 @@ require_once "../../php/session/conexao_banco.php"; ?>
             $dados = $conexao->query("SELECT * FROM unidade order by id"); ?>
 
             <br>
-            <h4>Unidades</h4>
+            <h4><i class='fa fa-solid fa-weight-hanging'></i> Unidades de medida</h4>
 
-            <button class="cadastrar_novo" onclick="abrir_popup('unidade_item')"><i class="fa fa-solid fa-plus"></i> Cadastrar</button>
+            <button class="cadastrar_novo bttn_editar" onclick="abrir_popup('unidade_item')"><i class="fa fa-solid fa-plus"></i> Cadastrar nova</button>
             <br><br>
 
             <?php if ($dados->num_rows > 0) { ?>
@@ -79,7 +55,7 @@ require_once "../../php/session/conexao_banco.php"; ?>
                         if ($dados_atribuicao->num_rows > 0) $destaque = "<a class='label azul' href='./itens.php'>Há $dados_atribuicao->num_rows itens vinculados</a>";
                         else {
 
-                            $exclusao = "<button type='button' onclick=\"confirmar_exclusao('unidade', $id)\"><i class='fa fa-solid fa-trash'></i> Excluir</button>";
+                            $exclusao = "<button type='button' class='bttn_cancelar' onclick=\"confirmar_exclusao('unidade', $id)\"><i class='fa fa-solid fa-trash'></i> Excluir</button>";
                             $destaque = "<div class='label'>Nenhum item vinculado</div>";
                         }
 
@@ -92,7 +68,7 @@ require_once "../../php/session/conexao_banco.php"; ?>
 
                                 <input name='id_unidade' value='$id' class='invisible'>
 
-                                <button><i class='fa fa-solid fa-pen'></i> Editar</button>
+                                <button class='bttn_editar'><i class='fa fa-solid fa-pen'></i> Editar</button>
                                 $exclusao
                         </form>";
                     } ?>
@@ -100,7 +76,7 @@ require_once "../../php/session/conexao_banco.php"; ?>
 
             <?php } else { ?>
 
-                <h3>Não há nenhuma unidade cadastrada ainda...</h3>
+                <h3><i class="fa fa-solid fa-ban"></i> Não há nenhuma unidade de medida cadastrada ainda...</h3>
                 <hr>
 
             <?php } ?>
@@ -112,9 +88,9 @@ require_once "../../php/session/conexao_banco.php"; ?>
             $dados = $conexao->query("SELECT * FROM tipo_item order by id"); ?>
 
             <br>
-            <h4>Tipo de item</h4>
+            <h4><i class='fa fa-solid fa-pencil'></i> Tipo de item</h4>
 
-            <button class="cadastrar_novo" onclick="abrir_popup('tipo_item')"><i class="fa fa-solid fa-plus"></i> Cadastrar</button>
+            <button class="cadastrar_novo bttn_editar" onclick="abrir_popup('tipo_item')"><i class="fa fa-solid fa-plus"></i> Cadastrar nova</button>
             <br><br>
 
             <?php if ($dados->num_rows > 0) { ?>
@@ -133,7 +109,7 @@ require_once "../../php/session/conexao_banco.php"; ?>
 
                         if ($dados_atribuicao->num_rows > 0) $destaque = "<a class='label azul' href='./itens.php'>Há $dados_atribuicao->num_rows itens vinculados</a>";
                         else {
-                            $exclusao = "<button type='button' onclick=\"confirmar_exclusao('tipo_item', $id)\"><i class='fa fa-solid fa-trash'></i> Excluir</button>";
+                            $exclusao = "<button type='button' class='bttn_cancelar' onclick=\"confirmar_exclusao('tipo_item', $id)\"><i class='fa fa-solid fa-trash'></i> Excluir</button>";
                             $destaque = "<div class='label'>Nenhum item vinculado</div>";
                         }
 
@@ -146,7 +122,7 @@ require_once "../../php/session/conexao_banco.php"; ?>
 
                                 <input name='id_tipo' value='$id' class='invisible'>
 
-                                <button><i class='fa fa-solid fa-pen'></i> Editar</button>
+                                <button class='bttn_editar'><i class='fa fa-solid fa-pen'></i> Editar</button>
                                 $exclusao
                         </form>";
                     } ?>
@@ -156,7 +132,7 @@ require_once "../../php/session/conexao_banco.php"; ?>
 
             <?php } else { ?>
 
-                <h3>Não há nenhum tipo de item cadastrado ainda...</h3>
+                <h3><i class="fa fa-solid fa-ban"></i> Não há nenhum tipo de item cadastrado ainda...</h3>
                 <hr>
 
             <?php } ?>
@@ -165,8 +141,7 @@ require_once "../../php/session/conexao_banco.php"; ?>
             <div class="cadastro_popup unidade_item">
                 <form id="cadastro_fornecedor" action="../../php/functions/cadastrar_unidade.php" method="post">
 
-                    <h3>Cadastrar unidade</h3>
-                    <br>
+                    <h3>Cadastrar Unidade de medida</h3>
 
                     <br><br>
                     <span>Nome</span><br>
@@ -177,8 +152,8 @@ require_once "../../php/session/conexao_banco.php"; ?>
                     <input type="text" class="input" name="input_sigla_unidade" required maxlength="10">
 
                     <br><br>
-                    <button class="button_form_cadastro">Cadastrar</button> <br><br>
-                    <button class="button_form_cadastro" onclick="fechar_popup('unidade_item')" type="button">Fechar janela</button>
+                    <button class="button_form_cadastro bttn_salvar">Cadastrar</button> <br><br>
+                    <button class="button_form_cadastro bttn_cancelar" onclick="fechar_popup('unidade_item')" type="button">Fechar janela</button>
                 </form>
             </div>
 
@@ -186,15 +161,14 @@ require_once "../../php/session/conexao_banco.php"; ?>
                 <form id="cadastro_fornecedor" action="../../php/functions/cadastrar_tipo_item.php" method="post">
 
                     <h3>Cadastrar Tipo de Item</h3>
-                    <br>
 
                     <br><br>
                     <span>Nome</span><br>
                     <input type="text" class="input" name="input_nome_tipo_item" required maxlength="50">
 
                     <br><br>
-                    <button class="button_form_cadastro">Cadastrar</button> <br><br>
-                    <button class="button_form_cadastro" onclick="fechar_popup('tipo_item')" type="button">Fechar janela</button>
+                    <button class="button_form_cadastro bttn_salvar">Cadastrar</button> <br><br>
+                    <button class="button_form_cadastro bttn_cancelar" onclick="fechar_popup('tipo_item')" type="button">Fechar janela</button>
                 </form>
             </div>
         </div>

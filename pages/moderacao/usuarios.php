@@ -17,36 +17,12 @@
     <script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
 </head>
 
-<?php session_start();
-
-require_once "../../php/session/verifica_sessao.php";
-require_once "../../php/session/conexao_banco.php"; ?>
-
 <body>
-    <div id="banner_topo">
 
-        <div id="caixa_entrada">
-            <i class="fa fa-solid fa-envelope fa-lg icon_cinza"></i>
-            <!-- <i class="fa fa-solid fa-envelope-open-text fa-lg icon_amarelo"></i> -->
-        </div>
+    <?php // Importando a barra lateral de funções
+    include_once "../../modules/barra_funcoes.php" ?>
 
-        <img id="perfil_sm" src="<?php if (isset($_SESSION["foto"])) {
-                                        echo $_SESSION["foto"];
-                                    } else {
-                                        echo "../../files/img/icons/avatar.png";
-                                    } ?>">
-
-        <div id="nav_links">
-            <h2><a href="../panel.php"><img src="../../files/img/icons/logo.png"></a></h2>
-
-            <h2><a href="../licitacoes.php">Licitações</a></h2>
-            <h2><a href="../pedidos.php">Pedidos</a></h2>
-            <h2><a href="../autorizacoes.php">Autorizações</a></h2>
-            <?php if ($_SESSION["hierarquia"]) { ?> <h2><a href="../moderacao.php">Moderação</a></h2> <?php } ?>
-        </div>
-    </div>
-
-    <div id="quadro_fundo_total" class="cinza_escuro">
+    <div id="quadro_fundo_total" class="cinza_escuro_fundo">
         <div class="detalhes_fornecedor">
 
             <a href="../moderacao.php"><button><i class="fa fa-solid fa-caret-left"></i> Retornar</button></a>
@@ -60,7 +36,7 @@ require_once "../../php/session/conexao_banco.php"; ?>
                 <input id="input_filtro_fornecedor" style="width: 100%;" type="text" name="text" class="input" placeholder="Pesquise por nome ou departamento" onkeyup="filtra_fornecedor()">
 
                 <br><br>
-                <h4>Usuários</h4>
+                <h4>Usuários cadastrados</h4>
 
                 <div class="lista_fornecedores">
 
@@ -107,7 +83,7 @@ require_once "../../php/session/conexao_banco.php"; ?>
 
                                 <input name='id_usuario' value='$id' class='invisible'>
 
-                                <button><i class='fa fa-solid fa-pen'></i> Editar</button>
+                                <button class='bttn_editar'><i class='fa fa-solid fa-pen'></i> Editar</button>
                         </form>";
                     } ?>
 
@@ -116,7 +92,7 @@ require_once "../../php/session/conexao_banco.php"; ?>
 
             <?php } else { ?>
 
-                <h1>Não há nenhum usuário cadastrado ainda...</h1>
+                <h1><i class="fa fa-solid fa-ban"></i> Não há nenhum usuário cadastrado ainda...</h1>
                 <hr>
 
             <?php } ?>

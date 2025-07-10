@@ -17,36 +17,12 @@
     <script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
 </head>
 
-<?php session_start();
-
-require_once "../../php/session/verifica_sessao.php";
-require_once "../../php/session/conexao_banco.php"; ?>
-
 <body>
-    <div id="banner_topo">
 
-        <div id="caixa_entrada">
-            <i class="fa fa-solid fa-envelope fa-lg icon_cinza"></i>
-            <!-- <i class="fa fa-solid fa-envelope-open-text fa-lg icon_amarelo"></i> -->
-        </div>
+    <?php // Importando a barra lateral de funções
+    include_once "../../modules/barra_funcoes.php" ?>
 
-        <img id="perfil_sm" src="<?php if (isset($_SESSION["foto"])) {
-                                        echo $_SESSION["foto"];
-                                    } else {
-                                        echo "../../files/img/icons/avatar.png";
-                                    } ?>">
-
-        <div id="nav_links">
-            <h2><a href="../panel.php"><img src="../../files/img/icons/logo.png"></a></h2>
-
-            <h2><a href="../licitacoes.php">Licitações</a></h2>
-            <h2><a href="../pedidos.php">Pedidos</a></h2>
-            <h2><a href="../autorizacoes.php">Autorizações</a></h2>
-            <?php if ($_SESSION["hierarquia"]) { ?> <h2><a href="../moderacao.php">Moderação</a></h2> <?php } ?>
-        </div>
-    </div>
-
-    <div id="quadro_fundo_total" class="cinza_escuro">
+    <div id="quadro_fundo_total" class="cinza_escuro_fundo">
         <div class="detalhes_fornecedor">
 
             <a href="../moderacao.php"><button><i class="fa fa-solid fa-caret-left"></i> Retornar</button></a>
@@ -54,7 +30,7 @@ require_once "../../php/session/conexao_banco.php"; ?>
 
             <input id="input_filtro_fornecedor" type="text" name="text" class="input" placeholder="Pesquise por um departamento" onkeyup="filtra_fornecedor()">
 
-            <button class="cadastrar_novo" onclick="abrir_popup()"><i class="fa fa-solid fa-plus"></i> Cadastrar um novo</button>
+            <button class="cadastrar_novo bttn_editar" onclick="abrir_popup()"><i class="fa fa-solid fa-plus"></i> Cadastrar um novo</button>
 
             <?php
             $dados = $conexao->query("SELECT * FROM departamento");
@@ -62,13 +38,11 @@ require_once "../../php/session/conexao_banco.php"; ?>
             if ($dados->num_rows > 0) { ?>
 
                 <br><br>
-                <h4>Departamentos</h4>
+                <h4>Departamentos cadastrados</h4>
 
                 <div class="lista_grid">
 
-                    <?php
-
-                    // Listando todos os fornecedores
+                    <?php // Listando todos os departamentos
                     while ($dados_departamento = $dados->fetch_assoc()) {
 
                         $id = $dados_departamento["id"];
@@ -89,7 +63,7 @@ require_once "../../php/session/conexao_banco.php"; ?>
 
                                 $users_vinculados
 
-                                <br><button class='btn_editar_dpt'><i class='fa fa-solid fa-pen'></i> Editar</button>
+                                <br><button class='btn_editar_dpt bttn_editar'><i class='fa fa-solid fa-pen'></i> Editar</button>
                         
                                 <h4 class='id_label'>$nome</h4>
                         </form>";
@@ -100,7 +74,7 @@ require_once "../../php/session/conexao_banco.php"; ?>
 
             <?php } else { ?>
 
-                <h1>Não há nenhum departamento cadastrado ainda...</h1>
+                <h1><i class="fa fa-solid fa-ban"></i> Não há nenhum departamento cadastrado ainda...</h1>
                 <hr>
 
                 <div class="form_primeira_interacao">
@@ -117,7 +91,7 @@ require_once "../../php/session/conexao_banco.php"; ?>
                         <input type="color" class="input" name="input_cor_destaque" required>
 
                         <br><br>
-                        <button class="button_form_cadastro">Cadastrar</button>
+                        <button class="button_form_cadastro bttn_salvar">Cadastrar</button>
                     </form>
                 </div>
             <?php } ?>
@@ -137,8 +111,8 @@ require_once "../../php/session/conexao_banco.php"; ?>
                 <input type="color" class="input" name="input_cor_destaque" required>
 
                 <br><br>
-                <button class="button_form_cadastro">Cadastrar</button> <br><br>
-                <button class="button_form_cadastro" onclick="fechar_popup()" type="button">Fechar janela</button>
+                <button class="button_form_cadastro bttn_salvar">Cadastrar</button> <br><br>
+                <button class="button_form_cadastro bttn_cancelar" onclick="fechar_popup()" type="button">Fechar janela</button>
             </form>
         </div>
     </div>

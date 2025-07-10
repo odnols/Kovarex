@@ -3,7 +3,7 @@
 require_once "../session/verifica_sessao.php";
 require_once "../session/conexao_banco.php";
 
-$id_user = $_SESSION["id"];
+$id_user = $_SESSION["id_user"];
 
 $options = [
     'cost' => 12

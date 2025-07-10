@@ -27,7 +27,7 @@ if (!$executa->num_rows) {
 
             session_start();
             $_SESSION["logado"] = 1;
-            $_SESSION["id"] = $linha["id"];
+            $_SESSION["id_user"] = $linha["id"];
             $_SESSION["nome"] = $nome_usuario;
             $_SESSION["hierarquia"] = 0;
 

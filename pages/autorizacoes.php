@@ -17,30 +17,10 @@
     <script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
 </head>
 
-<?php session_start();
-
-require_once "../php/session/verifica_sessao.php";
-require_once "../php/session/conexao_banco.php";
-
-$id_user = $_SESSION["id"]; ?>
-
 <body>
-    <div id="banner_topo">
-        <img id="perfil_sm" src="<?php if (isset($_SESSION["foto"])) {
-                                        echo $_SESSION["foto"];
-                                    } else {
-                                        echo "../files/img/icons/avatar.png";
-                                    } ?>">
 
-        <div id="nav_links">
-            <h2><a href="panel.php"><img src="../files/img/icons/logo.png"></a></h2>
-
-            <h2><a href="licitacoes.php">Licitações</a></h2>
-            <h2><a href="pedidos.php">Pedidos</a></h2>
-            <h2><a href="autorizacoes.php">Autorizações</a></h2>
-            <?php if ($_SESSION["hierarquia"]) { ?> <h2><a href="moderacao.php">Moderação</a></h2> <?php } ?>
-        </div>
-    </div>
+    <?php // Importando a barra lateral de funções
+    include_once "../modules/barra_funcoes.php" ?>
 
     <div id="buttons_navegacao_pedidos" class="sombra_quadro">
         <button class="badge button_filtro" onclick="filtra_itens('em_aberto')">Em Aberto</button>

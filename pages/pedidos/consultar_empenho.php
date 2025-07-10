@@ -19,51 +19,18 @@
 
 <?php
 
-session_start();
-require_once "../../php/session/conexao_banco.php";
+$codigo = "";
 
-$codigo;
-
-if (isset($_GET["empenho"]))
-    $codigo = $_GET["empenho"];
-else if (isset($_POST["empenho"]))
-    $codigo = $_POST["empenho"];
+if (isset($_GET["empenho"])) $codigo = $_GET["empenho"];
+else if (isset($_POST["empenho"])) $codigo = $_POST["empenho"];
 ?>
 
 <body>
-    <div id="banner_topo">
 
-        <?php if (isset($_SESSION["foto"])) { ?>
-            <div id="caixa_entrada">
-                <i class="fa fa-solid fa-envelope fa-lg icon_cinza"></i>
-                <!-- <i class="fa fa-solid fa-envelope-open-text fa-lg icon_amarelo"></i> -->
-            </div>
-        <?php } ?>
+    <?php // Importando a barra lateral de funções
+    include_once "../../modules/barra_funcoes.php" ?>
 
-        <img id="perfil_sm" src="<?php if (isset($_SESSION["foto"])) {
-                                        echo $_SESSION["foto"];
-                                    } else {
-                                        echo "../../files/img/icons/avatar.png";
-                                    } ?>">
-
-        <div id="nav_links">
-            <?php if (isset($_SESSION["hierarquia"])) { ?>
-                <h2><a href="../panel.php"><img src="../../files/img/icons/logo.png"></a></h2>
-
-                <h2><a href="../licitacoes.php">Licitações</a></h2>
-                <h2><a href="../pedidos.php">Pedidos</a></h2>
-                <h2><a href="../autorizacoes.php">Autorizações</a></h2>
-                <?php if (isset($_SESSION["hierarquia"])) { ?> <h2><a href="../moderacao.php">Moderação</a></h2> <?php } ?>
-
-            <?php } else { ?>
-
-                <h2 style='float: right; margin-right: 25px'><a href='#' onclick='pop_up_login()'>Faça login</a></h2>
-                <h2><a href="../../index.php"><img src="../../files/img/icons/logo.png"></a></h2>
-            <?php } ?>
-        </div>
-    </div>
-
-    <div id="quadro_fundo_total" class="cinza_escuro">
+    <div id="quadro_fundo_total" class="cinza_escuro_fundo">
 
         <?php
         $dados_empenho = $conexao->query("SELECT * FROM empenho WHERE codigo_compartilhamento = '$codigo'");
@@ -288,13 +255,16 @@ else if (isset($_POST["empenho"]))
     </div>
 
     <div id="formulario_login_empenho">
-        <h1 style="color: white;">Faça login para começar</h1>
-        <hr id="hr_login">
-
         <!-- Formulários de Login -->
         <div id="formularios_lg">
-            <form name="loga" class="logah" action="php/session/usuario_confirmar_login.php" method="post">
+
+            <h1 style="color: white;">Faça login para continuar</h1>
+            <hr id="hr_login">
+
+            <form name="loga" class="logah" action="/kovarex/php/session/usuario_confirmar_login.php" method="post">
                 <h2>
+                    <input type="text" name="codigo_empenho" class="invisible" required value="<?php echo $codigo ?>">
+
                     <input type="text" name="email" required placeholder="E-mail" maxlength="100"><br><br>
 
                     <input type="password" name="senha" required placeholder="Senha" maxlength="50"><br><br>
@@ -310,7 +280,11 @@ else if (isset($_POST["empenho"]))
 
         <!-- Formulário cadastro -->
         <div id="formularios_cad">
-            <form name="cadastra" class="logah" action="php/session/usuario_receber_cadastro.php" method="post">
+
+            <h1 style="color: white;">Cadastre-se para começar</h1>
+            <hr id="hr_login">
+
+            <form name="cadastra" class="logah" action="/kovarex/php/session/usuario_receber_cadastro.php" method="post">
                 <h2>
                     <input type="text" name="nome" required placeholder="Nome" maxlength="100"><br><br>
 

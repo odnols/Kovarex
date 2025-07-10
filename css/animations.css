@@ -12,11 +12,11 @@
 
 @keyframes puxa_float_menu {
     from {
-        top: 2%;
+        left: 0%;
     }
 
     to {
-        top: 6%;
+        left: 200px;
     }
 }
 

@@ -17,36 +17,12 @@
     <script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
 </head>
 
-<?php session_start();
-
-require_once "../../php/session/verifica_sessao.php";
-require_once "../../php/session/conexao_banco.php"; ?>
-
 <body>
-    <div id="banner_topo">
 
-        <div id="caixa_entrada">
-            <i class="fa fa-solid fa-envelope fa-lg icon_cinza"></i>
-            <!-- <i class="fa fa-solid fa-envelope-open-text fa-lg icon_amarelo"></i> -->
-        </div>
+    <?php // Importando a barra lateral de funções
+    include_once "../../modules/barra_funcoes.php" ?>
 
-        <img id="perfil_sm" src="<?php if (isset($_SESSION["foto"])) {
-                                        echo $_SESSION["foto"];
-                                    } else {
-                                        echo "../../files/img/icons/avatar.png";
-                                    } ?>">
-
-        <div id="nav_links">
-            <h2><a href="../panel.php"><img src="../../files/img/icons/logo.png"></a></h2>
-
-            <h2><a href="../licitacoes.php">Licitações</a></h2>
-            <h2><a href="../pedidos.php">Pedidos</a></h2>
-            <h2><a href="../autorizacoes.php">Autorizações</a></h2>
-            <?php if ($_SESSION["hierarquia"]) { ?> <h2><a href="../moderacao.php">Moderação</a></h2> <?php } ?>
-        </div>
-    </div>
-
-    <div id="quadro_fundo_total" class="cinza_escuro">
+    <div id="quadro_fundo_total" class="cinza_escuro_fundo">
         <div class="detalhes_fornecedor">
 
             <a href="../moderacao.php"><button><i class="fa fa-solid fa-caret-left"></i> Retornar</button></a>
@@ -54,13 +30,12 @@ require_once "../../php/session/conexao_banco.php"; ?>
 
             <input id="input_filtro_fornecedor" type="text" name="text" class="input" placeholder="Pesquise por um nome, tipo de item ou unidade" onkeyup="filtra_fornecedor()">
 
-            <button class="cadastrar_novo" onclick="abrir_popup('cadastrar_item')"><i class="fa fa-solid fa-plus"></i> Cadastrar um novo</button>
+            <button class="cadastrar_novo bttn_editar" onclick="abrir_popup('cadastrar_item')"><i class="fa fa-solid fa-plus"></i> Cadastrar novo</button>
 
-            <?php
-            $dados = $conexao->query("SELECT * FROM item order by nome"); ?>
+            <?php $dados = $conexao->query("SELECT * FROM item order by nome"); ?>
 
             <br><br>
-            <h4>Itens</h4>
+            <h4>Gerenciando itens</h4>
 
             <?php if ($dados->num_rows > 0) { ?>
 
@@ -89,7 +64,7 @@ require_once "../../php/session/conexao_banco.php"; ?>
                         if ($dados_atribuicao->num_rows > 0) $destaque = "<div class='label azul'>Há $dados_atribuicao->num_rows processos vinculados a este item</div>";
                         else {
 
-                            $exclusao = "<button type='button' onclick=\"confirmar_exclusao('item', $id)\"><i class='fa fa-solid fa-trash'></i> Excluir</button>";
+                            $exclusao = "<button type='button' class='bttn_cancelar' onclick=\"confirmar_exclusao('item', $id)\"><i class='fa fa-solid fa-trash'></i> Excluir</button>";
                             $destaque = "<div class='label'>Não utilizado em nenhum processo</div>";
                         }
 
@@ -104,14 +79,16 @@ require_once "../../php/session/conexao_banco.php"; ?>
 
                                 <input name='id_item' value='$id' class='invisible'>
 
-                                <button><i class='fa fa-solid fa-pen'></i> Editar</button>
+                                <button class='bttn_editar'><i class='fa fa-solid fa-pen'></i> Editar</button>
                                 $exclusao
                         </form>";
                     } ?>
+
+                    <h2 class="sem_resultados"><i class="fa fa-solid fa-ban"></i> Sem itens para essa pesquisa...</h2>
                 </div>
 
             <?php } else { ?>
-                <h3>Não há nenhum item cadastrado ainda...</h3>
+                <h1 class="cadastro_zerado"><i class="fa fa-solid fa-ban"></i> Não há nenhum item cadastrado ainda...</h1>
                 <hr>
             <?php } ?>
         </div>
@@ -166,8 +143,8 @@ require_once "../../php/session/conexao_banco.php"; ?>
                 </select>
 
                 <br><br><br>
-                <button class="button_form_cadastro">Salvar</button> <br><br>
-                <button class="button_form_cadastro" onclick="fechar_popup('cadastrar_item')" type="button">Cancelar</button>
+                <button class="button_form_cadastro bttn_salvar">Cadastrar</button> <br><br>
+                <button class="button_form_cadastro bttn_cancelar" onclick="fechar_popup('cadastrar_item')" type="button">Fechar janela</button>
             </form>
         </div>
     </div>
