@@ -7,7 +7,7 @@ $nome = $_POST["input_nome_tipo_item"];
 
 $verifica = $conexao->query("SELECT * FROM tipo_item WHERE nome = '$nome'");
 
-if ($verifica->num_rows > 0) // Tipo de item informado já existe
+if ($verifica->num_rows) // Tipo de item informado já existe
     header("Location: ../../pages/moderacao/unidades.php");
 
 // Inserindo o novo tipo de item no banco

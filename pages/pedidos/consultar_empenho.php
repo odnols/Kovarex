@@ -65,7 +65,7 @@ else if (isset($_POST["empenho"])) $codigo = $_POST["empenho"];
             return $randomString;
         }
 
-        if ($dados_empenho->num_rows > 0 && strlen($codigo) > 0) {
+        if ($dados_empenho->num_rows && strlen($codigo) > 0) {
 
             $dados = $dados_empenho->fetch_assoc();
 

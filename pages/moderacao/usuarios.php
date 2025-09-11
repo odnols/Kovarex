@@ -31,7 +31,7 @@
             <?php
             $dados = $conexao->query("SELECT * FROM usuario");
 
-            if ($dados->num_rows > 0) { ?>
+            if ($dados->num_rows) { ?>
 
                 <input id="input_filtro_fornecedor" style="width: 100%;" type="text" name="text" class="input" placeholder="Pesquise por nome ou departamento" onkeyup="filtra_fornecedor()">
 
@@ -45,13 +45,14 @@
 
                         $id = $dados_usuario["id"];
                         $nome = $dados_usuario["nome"];
+                        $hierarquia = $dados_usuario["hierarquia"];
 
                         $dados_atribuicao = $conexao->query("SELECT * FROM atribuicao WHERE id_usuario = $id");
 
                         $departamentos = "";
                         $nome_departamentos = "";
 
-                        if ($dados_atribuicao->num_rows > 0) {
+                        if ($dados_atribuicao->num_rows) {
                             while ($dados_dpt_interno = $dados_atribuicao->fetch_assoc()) {
 
                                 $id_departamento = $dados_dpt_interno["id_departamento"];
@@ -65,8 +66,10 @@
                                 $departamentos = $departamentos . "<a class='label espacador_label' style='background-color: $cor_destaque' href='./departamentos.php'>$nome_departamento</a>";
                                 $nome_departamentos = $nome_departamentos . "$nome_departamento ";
                             }
-                        } else
-                            $departamentos = "<a class='label' href='./departamentos.php'>Sem departamento vinculado</a> <div class='label vermelho'>Sem acesso ao sistema</div>";
+                        } else if (!$hierarquia) $departamentos = "<a class='label' href='./departamentos.php'>Sem departamento vinculado</a> <div class='label vermelho'>Sem acesso ao sistema</div>";
+
+                        if ($hierarquia) // Incluindo tag de moderador ao usuário
+                            $departamentos = $departamentos . "<div class='label azul'>💂‍♂️ Moderador</div>";
 
                         $nome_departamentos = strtolower($nome_departamentos);
                         $nome_min = strtolower($nome);

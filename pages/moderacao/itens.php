@@ -37,7 +37,7 @@
             <br><br>
             <h4>Gerenciando itens</h4>
 
-            <?php if ($dados->num_rows > 0) { ?>
+            <?php if ($dados->num_rows) { ?>
 
                 <div class="lista_fornecedores">
                     <?php // Listando todos os itens
@@ -61,7 +61,7 @@
                         $destaque = "";
                         $exclusao = "";
 
-                        if ($dados_atribuicao->num_rows > 0) $destaque = "<div class='label azul'>Há $dados_atribuicao->num_rows processos vinculados a este item</div>";
+                        if ($dados_atribuicao->num_rows) $destaque = "<div class='label azul'>Há $dados_atribuicao->num_rows processos vinculados a este item</div>";
                         else {
 
                             $exclusao = "<button type='button' class='bttn_cancelar' onclick=\"confirmar_exclusao('item', $id)\"><i class='fa fa-solid fa-trash'></i> Excluir</button>";
@@ -110,11 +110,11 @@
 
                 <br><br>
                 <span>Unidade de medida</span><br>
-                <select id="input_unidade_medida" type="select" class="input" name="input_unidade_medida" required style="color: black;">
+                <select id="input_unidade_medida" type="select" class="input cadastro_select" name="input_unidade_medida" required style="color: black;">
                     <?php
 
                     $unidades_medida = $conexao->query("SELECT * FROM unidade ORDER BY nome");
-                    if ($unidades_medida->num_rows > 0) {
+                    if ($unidades_medida->num_rows) {
                         while ($unidade = $unidades_medida->fetch_assoc()) {
 
                             $id_unidade = $unidade["id"];
@@ -124,14 +124,16 @@
                         }
                     } ?>
                 </select>
+
+                <a href="#" class="button_cadastro_select verde-claro">+</a>
 
                 <br><br>
                 <span>Tipo de item</span><br>
-                <select id="input_tipo_item" type="select" class="input" name="input_tipo_item" required style="color: black;">
+                <select id="input_tipo_item" type="select" class="input cadastro_select" name="input_tipo_item" required style="color: black;">
                     <?php
 
                     $unidades_medida = $conexao->query("SELECT * FROM tipo_item ORDER BY nome");
-                    if ($unidades_medida->num_rows > 0) {
+                    if ($unidades_medida->num_rows) {
                         while ($unidade = $unidades_medida->fetch_assoc()) {
 
                             $id_unidade = $unidade["id"];
@@ -141,6 +143,8 @@
                         }
                     } ?>
                 </select>
+
+                <a href="#" class="button_cadastro_select verde-claro">+</a>
 
                 <br><br><br>
                 <button class="button_form_cadastro bttn_salvar">Cadastrar</button> <br><br>

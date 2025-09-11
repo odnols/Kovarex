@@ -74,12 +74,12 @@
                             $atribuicoes = [];
 
                             // Listando todos os departamentos do usuário
-                            if ($dados_atribuicao->num_rows > 0)
+                            if ($dados_atribuicao->num_rows)
                                 while ($dados_atr_interno = $dados_atribuicao->fetch_assoc())
                                     array_push($atribuicoes, $dados_atr_interno["id_departamento"]);
 
                             // Listando todos os departamentos e ativando os que o usuário possui atribuição
-                            if ($dados_departamentos->num_rows > 0) {
+                            if ($dados_departamentos->num_rows) {
                                 while ($dados_dpt_interno = $dados_departamentos->fetch_assoc()) {
 
                                     $id_departamento = $dados_dpt_interno["id"];

@@ -15,13 +15,13 @@ if (isset($_POST["input_atribuicoes"])) {
     $dados_departamento = $conexao->query("SELECT * FROM departamento");
 
     // Listando todos os departamentos
-    if ($dados_departamento->num_rows > 0)
+    if ($dados_departamento->num_rows)
         while ($dados_atr_interno = $dados_departamento->fetch_assoc())
             array_push($departamentos, $dados_atr_interno["id"]);
 
     $dados_atribuicao = $conexao->query("SELECT * FROM atribuicao WHERE id_usuario = $id");
 
-    if ($dados_atribuicao->num_rows > 0) // Listando todos os departamentos do usuário
+    if ($dados_atribuicao->num_rows) // Listando todos os departamentos do usuário
         while ($dados_atr_interno = $dados_atribuicao->fetch_assoc())
             array_push($atribuicoes, $dados_atr_interno["id_departamento"]);
 

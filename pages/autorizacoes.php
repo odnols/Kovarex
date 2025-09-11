@@ -43,7 +43,7 @@
                 $id_departamento = $atribuicao["id_departamento"];
                 $dados = $conexao->query("SELECT * FROM empenho WHERE status = 1 AND id_departamento = $id_departamento");
 
-                if ($dados->num_rows > 0) {
+                if ($dados->num_rows) {
                     while ($empenho = $dados->fetch_assoc()) {
 
                         $id_empenho = $empenho["id"];

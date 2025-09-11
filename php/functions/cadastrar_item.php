@@ -10,7 +10,7 @@ $tipo_item = $_POST["input_tipo_item"];
 
 $verifica = $conexao->query("SELECT * FROM item WHERE nome = '$nome'");
 
-if ($verifica->num_rows > 0) // Item informado já existe
+if ($verifica->num_rows) // Item informado já existe
     header("Location: ../../pages/moderacao/itens.php");
 
 // Inserindo o novo item no banco

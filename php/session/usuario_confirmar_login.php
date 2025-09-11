@@ -8,7 +8,7 @@ $email = $_POST["email"];
 
 $resultado = $conexao->query("SELECT * FROM usuario WHERE email LIKE '$email'");
 
-if ($resultado->num_rows > 0) {
+if ($resultado->num_rows) {
     $linha = $resultado->fetch_assoc();
 
     if (password_verify($_POST["senha"], $linha['hash'])) {

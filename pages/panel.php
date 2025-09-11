@@ -24,7 +24,7 @@
 
     <div id="conteudo_pag">
 
-        <?php if ($atribuicoes->num_rows > 0) { ?>
+        <?php if ($atribuicoes->num_rows || $_SESSION["hierarquia"]) { ?>
 
             <div id="buttons_navegacao_index">
                 <div class="quadro_pag pilula_l sombra_quadro">
@@ -55,7 +55,7 @@
                     <?php
                     $resultado = $conexao->query("SELECT * FROM pedido WHERE id_autor = $id_user ORDER BY id DESC LIMIT 5");
 
-                    if ($resultado->num_rows > 0) {
+                    if ($resultado->num_rows) {
                     } else
                         echo "<p>Você ainda não tem pedidos para acompanhar... <br><br>Crie um agora mesmo!</p>"; ?>
                 </div>
@@ -80,7 +80,7 @@
                         $id_departamento = $atribuicao["id_departamento"];
                         $dados = $conexao->query("SELECT * FROM empenho WHERE status = 1 AND id_departamento = $id_departamento");
 
-                        if ($dados->num_rows > 0) {
+                        if ($dados->num_rows) {
 
                             while ($i < 5 && $empenho = $dados->fetch_assoc()) {
 
@@ -147,16 +147,13 @@
                 <div class="quadro_pag sombra_quadro">
                     <h3>Boas vindas ao Kovarex!</h3>
                     <hr>
-                    <p>Sua conta foi enviada para aprovação... Logo iremos liberar todas<br>as funcionalidades para utilização!<br><br>Uma notificação será enviada ao envelope localizado no canto superior direito.</p>
+                    <p>Sua conta foi enviada para aprovação... Logo iremos liberar todas<br>as funcionalidades para utilização!<br><br>Uma notificação será enviada ao envelope localizado no canto superior esquerdo.</p>
                 </div>
             </div>
 
         <?php } ?>
     </div>
 
-    <footer id="footer">
-        <h2 style="float: right;">Kovarex</h2>
-    </footer>
 </body>
 
 <script type="text/javascript" src="../js/engine.js"></script>

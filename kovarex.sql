@@ -70,6 +70,12 @@ create table item_pregao(
     foreign key (id_empresa) references empresa(id)
 ) engine = InnoDB;
 
+create table departamento(
+    id int not null auto_increment primary key,
+    nome varchar(250),
+    cor_destaque varchar(20)
+) engine = InnoDB;
+
 create table pedido(
     id int not null auto_increment primary key,
     data_criacao varchar(50),
@@ -89,12 +95,6 @@ create table item_pedido(
     foreign key (id_item) references item(id),
     foreign key (id_autor) references usuario(id),
     foreign key (id_pedido) references pedido(id)
-) engine = InnoDB;
-
-create table departamento(
-    id int not null auto_increment primary key,
-    nome varchar(250),
-    cor_destaque varchar(20)
 ) engine = InnoDB;
 
 create table empenho(

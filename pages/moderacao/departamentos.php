@@ -35,7 +35,7 @@
             <?php
             $dados = $conexao->query("SELECT * FROM departamento");
 
-            if ($dados->num_rows > 0) { ?>
+            if ($dados->num_rows) { ?>
 
                 <br><br>
                 <h4>Departamentos cadastrados</h4>
@@ -54,7 +54,7 @@
                         $vinculos = $conexao->query("SELECT * FROM atribuicao WHERE id_departamento = $id");
                         $users_vinculados = "";
 
-                        if ($vinculos->num_rows > 0) $users_vinculados = "<a class='label azul' href='./usuarios.php'>$vinculos->num_rows usuários vinculados</a>";
+                        if ($vinculos->num_rows) $users_vinculados = "<a class='label azul' href='./usuarios.php'>$vinculos->num_rows usuários vinculados</a>";
                         else $users_vinculados = "<a class='label' href='./usuarios.php'>Sem usuários vinculos</a>";
 
                         echo "<form class='item_fornecedor item_departamento $nome_min' action='../../php/cache/editar_departamento.php' method='POST'>

@@ -79,10 +79,6 @@
             </div>
         </div>
     </div>
-
-    <footer id="footer">
-        <h2 style="float: right;">Kovarex</h2>
-    </footer>
 </body>
 
 <script type="text/javascript" src="../js/engine.js"></script>

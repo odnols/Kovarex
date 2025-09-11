@@ -37,7 +37,7 @@
             <button class="cadastrar_novo bttn_editar" onclick="abrir_popup('unidade_item')"><i class="fa fa-solid fa-plus"></i> Cadastrar nova</button>
             <br><br>
 
-            <?php if ($dados->num_rows > 0) { ?>
+            <?php if ($dados->num_rows) { ?>
 
                 <div class="lista_fornecedores">
 
@@ -52,7 +52,7 @@
                         $destaque = "";
                         $exclusao = "";
 
-                        if ($dados_atribuicao->num_rows > 0) $destaque = "<a class='label azul' href='./itens.php'>Há $dados_atribuicao->num_rows itens vinculados</a>";
+                        if ($dados_atribuicao->num_rows) $destaque = "<a class='label azul' href='./itens.php'>Há $dados_atribuicao->num_rows itens vinculados</a>";
                         else {
 
                             $exclusao = "<button type='button' class='bttn_cancelar' onclick=\"confirmar_exclusao('unidade', $id)\"><i class='fa fa-solid fa-trash'></i> Excluir</button>";
@@ -93,7 +93,7 @@
             <button class="cadastrar_novo bttn_editar" onclick="abrir_popup('tipo_item')"><i class="fa fa-solid fa-plus"></i> Cadastrar nova</button>
             <br><br>
 
-            <?php if ($dados->num_rows > 0) { ?>
+            <?php if ($dados->num_rows) { ?>
 
                 <div class="lista_fornecedores">
 
@@ -107,7 +107,7 @@
                         $destaque = "";
                         $exclusao = "";
 
-                        if ($dados_atribuicao->num_rows > 0) $destaque = "<a class='label azul' href='./itens.php'>Há $dados_atribuicao->num_rows itens vinculados</a>";
+                        if ($dados_atribuicao->num_rows) $destaque = "<a class='label azul' href='./itens.php'>Há $dados_atribuicao->num_rows itens vinculados</a>";
                         else {
                             $exclusao = "<button type='button' class='bttn_cancelar' onclick=\"confirmar_exclusao('tipo_item', $id)\"><i class='fa fa-solid fa-trash'></i> Excluir</button>";
                             $destaque = "<div class='label'>Nenhum item vinculado</div>";

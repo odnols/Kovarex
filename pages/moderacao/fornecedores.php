@@ -35,7 +35,7 @@
             <?php
             $dados = $conexao->query("SELECT * FROM empresa");
 
-            if ($dados->num_rows > 0) { ?>
+            if ($dados->num_rows) { ?>
 
                 <br><br>
                 <h4>Fornecedores cadastrados</h4>

@@ -11,7 +11,7 @@ $razao = strtoupper($razao);
 
 $verifica = $conexao->query("SELECT * FROM empresa WHERE cnpj = '$cnpj'");
 
-if ($verifica->num_rows > 0) // Fornecedor com o CNPJ ou CPF informado já existe
+if ($verifica->num_rows) // Fornecedor com o CNPJ ou CPF informado já existe
     header("Location: ../../pages/moderacao/fornecedores.php");
 
 // Inserindo o novo fornecedor no banco
