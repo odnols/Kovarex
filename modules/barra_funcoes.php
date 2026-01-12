@@ -1,5 +1,8 @@
 <?php session_start();
 
+// Importando caminho relativo do config.php
+require_once __DIR__."/../config.php"; 
+
 $id_user = "";
 $foto_user = "/kovarex/files/img/icons/avatar.png";
 
@@ -16,22 +19,11 @@ $caller = $trace[0];
 
 $solicitante = $caller['file'];
 
-// Encontra a posição da palavra
-$posicao = strpos($solicitante, "kovarex\pages");
-$substring = substr($solicitante, $posicao + strlen("kovarex\pages"));
-
-// Conta quantas vezes \ aparece na substring
-$count = substr_count($substring, '\\');
-$navegacao = "";
-
-if ($count > 1)
-    $navegacao = "../";
-
-require_once "$navegacao../php/session/conexao_banco.php";
+require_once SITE_ROOT."/php/session/conexao_banco.php";
 
 // Verifica se o usuário está logado para liberar acesso a outras páginas além da consulta de empenho
 if (!strpos($solicitante, "consultar_empenho.php") && !isset($_SESSION["id_user"]))
-    require_once "$navegacao../php/session/verifica_sessao.php";
+    require_once SITE_ROOT."/php/session/verifica_sessao.php";
 
 if (isset($_SESSION["id_user"])) {
 
@@ -40,7 +32,7 @@ if (isset($_SESSION["id_user"])) {
     // Coletando a foto que o usuário possui
     if (isset($_SESSION["foto"])) $foto_user = $_SESSION["foto"];
 
-    require_once "$navegacao../php/session/verifica_sessao.php";
+    require_once SITE_ROOT."/php/session/verifica_sessao.php";
 
     // Verificando as atribuições de departamentos que o usuário possui
     $atribuicoes = $conexao->query("SELECT * FROM atribuicao WHERE id_usuario = $id_user");

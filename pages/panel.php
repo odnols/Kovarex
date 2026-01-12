@@ -33,7 +33,7 @@
                     <p>Crie pedidos e acompanhe o status de entregas de forma rápida.</p>
 
                     <br>
-                    <a href="./pedidos/criar_pedido.php" class="button_add_pedido bttn_atalhos_panel cinza large_button">Criar um novo pedido ></a>
+                    <a href="./pedidos/criar_pedido.php" class="button_add_pedido bttn_atalhos_panel cinza large_button">Novo pedido ></a>
                 </div>
 
                 <div class="quadro_pag pilula_l_2 sombra_quadro">
@@ -65,7 +65,7 @@
                 </div> -->
 
                 <div class="quadro_pag pilula_completa sombra_quadro">
-                    <a href="autorizacoes.php" class="button_add_pedido bttn_ver_autorizacoes_index cinza" style="float: right; width: 20%">Ver todas as autorizações ></a>
+                    <a href="autorizacoes.php" class="button_add_pedido bttn_ver_autorizacoes_index cinza" style="float: right; width: 20%">Ver autorizações ></a>
 
                     <h3><i class="fa fa-solid fa-clipboard-check"></i> Autorizações</h3>
                     <hr>
@@ -147,7 +147,7 @@
                 <div class="quadro_pag sombra_quadro">
                     <h3>Boas vindas ao Kovarex!</h3>
                     <hr>
-                    <p>Sua conta foi enviada para aprovação... Logo iremos liberar todas<br>as funcionalidades para utilização!<br><br>Uma notificação será enviada ao envelope localizado no canto superior esquerdo.</p>
+                    <p>Sua conta foi enviada para aprovação... Logo iremos liberar todas<br>as funcionalidades para utilização!<br><br>Uma notificação será enviada ao envelope localizado no canto superior esquerdo quando tudo estiver pronto!</p>
                 </div>
             </div>
 
