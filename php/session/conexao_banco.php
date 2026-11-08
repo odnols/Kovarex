@@ -1,22 +1,16 @@
 <?php
-
-$servidor = "localhost";
-$user = "root";
-$password = "";
-$banco = "kovarex";
+// Configurar estas variáveis via variáveis de ambiente em produção
+$servidor = getenv('DB_HOST') ?: "localhost";
+$user = getenv('DB_USER') ?: "root";
+$password = getenv('DB_PASSWORD') ?: "";
+$banco = getenv('DB_NAME') ?: "kovarex";
 
 $conexao = new mysqli($servidor, $user, $password, $banco);
-/*$conexao->query("SET NAMES 'utf8'");
-    $conexao->query('SET character_set_connection=utf8');
-    $conexao->query('SET character_set_client=utf8');
-    $conexao->query('SET character_set_results=utf8');*/
 
-if (!$conexao) die("Falha na conexão: " . $conexao->connect_error);
+if ($conexao->connect_error) {
+    error_log("Erro de conexão ao banco: " . $conexao->connect_error);
+    die("Falha na conexão com o banco de dados.");
+}
 
-// Corretor ortográfico
-mysqli_set_charset($conexao, "utf8");
+mysqli_set_charset($conexao, "utf8mb4");
 
-// $conexao = mysqli_init();
-// $mysqli->ssl_set(NULL, NULL, "/etc/ssl/certs/ca-certificates.crt", NULL, NULL);
-// $mysqli->real_connect(getenv("DB_HOST"), getenv("DB_USERNAME"), getenv("DB_PASSWORD"), getenv("DB_NAME"));
-// $conexao->close();

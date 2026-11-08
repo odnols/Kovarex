@@ -19,8 +19,14 @@
 
 <body>
 
-    <?php // Importando a barra lateral de funções
-    include_once "../../modules/barra_funcoes.php" ?>
+    <?php
+    include_once "../../modules/barra_funcoes.php";
+    
+    if (!isset($_SESSION["id_user"]) || !$_SESSION["hierarquia"]) {
+        header("Location: ../../index.php?ERROR=401");
+        exit;
+    }
+    ?>
 
     <div id="quadro_fundo_total" class="cinza_escuro_fundo">
         <div class="detalhes_fornecedor">
@@ -29,7 +35,9 @@
             <br><br>
 
             <?php
-            $dados = $conexao->query("SELECT * FROM usuario");
+            $stmt = $conexao->prepare("SELECT id, nome, hierarquia, alterar_psw FROM usuario ORDER BY nome ASC");
+            $stmt->execute();
+            $dados = $stmt->get_result();
 
             if ($dados->num_rows) { ?>
 
@@ -40,60 +48,75 @@
 
                 <div class="lista_fornecedores">
 
-                    <?php // Listando todos os usuarios
+                    <?php
                     while ($dados_usuario = $dados->fetch_assoc()) {
+                        $id = (int) $dados_usuario["id"];
+                        $nome = htmlspecialchars($dados_usuario["nome"], ENT_QUOTES, 'UTF-8');
+                        $hierarquia = (int) $dados_usuario["hierarquia"];
+                        $alterar_psw = (int) $dados_usuario["alterar_psw"];
 
-                        $id = $dados_usuario["id"];
-                        $nome = $dados_usuario["nome"];
-                        $hierarquia = $dados_usuario["hierarquia"];
-
-                        $dados_atribuicao = $conexao->query("SELECT * FROM atribuicao WHERE id_usuario = $id");
+                        $stmtAtrib = $conexao->prepare("SELECT id_departamento FROM atribuicao WHERE id_usuario = ?");
+                        $stmtAtrib->bind_param("i", $id);
+                        $stmtAtrib->execute();
+                        $dados_atribuicao = $stmtAtrib->get_result();
 
                         $departamentos = "";
                         $nome_departamentos = "";
 
                         if ($dados_atribuicao->num_rows) {
                             while ($dados_dpt_interno = $dados_atribuicao->fetch_assoc()) {
-
-                                $id_departamento = $dados_dpt_interno["id_departamento"];
-                                $dados_departamento = $conexao->query("SELECT * FROM departamento WHERE id = $id_departamento");
-
-                                $dados_dpt_interno = $dados_departamento->fetch_assoc();
-
-                                $nome_departamento = $dados_dpt_interno["nome"];
-                                $cor_destaque = $dados_dpt_interno["cor_destaque"];
-
-                                $departamentos = $departamentos . "<a class='label espacador_label' style='background-color: $cor_destaque' href='./departamentos.php'>$nome_departamento</a>";
-                                $nome_departamentos = $nome_departamentos . "$nome_departamento ";
+                                $id_departamento = (int) $dados_dpt_interno["id_departamento"];
+                                
+                                $stmtDept = $conexao->prepare("SELECT nome, cor_destaque FROM departamento WHERE id = ?");
+                                $stmtDept->bind_param("i", $id_departamento);
+                                $stmtDept->execute();
+                                $resultDept = $stmtDept->get_result();
+                                
+                                if ($resultDept->num_rows) {
+                                    $dados_dpt = $resultDept->fetch_assoc();
+                                    $nome_departamento = htmlspecialchars($dados_dpt["nome"], ENT_QUOTES, 'UTF-8');
+                                    $cor_destaque = preg_match('/^#[0-9a-fA-F]{6}$/', $dados_dpt["cor_destaque"]) 
+                                        ? htmlspecialchars($dados_dpt["cor_destaque"], ENT_QUOTES, 'UTF-8') 
+                                        : '#cccccc';
+                                    
+                                    $departamentos .= "<a class='label espacador_label' style='background-color: $cor_destaque' href='./departamentos.php'>" 
+                                        . $nome_departamento . "</a>";
+                                    $nome_departamentos .= $nome_departamento . " ";
+                                }
+                                $stmtDept->close();
                             }
-                        } else if (!$hierarquia) $departamentos = "<a class='label' href='./departamentos.php'>Sem departamento vinculado</a> <div class='label vermelho'>Sem acesso ao sistema</div>";
+                        } else if (!$hierarquia) {
+                            $departamentos = "<div class='label vermelho'>Sem acesso ao sistema</div> <a class='label' href='./departamentos.php'>Sem departamento vinculado</a>";
+                        }
 
-                        if ($hierarquia) // Incluindo tag de moderador ao usuário
-                            $departamentos = $departamentos . "<div class='label azul'>💂‍♂️ Moderador</div>";
+                        if ($hierarquia) {
+                            $departamentos .= "<div class='label azul'>💂‍♂️ Moderador</div>";
+                        }
 
                         $nome_departamentos = strtolower($nome_departamentos);
                         $nome_min = strtolower($nome);
 
-                        $alterar_psw = "";
+                        $alterar_psw_label = "";
+                        if ($alterar_psw == 1) {
+                            $alterar_psw_label = "<div class='label vermelho'><i class='fa fa-solid fa-key'></i> Senha a ser alterada</div>";
+                        }
 
-                        if ($dados_usuario["alterar_psw"] == 1) // Tag com informações sobre alteração de senha em andamento
-                            $alterar_psw = "<div class='label vermelho'><i class='fa fa-solid fa-key'></i> Senha a ser alterada</div>";
-
-                        echo "<form class='item_fornecedor $nome_min $id $nome_departamentos' action='../../php/cache/editar_usuario.php' method='POST'>
-                                <span class='label'>$id</span> $nome <br>
-
-                                $departamentos$alterar_psw
-
-                                <input name='id_usuario' value='$id' class='invisible'>
-
-                                <button class='bttn_editar'><i class='fa fa-solid fa-pen'></i> Editar</button>
+                        echo "<form class='item_fornecedor $nome_min " . (int)$id . " $nome_departamentos' action='../../php/cache/editar_usuario.php' method='POST'>
+                                <span class='label'>" . (int)$id . "</span> $nome <br>
+                                $departamentos $alterar_psw_label
+                                <input name='id_usuario' value='" . (int)$id . "' class='invisible' type='hidden'>
+                                <button class='bttn_editar' type='submit'><i class='fa fa-solid fa-pen'></i> Editar</button>
                         </form>";
-                    } ?>
+                    }
+                    $stmt->close();
+                    ?>
 
                     <h2 class="sem_resultados"><i class="fa fa-solid fa-ban"></i> Sem usuários para essa pesquisa...</h2>
                 </div>
 
-            <?php } else { ?>
+            <?php } else {
+                $stmt->close();
+            ?>
 
                 <h1><i class="fa fa-solid fa-ban"></i> Não há nenhum usuário cadastrado ainda...</h1>
                 <hr>

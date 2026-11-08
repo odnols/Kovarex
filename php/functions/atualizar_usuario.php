@@ -1,46 +1,95 @@
-<?php session_start();
+<?php
+session_start();
 
 require_once "../session/verifica_sessao.php";
 require_once "../session/conexao_banco.php";
 
-$id = $_POST["input_id"];
-$nome = $_POST["input_nome"];
-$email = $_POST["input_email"];
+if (!isset($_SESSION["hierarquia"]) || !$_SESSION["hierarquia"]) {
+    header("Location: ../../index.php?ERROR=401");
+    exit;
+}
+
+$id = (int) ($_POST["input_id"] ?? 0);
+$nome = $_POST["input_nome"] ?? '';
+$email = filter_var($_POST["input_email"] ?? '', FILTER_SANITIZE_EMAIL);
+
+if (!$id || !$nome || !$email || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
+    header("Location: ../../pages/moderacao/usuarios.php?ERROR=invalid");
+    exit;
+}
 
 $atribuidos = [];
 $atribuicoes = [];
 $departamentos = [];
 
-if (isset($_POST["input_atribuicoes"])) {
-    $dados_departamento = $conexao->query("SELECT * FROM departamento");
+if (isset($_POST["input_atribuicoes"]) && is_array($_POST["input_atribuicoes"])) {
+    $stmtDept = $conexao->prepare("SELECT id FROM departamento ORDER BY id ASC");
+    $stmtDept->execute();
+    $dados_departamento = $stmtDept->get_result();
+    $stmtDept->close();
 
-    // Listando todos os departamentos
-    if ($dados_departamento->num_rows)
-        while ($dados_atr_interno = $dados_departamento->fetch_assoc())
-            array_push($departamentos, $dados_atr_interno["id"]);
+    if ($dados_departamento->num_rows) {
+        while ($dados_dpt = $dados_departamento->fetch_assoc()) {
+            $departamentos[] = (int) $dados_dpt["id"];
+        }
+    }
 
-    $dados_atribuicao = $conexao->query("SELECT * FROM atribuicao WHERE id_usuario = $id");
+    $stmtAtrib = $conexao->prepare("SELECT id_departamento FROM atribuicao WHERE id_usuario = ?");
+    $stmtAtrib->bind_param("i", $id);
+    $stmtAtrib->execute();
+    $dados_atribuicao = $stmtAtrib->get_result();
+    $stmtAtrib->close();
 
-    if ($dados_atribuicao->num_rows) // Listando todos os departamentos do usuário
-        while ($dados_atr_interno = $dados_atribuicao->fetch_assoc())
-            array_push($atribuicoes, $dados_atr_interno["id_departamento"]);
+    if ($dados_atribuicao->num_rows) {
+        while ($dados_atr = $dados_atribuicao->fetch_assoc()) {
+            $atribuicoes[] = (int) $dados_atr["id_departamento"];
+        }
+    }
 
-    // Listando os departamentos selecionados
-    foreach ($_POST["input_atribuicoes"] as $atribuicao)
-        array_push($atribuidos, $atribuicao);
+    foreach ($_POST["input_atribuicoes"] as $atribuicao) {
+        $atribuicao_int = (int) $atribuicao;
+        if (in_array($atribuicao_int, $departamentos)) {
+            $atribuidos[] = $atribuicao_int;
+        }
+    }
 
     foreach ($departamentos as $id_departamento) {
-
-        // Departamento não está na lista de atribuições e foi atribuído ao usuário
         if (in_array($id_departamento, $atribuidos)) {
-            if (!in_array($id_departamento, $atribuicoes))
-                $conexao->query("INSERT INTO atribuicao (id_usuario, id_departamento) VALUES ($id, $id_departamento)");
-        } else $conexao->query("DELETE FROM atribuicao WHERE id_usuario = $id AND id_departamento = $id_departamento");
+            if (!in_array($id_departamento, $atribuicoes)) {
+                $stmtIns = $conexao->prepare("INSERT INTO atribuicao (id_usuario, id_departamento) VALUES (?, ?)");
+                $stmtIns->bind_param("ii", $id, $id_departamento);
+                $stmtIns->execute();
+                $stmtIns->close();
+            }
+        } else {
+            $stmtDel = $conexao->prepare("DELETE FROM atribuicao WHERE id_usuario = ? AND id_departamento = ?");
+            $stmtDel->bind_param("ii", $id, $id_departamento);
+            $stmtDel->execute();
+            $stmtDel->close();
+        }
     }
-} else // Remove todas as atribuições ligadas a um usuário
-    $conexao->query("DELETE FROM atribuicao WHERE id_usuario = $id");
+} else {
+    $stmtDelAll = $conexao->prepare("DELETE FROM atribuicao WHERE id_usuario = ?");
+    $stmtDelAll->bind_param("i", $id);
+    $stmtDelAll->execute();
+    $stmtDelAll->close();
+}
 
-// Atualizando o nome e e-mail do usuário
-$conexao->query("UPDATE usuario SET nome = '$nome', email = '$email' WHERE id = $id");
+$stmt = $conexao->prepare("UPDATE usuario SET nome = ?, email = ? WHERE id = ?");
+if (!$stmt) {
+    error_log("Erro na preparação da query: " . $conexao->error);
+    header("Location: ../../pages/moderacao/usuarios.php?ERROR=db");
+    exit;
+}
 
-header("Location: ../../pages/moderacao/usuarios.php");
+$stmt->bind_param("ssi", $nome, $email, $id);
+if (!$stmt->execute()) {
+    error_log("Erro ao atualizar usuário: " . $stmt->error);
+    $stmt->close();
+    header("Location: ../../pages/moderacao/usuarios.php?ERROR=update");
+    exit;
+}
+$stmt->close();
+
+header("Location: ../../pages/moderacao/usuarios.php?success=1");
+

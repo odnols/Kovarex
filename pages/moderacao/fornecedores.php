@@ -19,8 +19,14 @@
 
 <body>
 
-    <?php // Importando a barra lateral de funções
-    include_once "../../modules/barra_funcoes.php" ?>
+    <?php
+    include_once "../../modules/barra_funcoes.php";
+    
+    if (!isset($_SESSION["id_user"]) || !$_SESSION["hierarquia"]) {
+        header("Location: ../../index.php?ERROR=401");
+        exit;
+    }
+    ?>
 
     <div id="quadro_fundo_total" class="cinza_escuro_fundo">
         <div class="detalhes_fornecedor">
@@ -33,7 +39,10 @@
             <button class="cadastrar_novo bttn_editar" onclick="abrir_popup()"><i class="fa fa-solid fa-plus"></i> Cadastrar um novo</button>
 
             <?php
-            $dados = $conexao->query("SELECT * FROM empresa");
+            $stmt = $conexao->prepare("SELECT id, cnpj, razao_social, id_vinculado FROM empresa ORDER BY razao_social ASC");
+            $stmt->execute();
+            $dados = $stmt->get_result();
+            $stmt->close();
 
             if ($dados->num_rows) { ?>
 
@@ -43,26 +52,26 @@
                 <div class="lista_fornecedores">
 
                     <?php
-                    // Listando todos os fornecedores
                     while ($dados_fornecedor = $dados->fetch_assoc()) {
+                        $id = (int) $dados_fornecedor["id"];
+                        $cnpj = htmlspecialchars($dados_fornecedor["cnpj"], ENT_QUOTES, 'UTF-8');
+                        $razao = htmlspecialchars($dados_fornecedor["razao_social"], ENT_QUOTES, 'UTF-8');
+                        $id_vinculado = htmlspecialchars($dados_fornecedor["id_vinculado"] ?? '', ENT_QUOTES, 'UTF-8');
+                        
+                        $cnpj_formatado = preg_replace('/[^0-9]/', '', $cnpj);
+                        $razao_min = strtolower($razao);
+                        
+                        $cadastro = strlen($id_vinculado) > 0 
+                            ? "<span class='label amarelo' style='float: right; margin-right: 5px; margin-top: -11px'><i class='fa fa-solid fa-id-badge'></i> Representante cadastrado</span>" 
+                            : "<span class='label vermelho' style='float: right; margin-right: 5px; margin-top: -11px'><i class='fa fa-solid fa-id-badge'></i> Sem representante</span>";
 
-                        $id = $dados_fornecedor["id"];
-                        $cnpj = $dados_fornecedor["cnpj"];
-                        $razao = $dados_fornecedor["razao_social"];
-                        $cnpj_formatado = str_replace(".", "", $cnpj);
-                        $cnpj_formatado = str_replace("/", "", $cnpj_formatado);
-                        $cnpj_formatado = str_replace("-", "", $cnpj_formatado);
-
-                        $razaio_min = strtolower($razao);
-                        $cadastro = strlen($dados_fornecedor["id_vinculado"]) > 0 ? "<span class='label amarelo' style='float: right; margin-right: 5px; margin-top: -11px'><i class='fa fa-solid fa-id-badge'></i> Representante cadastrado</span>" : "<span class='label vermelho' style='float: right; margin-right: 5px; margin-top: -11px'><i class='fa fa-solid fa-id-badge'></i> Sem representante</span>";
-
-                        echo "<form class='item_fornecedor $cnpj $razaio_min $id $cnpj_formatado' action='../../php/cache/editar_fornecedor.php' method='POST'>
-                                <span class='label'>$id</span> $razao <br>
+                        echo "<form class='item_fornecedor $cnpj_formatado $razao_min " . (int)$id . "' action='../../php/cache/editar_fornecedor.php' method='POST'>
+                                <span class='label'>" . (int)$id . "</span> $razao <br>
                                 $cnpj
 
-                                <input name='id_fornecedor' value='$id' class='invisible'>
+                                <input name='id_fornecedor' value='" . (int)$id . "' type='hidden'>
 
-                                <button class='bttn_editar'><i class='fa fa-solid fa-pen'></i> Editar</button>
+                                <button class='bttn_editar' type='submit'><i class='fa fa-solid fa-pen'></i> Editar</button>
                                 $cadastro
                         </form>";
                     } ?>
@@ -89,7 +98,7 @@
                         <input type="text" class="input" name="input_razao_social" required maxlength="255">
 
                         <br><br>
-                        <button class="button_form_cadastro bttn_salvar">Cadastrar</button>
+                        <button class="button_form_cadastro bttn_salvar" type="submit">Cadastrar</button>
                     </form>
 
                     <form id="cadastro_fornecedor" action="../../php/functions/importar_dados.php" method="post">
@@ -113,7 +122,7 @@
                         </div>
 
                         <br>
-                        <button class="button_form_cadastro bttn_salvar" disabled>Importar</button>
+                        <button class="button_form_cadastro bttn_salvar" type="submit" disabled>Importar</button>
                     </form>
                 </div>
             <?php } ?>

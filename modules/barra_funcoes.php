@@ -1,43 +1,47 @@
-<?php session_start();
+<?php
+session_start();
 
-// Importando caminho relativo do config.php
 require_once __DIR__."/../config.php"; 
 
 $id_user = "";
 $foto_user = "/kovarex/files/img/icons/avatar.png";
 
-// Redireciona o usuário para o empenho que estava visualizando antes de realizar o login
 if (isset($_SESSION["codigo_empenho"])) {
-    $codigo_empenho = $_SESSION["codigo_empenho"];
-
+    $codigo_empenho = preg_replace('/[^a-zA-Z0-9\-_]/', '', $_SESSION["codigo_empenho"]);
     unset($_SESSION["codigo_empenho"]);
     header("Location: /kovarex/pages/pedidos/consultar_empenho.php?empenho=$codigo_empenho");
+    exit;
 }
 
 $trace = debug_backtrace();
 $caller = $trace[0];
-
 $solicitante = $caller['file'];
 
 require_once SITE_ROOT."/php/session/conexao_banco.php";
 
-// Verifica se o usuário está logado para liberar acesso a outras páginas além da consulta de empenho
-if (!strpos($solicitante, "consultar_empenho.php") && !isset($_SESSION["id_user"]))
+if (!strpos($solicitante, "consultar_empenho.php") && !isset($_SESSION["id_user"])) {
     require_once SITE_ROOT."/php/session/verifica_sessao.php";
+    exit;
+}
+
+$atribuicoes = array();
 
 if (isset($_SESSION["id_user"])) {
+    $id_user = (int) $_SESSION["id_user"];
 
-    $id_user = $_SESSION["id_user"];
-
-    // Coletando a foto que o usuário possui
-    if (isset($_SESSION["foto"])) $foto_user = $_SESSION["foto"];
+    if (isset($_SESSION["foto"])) {
+        $foto_user = htmlspecialchars($_SESSION["foto"], ENT_QUOTES, 'UTF-8');
+    }
 
     require_once SITE_ROOT."/php/session/verifica_sessao.php";
 
-    // Verificando as atribuições de departamentos que o usuário possui
-    $atribuicoes = $conexao->query("SELECT * FROM atribuicao WHERE id_usuario = $id_user");
-} else
-    $atribuicoes = array(); ?>
+    $stmt = $conexao->prepare("SELECT id_departamento FROM atribuicao WHERE id_usuario = ?");
+    $stmt->bind_param("i", $id_user);
+    $stmt->execute();
+    $atribuicoes = $stmt->get_result();
+    $stmt->close();
+}
+?>
 
 <div id="barra_funcoes">
 
@@ -45,29 +49,31 @@ if (isset($_SESSION["id_user"])) {
 
         <div id="caixa_entrada">
             <i class="fa fa-solid fa-envelope fa-lg icon_cinza"></i>
-            <!-- <i class="fa fa-solid fa-envelope-open-text fa-lg icon_amarelo"></i> -->
         </div>
 
-        <img id="perfil_sm" src="<?php echo $foto_user ?>">
+        <img id="perfil_sm" src="<?php echo htmlspecialchars($foto_user, ENT_QUOTES, 'UTF-8') ?>" alt="Perfil">
     <?php } ?>
 
     <div id="nav_links">
-        <?php if ($id_user) echo "<h2><a href='/kovarex/pages/panel.php'><img src='/kovarex/files/img/icons/logo.png'></a></h2>";
-        else { ?>
-
-            <h2><a href="/kovarex/index.php"><img src="/kovarex/files/img/icons/logo.png"></a></h2>
+        <?php if ($id_user) {
+            echo "<h2><a href='/kovarex/pages/panel.php'><img src='/kovarex/files/img/icons/logo.png' alt='Logo'></a></h2>";
+        } else { ?>
+            <h2><a href="/kovarex/index.php"><img src="/kovarex/files/img/icons/logo.png" alt="Logo"></a></h2>
             <h2><a href='#' onclick='pop_up_login()'>Faça login</a></h2>
-
         <?php } ?>
 
         <div class="opcoes_barra_funcoes">
             <?php if ($id_user) {
+                $nome = htmlspecialchars($_SESSION["nome"] ?? '', ENT_QUOTES, 'UTF-8');
+                $hierarquia = (int) ($_SESSION["hierarquia"] ?? 0);
+                
                 echo "<h2><a href='/kovarex/pages/licitacoes.php'>Licitações</a></h2>
                       <h2><a href='/kovarex/pages/pedidos.php'>Pedidos</a></h2>
                       <h2><a href='/kovarex/pages/autorizacoes.php'>Autorizações</a></h2>";
 
-                if ($_SESSION["hierarquia"])
+                if ($hierarquia) {
                     echo "<h2><a href='/kovarex/pages/moderacao.php'>Moderação</a></h2>";
+                }
             } ?>
         </div>
     </div>
@@ -82,5 +88,5 @@ if (isset($_SESSION["id_user"])) {
         <hr>
     <?php } ?>
 
-    <?php echo "<a href='/kovarex/php/session/redireciona_logoff.php'>Deslogar</a>" ?>
+    <a href='/kovarex/php/session/redireciona_logoff.php'>Deslogar</a>
 </div>

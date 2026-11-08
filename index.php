@@ -23,20 +23,47 @@
 </head>
 
 <?php
+session_start();
 $foto_user = "/kovarex/files/img/icons/avatar.png";
-if (isset($_SESSION["foto"])) $foto_user = $_SESSION["foto"]; ?>
+if (isset($_SESSION["foto"])) {
+    $foto_user = htmlspecialchars($_SESSION["foto"], ENT_QUOTES, 'UTF-8');
+}
+
+$error_code = isset($_GET["ERROR"]) ? htmlspecialchars($_GET["ERROR"], ENT_QUOTES, 'UTF-8') : '';
+$error_message = '';
+
+switch($error_code) {
+    case '001':
+        $error_message = 'E-mail ou senha incorretos.';
+        break;
+    case '002':
+        $error_message = 'Dados inválidos. Verifique os campos.';
+        break;
+    case '003':
+        $error_message = 'E-mail já cadastrado no sistema.';
+        break;
+    case '401':
+        $error_message = 'Acesso não autorizado.';
+        break;
+    case '999':
+        $error_message = 'Erro ao processar solicitação. Tente novamente.';
+        break;
+}
+?>
 
 <body>
     <div id="banner_topo">
         <h2 id="titulo">Kovarex</h2>
 
-        <!-- Redirecionando para o empenho com o código informado -->
         <?php if (isset($_GET["empenho"])) {
-            $codigo = $_GET["empenho"];
-            header("Location: /kovarex/pages/pedidos/consultar_empenho.php?empenho=$codigo");
+            $codigo = preg_replace('/[^a-zA-Z0-9\-_]/', '', $_GET["empenho"]);
+            if ($codigo) {
+                header("Location: /kovarex/pages/pedidos/consultar_empenho.php?empenho=$codigo");
+                exit;
+            }
         } ?>
 
-        <img id="perfil_sm" src="<?php echo $foto_user; ?>" onclick="<?php if (!isset($_SESSION["id_usuario"])) { ?> login()<?php } ?>">
+        <img id="perfil_sm" src="<?php echo htmlspecialchars($foto_user, ENT_QUOTES, 'UTF-8'); ?>" alt="Perfil" onclick="<?php if (!isset($_SESSION["id_user"])) { ?> login()<?php } ?>">
     </div>
 
     <div id="formulario_login">
@@ -47,17 +74,23 @@ if (isset($_SESSION["foto"])) $foto_user = $_SESSION["foto"]; ?>
             <h1 style="color: white;">Faça login para continuar</h1>
             <hr id="hr_login">
 
+            <?php if ($error_message): ?>
+                <div style="background-color: #f8d7da; color: #721c24; padding: 12px; border-radius: 4px; margin-bottom: 15px; border: 1px solid #f5c6cb;">
+                    <strong>Erro:</strong> <?php echo $error_message; ?>
+                </div>
+            <?php endif; ?>
+
             <form name="loga" class="logah" action="php/session/usuario_confirmar_login.php" method="post">
                 <h2>
-                    <input type="text" name="email" required placeholder="E-mail" maxlength="100"><br><br>
+                    <input type="email" name="email" required placeholder="E-mail" maxlength="100"><br><br>
 
-                    <input type="password" name="senha" required placeholder="Senha" maxlength="50"><br><br>
+                    <input type="password" name="senha" required placeholder="Senha" maxlength="255"><br><br>
                 </h2>
 
                 <div class="buttons_login">
                     <a class="btn btn-custom btn-lg page-scroll configura_perfil" style="float: left" onclick="btn_login(1)">Primeiro acesso</a>
 
-                    <button class="btn btn-custom btn-lg page-scroll configura_perfil" style="float: right">Entrar</button>
+                    <button class="btn btn-custom btn-lg page-scroll configura_perfil" style="float: right" type="submit">Entrar</button>
                 </div>
             </form>
         </div>
@@ -72,17 +105,17 @@ if (isset($_SESSION["foto"])) $foto_user = $_SESSION["foto"]; ?>
                 <h2>
                     <input type="text" name="nome" required placeholder="Nome" maxlength="100"><br><br>
 
-                    <input type="text" name="email" required placeholder="E-mail" maxlength="100"><br><br>
+                    <input type="email" name="email" required placeholder="E-mail" maxlength="100"><br><br>
 
-                    <input type="text" name="cnpj" placeholder="CNPJ" maxlength="100"><br><br>
+                    <input type="text" name="cnpj" placeholder="CNPJ" maxlength="14"><br><br>
 
-                    <input type="password" name="senha" required placeholder="Senha" maxlength="50"><br><br>
+                    <input type="password" name="senha" required placeholder="Senha (mínimo 8 caracteres)" maxlength="255" minlength="8"><br><br>
                 </h2>
 
                 <div class="buttons_login">
                     <a class="btn btn-custom btn-lg page-scroll configura_perfil" style="float: left" onclick="btn_login(0)">Voltar para login</a>
 
-                    <button class="btn btn-custom btn-lg page-scroll configura_perfil" style="float: right">Cadastrar</button>
+                    <button class="btn btn-custom btn-lg page-scroll configura_perfil" style="float: right" type="submit">Cadastrar</button>
                 </div>
             </form>
         </div>
